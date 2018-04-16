@@ -10,7 +10,6 @@ import by.fyodorov.musicstore.receiver.PerformerReceiver;
 import by.fyodorov.musicstore.receiver.TrackReceiver;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedList;
 import java.util.Optional;
 
 public class TrackInfoCommandImpl implements Command {
@@ -30,12 +29,13 @@ public class TrackInfoCommandImpl implements Command {
             TrackEntity trackEntity = trackReceiver.findTrack(trackName);
             if (trackEntity != null) {
                 PerformerEntity performer = performerReceiver.findPerformerId(trackEntity.getPerformerId());
+                requestInfo.setSessionAttribute(RequestArgument.TRACK_NAME.getName(), trackName);
                 requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_NAME.getName(), trackEntity.getName());
                 requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_GENRE.getName(), trackEntity.getGenre());
                 requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_PRICE.getName(), trackEntity.getPrice());
                 requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_DATE.getName(), trackEntity.getDate());
 
-                requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_COMMENT_LIST.getName(), trackReceiver.getComments(trackEntity.getName()));
+                requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_COMMENT_LIST.getName(), trackReceiver.findComments(trackEntity.getName()));
 
                 requestInfo.setRequestAttribute(RequestArgument.PERFORMER_INFO_NAME.getName(), performer.getName());
             }

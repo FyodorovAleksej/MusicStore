@@ -10,7 +10,7 @@ public class AssemblageByNameSpecification implements AssemblageRepositorySpecif
                     + ASSEMBLAGE_PRICE + ", "
                     + ASSEMBLAGE_DATE + ", "
                     + ASSEMBLAGE_OWNER_ID + " " +
-                    "FROM "   + BD_SCHEME + "." + BD_TABLE + " " +
+                    "FROM "   + ASSEMBLAGE_BD_SCHEME + "." + ASSEMBLAGE_BD_TABLE + " " +
                     "WHERE "  + ASSEMBLAGE_NAME + " LIKE ?;";
 
     private String name;

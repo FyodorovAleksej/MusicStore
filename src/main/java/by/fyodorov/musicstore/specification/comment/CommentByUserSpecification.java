@@ -10,7 +10,7 @@ public class CommentByUserSpecification implements CommentRepositorySpecificatio
                     + COMMENT_USER_ID + ", "
                     + COMMENT_TRACK_ID + ", "
                     + COMMENT_PERFORMER_ID + " " +
-                    "FROM "   + BD_SCHEME + "." + BD_TABLE + " " +
+                    "FROM "   + COMMENT_BD_SCHEME + "." + COMMENT_BD_TABLE + " " +
                     "WHERE "  + COMMENT_USER_ID + " = ?;";
 
     private int userId;

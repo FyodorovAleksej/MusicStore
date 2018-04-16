@@ -10,7 +10,7 @@ public class TrackByNameSpecification implements TrackRepositorySpecification {
                     + TRACK_PRICE + ", "
                     + TRACK_DATE + ", "
                     + TRACK_PERFORMER_FK + " " +
-                    "FROM "   + BD_SCHEME + "." + BD_TABLE + " " +
+                    "FROM "   + TRACK_BD_SCHEME + "." + TRACK_BD_TABLE + " " +
                     "WHERE "  + TRACK_NAME + " LIKE ?;";
 
     private String name;

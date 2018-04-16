@@ -8,11 +8,14 @@ public class RequestParameterMap {
     private HashMap<String, Object> requestAttributes;
     private HashMap<String, Object> sessionAttributes;
     private HashMap<String, String> requestParameters;
+    private String contextPath;
 
     public RequestParameterMap(HttpServletRequest request) {
         requestAttributes = new HashMap<>();
         sessionAttributes = new HashMap<>();
         requestParameters = new HashMap<>();
+
+        contextPath = request.getContextPath();
 
         Enumeration<String> attributeNames = request.getAttributeNames();
         while (attributeNames.hasMoreElements()) {
@@ -43,6 +46,10 @@ public class RequestParameterMap {
 
     public Object getSessionAttribute(String name) {
         return sessionAttributes.get(name);
+    }
+
+    public String getContextPath() {
+        return contextPath;
     }
 
 

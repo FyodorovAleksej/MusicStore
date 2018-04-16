@@ -22,7 +22,7 @@ public class UserRepository {
     private static Logger LOGGER = LogManager.getLogger(UserRepository.class);
 
     private static final String ADD_USER_SQL =
-            "INSERT INTO " + BD_SCHEME + "." + BD_TABLE + " ("
+            "INSERT INTO " + USER_BD_SCHEME + "." + USER_BD_TABLE + " ("
                     + USER_USERNAME + ", "
                     + USER_EMAIL + ", "
                     + USER_ROLE + ", "
@@ -33,7 +33,7 @@ public class UserRepository {
                     "VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', %5$s, \'%6$s\', SHA(\'%7$s\'));";
 
     private static final String REMOVE_USER_SQL =
-            "DELETE FROM " + BD_SCHEME + "." + BD_TABLE + " WHERE " +
+            "DELETE FROM " + USER_BD_SCHEME + "." + USER_BD_TABLE + " WHERE " +
                     USER_ID + " = \'%1$s\';";
 
     private SqlUtil util;
@@ -97,8 +97,8 @@ public class UserRepository {
         return list;
     }
 
-    public LinkedList<HashMap<String, String>> customSelect(UserCustomSelectSpecification specification) throws ConnectorException {
-        LOGGER.debug("custom select query");
+    public LinkedList<HashMap<String, String>> customQuery(UserCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
         return specification.fromSet(set);
     }

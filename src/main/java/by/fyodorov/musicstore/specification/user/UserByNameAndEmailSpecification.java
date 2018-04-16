@@ -13,7 +13,7 @@ public class UserByNameAndEmailSpecification implements UserRepositorySpecificat
                     + USER_BONUS + ", "
                     + USER_DISCOUNT + ", "
                     + USER_PASSWORD + " " +
-                    "FROM "   + BD_SCHEME + "." + BD_TABLE + " " +
+                    "FROM "   + USER_BD_SCHEME + "." + USER_BD_TABLE + " " +
                     "WHERE "  + USER_USERNAME + " = ?" +
                     "OR " + USER_EMAIL + " = ?";
 

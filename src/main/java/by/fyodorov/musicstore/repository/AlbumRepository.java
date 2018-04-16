@@ -24,7 +24,7 @@ public class AlbumRepository {
     private static Logger LOGGER = LogManager.getLogger(AlbumRepository.class);
 
     private static final String ADD_ALBUM_SQL =
-            "INSERT INTO " + BD_SCHEME + "." + BD_TABLE + " ("
+            "INSERT INTO " + ALBUM_BD_SCHEME + "." + ABUM_BD_TABLE + " ("
                     + ALBUM_NAME + ", "
                     + ALBUM_GENRE + ", "
                     + ALBUM_PRICE + ", "
@@ -33,7 +33,7 @@ public class AlbumRepository {
                     "VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', %5$s);";
 
     private static final String REMOVE_ALBUM_SQL =
-            "DELETE FROM " + BD_SCHEME + "." + BD_TABLE + " WHERE " +
+            "DELETE FROM " + ALBUM_BD_SCHEME + "." + ABUM_BD_TABLE + " WHERE " +
                     ALBUM_ID + " = %1$s;";
 
     private SqlUtil util;
@@ -92,8 +92,8 @@ public class AlbumRepository {
         return list;
     }
 
-    public LinkedList<HashMap<String, String>> customSelect(AlbumCustomSelectSpecification specification) throws ConnectorException {
-        LOGGER.debug("custom select query");
+    public LinkedList<HashMap<String, String>> customQuery(AlbumCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
         return specification.fromSet(set);
     }

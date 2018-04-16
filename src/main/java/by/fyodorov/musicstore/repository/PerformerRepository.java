@@ -22,12 +22,12 @@ public class PerformerRepository {
     private static Logger LOGGER = LogManager.getLogger(PerformerRepository.class);
 
     private static final String ADD_PERFORMER_SQL =
-            "INSERT INTO " + BD_SCHEME + "." + BD_TABLE + " ("
+            "INSERT INTO " + PERFORMER_BD_SCHEME + "." + PERFORMER_BD_TABLE + " ("
                     + PERFORMER_NAME + ") " +
                     "VALUES (\'%1$s\');";
 
     private static final String REMOVE_PERFORMER_SQL =
-            "DELETE FROM " + BD_SCHEME + "." + BD_TABLE + " WHERE " +
+            "DELETE FROM " + PERFORMER_BD_SCHEME + "." + PERFORMER_BD_TABLE + " WHERE " +
                     PERFORMER_ID + " = \'%1$s\';";
 
     private SqlUtil util;
@@ -78,8 +78,8 @@ public class PerformerRepository {
         return list;
     }
 
-    public LinkedList<HashMap<String, String>> customSelect(PerformerCustomSelectSpecification specification) throws ConnectorException {
-        LOGGER.debug("custom select query");
+    public LinkedList<HashMap<String, String>> customQuery(PerformerCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
         return specification.fromSet(set);
     }

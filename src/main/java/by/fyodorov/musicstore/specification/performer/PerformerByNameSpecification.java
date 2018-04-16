@@ -7,7 +7,7 @@ public class PerformerByNameSpecification implements PerformerRepositorySpecific
     private static final String SELECT_BY_NAME =
             "SELECT " + PERFORMER_ID + ", "
                     + PERFORMER_NAME + " " +
-                    "FROM "   + BD_SCHEME + "." + BD_TABLE + " " +
+                    "FROM "   + PERFORMER_BD_SCHEME + "." + PERFORMER_BD_TABLE + " " +
                     "WHERE "  + PERFORMER_NAME + " LIKE ?;";
 
     private String name;

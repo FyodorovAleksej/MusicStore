@@ -24,4 +24,32 @@ public class CommentView {
     public String getDate() {
         return date;
     }
+
+    @Override
+    public int hashCode() {
+        return  userName.hashCode() +
+                text.hashCode() +
+                date.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+        CommentView view = (CommentView)o;
+        return  this.userName.equals(view.userName) &&
+                this.text.equals(view.date) &&
+                this.date.equals(view.date);
+    }
+
+    @Override
+    public String toString() {
+        return  "userName: " + userName +
+                "; text: \"" + text +
+                "\"; date: " + date;
+    }
 }

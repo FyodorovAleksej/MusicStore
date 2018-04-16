@@ -10,8 +10,8 @@ public enum UserRepositoryConstant {
     USER_DISCOUNT("discount"),
     USER_PASSWORD("password"),
 
-    BD_SCHEME("musicstore"),
-    BD_TABLE("users");
+    USER_BD_SCHEME("musicstore"),
+    USER_BD_TABLE("users");
 
     private String name;
 

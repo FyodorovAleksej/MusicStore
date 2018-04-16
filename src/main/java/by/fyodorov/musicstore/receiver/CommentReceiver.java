@@ -4,6 +4,7 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.CommentEntity;
 import by.fyodorov.musicstore.repository.CommentRepository;
 import by.fyodorov.musicstore.specification.comment.CommentByTrackIdSpecification;
+import by.fyodorov.musicstore.specification.comment.custom.CommentAddByTextAndUserSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,17 +22,10 @@ public class CommentReceiver {
 
     }
 
-    public boolean addComment(CommentEntity entity) throws ConnectorException {
+    public boolean addComment(String text, String user, String trackName) throws ConnectorException {
         CommentRepository commentRepository = new CommentRepository();
-        boolean result;
-        try {
-            commentRepository.add(entity);
-            result = true;
-        } catch (ConnectorException e) {
-            LOGGER.catching(e);
-            result = false;
-        }
+        int result = commentRepository.prepareUpdate(new CommentAddByTextAndUserSpecification(text, user, trackName));
         commentRepository.close();
-        return result;
+        return result > 0;
     }
 }

@@ -4,8 +4,8 @@ public enum PerformerRepositoryConstant {
     PERFORMER_ID("performerId"),
     PERFORMER_NAME("name"),
 
-    BD_SCHEME("musicstore"),
-    BD_TABLE("performers");
+    PERFORMER_BD_SCHEME("musicstore"),
+    PERFORMER_BD_TABLE("performers");
 
     private String name;
 

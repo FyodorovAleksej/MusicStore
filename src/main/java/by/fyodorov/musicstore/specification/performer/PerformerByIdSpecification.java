@@ -7,7 +7,7 @@ public class PerformerByIdSpecification implements PerformerRepositorySpecificat
     private static final String SELECT_BY_ID =
             "SELECT " + PERFORMER_ID + ", "
                     + PERFORMER_NAME + " " +
-                    "FROM "   + BD_SCHEME + "." + BD_TABLE + " " +
+                    "FROM "   + PERFORMER_BD_SCHEME + "." + PERFORMER_BD_TABLE + " " +
                     "WHERE "  + PERFORMER_ID + " = ?;";
 
     private int id;

@@ -8,8 +8,8 @@ public enum TrackRepositoryConstant {
     TRACK_DATE("date"),
     TRACK_PERFORMER_FK("performers_id"),
 
-    BD_SCHEME("musicstore"),
-    BD_TABLE("tracks");
+    TRACK_BD_SCHEME("musicstore"),
+    TRACK_BD_TABLE("tracks");
 
     private String name;
 

@@ -46,9 +46,43 @@
     <h4>${trackDate}</h4>
     <h4>${performerName}</h4>
 </div>
-<br/>
+<hr/>
 <h4>Comments:</h4>
-<br/>
-<ctl:comments-view/>
+<table>
+    <tr>
+        <th>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"></h4>
+        </th>
+        <th>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"></h4>
+        </th>
+        <th>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"></h4>
+        </th>
+    </tr>
+<c:forEach items="${commentList}" var="comment">
+    <tr>
+        <td>
+            <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
+                ${comment.getUserName()}
+            </h5>
+        </td>
+        <td>
+            <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
+                ${comment.getText()}
+            </h5>
+        </td>
+        <td>
+            <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
+                ${comment.getDate()}
+            </h5>
+        </td>
+    </tr>
+</c:forEach>
+</table>
+<form action="/comment" method="post">
+    <textarea type="text" name="newComment" style="padding-left: 25px;"></textarea>
+    <button type="submit" class="btn btn-primary">comment</button>
+</form>
 </body>
 </html>

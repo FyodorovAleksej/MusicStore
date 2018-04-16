@@ -23,7 +23,7 @@ public class CommentRepository {
     private static Logger LOGGER = LogManager.getLogger(CommentRepository.class);
 
     private static final String ADD_ASSEMBLAGE_SQL =
-            "INSERT INTO " + BD_SCHEME + "." + BD_TABLE + " ("
+            "INSERT INTO " + COMMENT_BD_SCHEME + "." + COMMENT_BD_TABLE + " ("
                     + COMMENT_ID + ", "
                     + COMMENT_TEXT + ", "
                     + COMMENT_DATE + ", "
@@ -33,7 +33,7 @@ public class CommentRepository {
                     "VALUES (\'%1$s\', \'%2$s\', \'%3$s\', %4$s, %5$s, %6$s);";
 
     private static final String REMOVE_ASSEMBLAGE_SQL =
-            "DELETE FROM " + BD_SCHEME + "." + BD_TABLE + " WHERE " +
+            "DELETE FROM " + COMMENT_BD_SCHEME + "." + COMMENT_BD_TABLE + " WHERE " +
                     COMMENT_ID + " = %1$s;";
 
     private SqlUtil util;
@@ -93,10 +93,15 @@ public class CommentRepository {
         return list;
     }
 
-    public LinkedList<HashMap<String, String>> customSelect(CommentCustomSelectSpecification specification) throws ConnectorException {
-        LOGGER.debug("custom select query");
+    public LinkedList<HashMap<String, String>> customQuery(CommentCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
         return specification.fromSet(set);
+    }
+
+    public int prepareUpdate(CommentCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom update");
+        return util.execUpdatePrepare(specification.toSqlClauses(), specification.getArguments());
     }
 
 

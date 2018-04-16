@@ -12,7 +12,7 @@ public class UserByNameAndPasswordSpecification implements UserRepositorySpecifi
                     + USER_BONUS + ", "
                     + USER_DISCOUNT + ", "
                     + USER_PASSWORD + " " +
-                    "FROM " + BD_SCHEME + "." + BD_TABLE + " " +
+                    "FROM " + USER_BD_SCHEME + "." + USER_BD_TABLE + " " +
                     "WHERE "  + USER_USERNAME + " = ? AND " + USER_PASSWORD + " = SHA(?);";
     private String name;
     private String password;

@@ -9,8 +9,8 @@ public enum AssemblageRepositoryConstant {
     ASSEMBLAGE_DATE("date"),
     ASSEMBLAGE_OWNER_ID("users_userId"),
 
-    BD_SCHEME("musicstore"),
-    BD_TABLE("assemblages");
+    ASSEMBLAGE_BD_SCHEME("musicstore"),
+    ASSEMBLAGE_BD_TABLE("assemblages");
 
     private String name;
 

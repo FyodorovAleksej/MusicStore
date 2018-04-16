@@ -47,6 +47,27 @@ public class SqlUtil {
         }
     }
 
+    public int execUpdatePrepare(String sqlRequest, String... strings) throws ConnectorException {
+        try {
+            if (connection.isClosed()) {
+                throw new ConnectorException("closed connection");
+            }
+            LOGGER.debug("exec prepare = \"" + sqlRequest + "\" with args = [" + String.join("; ", strings) + "]");
+            connection.setAutoCommit(false);
+            PreparedStatement statement = connection.prepareStatement(sqlRequest);
+            statement.closeOnCompletion();
+            for (int i = 0; i < strings.length; i++) {
+                statement.setString(i + 1, strings[i]);
+            }
+            connection.commit();
+            connection.setAutoCommit(true);
+            return statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new ConnectorException("can't execute prepare statement = \"" + sqlRequest + "\" with args = [" + String.join("; ", strings) + "]", e);
+        }
+    }
+
     public ResultSet execPrepare(String sqlRequest, String... strings) throws ConnectorException {
         try {
             if (connection.isClosed()) {

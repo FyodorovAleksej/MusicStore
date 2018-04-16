@@ -8,8 +8,8 @@ public enum CommentRepositoryConstant {
     COMMENT_TRACK_ID("tracks_trackId"),
     COMMENT_PERFORMER_ID("tracks_performers_id"),
 
-    BD_SCHEME("musicstore"),
-    BD_TABLE("comments");
+    COMMENT_BD_SCHEME("musicstore"),
+    COMMENT_BD_TABLE("comments");
 
     private String name;
 

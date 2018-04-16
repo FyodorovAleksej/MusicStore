@@ -10,7 +10,7 @@ public class AlbumByNameSpecification implements AlbumRepositorySpecification {
                     + ALBUM_PRICE + ", "
                     + ALBUM_DATE + ", "
                     + ALBUM_PERFORMER_ID + " " +
-                    "FROM "   + BD_SCHEME + "." + BD_TABLE + " " +
+                    "FROM "   + ALBUM_BD_SCHEME + "." + ABUM_BD_TABLE + " " +
                     "WHERE "  + ALBUM_NAME + " LIKE ?;";
 
     private String name;

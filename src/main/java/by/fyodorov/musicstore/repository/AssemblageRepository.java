@@ -23,7 +23,7 @@ public class AssemblageRepository {
     private static Logger LOGGER = LogManager.getLogger(AssemblageRepository.class);
 
     private static final String ADD_ASSEMBLAGE_SQL =
-            "INSERT INTO " + BD_SCHEME + "." + BD_TABLE + " ("
+            "INSERT INTO " + ASSEMBLAGE_BD_SCHEME + "." + ASSEMBLAGE_BD_TABLE + " ("
                     + ASSEMBLAGE_NAME + ", "
                     + ASSEMBLAGE_GENRE + ", "
                     + ASSEMBLAGE_PRICE + ", "
@@ -32,7 +32,7 @@ public class AssemblageRepository {
                     "VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', %5$s);";
 
     private static final String REMOVE_ASSEMBLAGE_SQL =
-            "DELETE FROM " + BD_SCHEME + "." + BD_TABLE + " WHERE " +
+            "DELETE FROM " + ASSEMBLAGE_BD_SCHEME + "." + ASSEMBLAGE_BD_TABLE + " WHERE " +
                     ASSEMBLAGE_ID + " = %1$s;";
 
     private SqlUtil util;
@@ -91,8 +91,8 @@ public class AssemblageRepository {
         return list;
     }
 
-    public LinkedList<HashMap<String, String>> customSelect(AssemblageCustomSelectSpecification specification) throws ConnectorException {
-        LOGGER.debug("custom select query");
+    public LinkedList<HashMap<String, String>> customQuery(AssemblageCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
         return specification.fromSet(set);
     }

@@ -28,6 +28,8 @@ public enum RequestArgument {
     TRACK_INFO_PRICE("trackPrice", null),
     TRACK_INFO_DATE("trackDate", null),
 
+    COMMENT_TEXT("newComment", null),
+
     PERFORMER_INFO_NAME("performerName", null),
 
     TRACK_INFO_COMMENT_LIST("commentList", null),

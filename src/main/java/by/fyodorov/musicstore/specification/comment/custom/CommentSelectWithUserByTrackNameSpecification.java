@@ -18,17 +18,17 @@ import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant
 
 public class CommentSelectWithUserByTrackNameSpecification implements CommentCustomSelectSpecification {
     private static final String SELECT_BY_NAME =
-            "SELECT " + UserRepositoryConstant.BD_TABLE + "." + USER_USERNAME + ", "
-            + BD_TABLE + "." + COMMENT_TEXT + ", "
-            + BD_TABLE + "." + COMMENT_DATE
-            + " FROM " + BD_SCHEME + "." + BD_TABLE
-            + " JOIN " + UserRepositoryConstant.BD_SCHEME + "." + UserRepositoryConstant.BD_TABLE
-            + " ON " + UserRepositoryConstant.BD_TABLE + "." + USER_ID
-            + " = " + BD_TABLE + "." + COMMENT_USER_ID + " "
-            + " JOIN " + TrackRepositoryConstant.BD_SCHEME + "." + TrackRepositoryConstant.BD_TABLE
-            + " ON " + TrackRepositoryConstant.BD_TABLE + "." + TRACK_ID
-            + " = " + BD_TABLE + "." + COMMENT_TRACK_ID
-            + " WHERE " + TrackRepositoryConstant.BD_TABLE + "." + TRACK_NAME + " = ?;";
+            "SELECT " + UserRepositoryConstant.USER_BD_TABLE + "." + USER_USERNAME + ", "
+            + COMMENT_BD_TABLE + "." + COMMENT_TEXT + ", "
+            + COMMENT_BD_TABLE + "." + COMMENT_DATE
+            + " FROM " + COMMENT_BD_SCHEME + "." + COMMENT_BD_TABLE
+            + " JOIN " + UserRepositoryConstant.USER_BD_SCHEME + "." + UserRepositoryConstant.USER_BD_TABLE
+            + " ON " + UserRepositoryConstant.USER_BD_TABLE + "." + USER_ID
+            + " = " + COMMENT_BD_TABLE + "." + COMMENT_USER_ID + " "
+            + " JOIN " + TrackRepositoryConstant.TRACK_BD_SCHEME + "." + TrackRepositoryConstant.TRACK_BD_TABLE
+            + " ON " + TrackRepositoryConstant.TRACK_BD_TABLE + "." + TRACK_ID
+            + " = " + COMMENT_BD_TABLE + "." + COMMENT_TRACK_ID
+            + " WHERE " + TrackRepositoryConstant.TRACK_BD_TABLE + "." + TRACK_NAME + " = ?;";
 
     private String trackName;
 
