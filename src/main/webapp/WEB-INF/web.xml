@@ -43,6 +43,8 @@
         <url-pattern>/findTrack</url-pattern>
         <url-pattern>/trackInfo</url-pattern>
         <url-pattern>/comment</url-pattern>
+        <url-pattern>/buyTrack</url-pattern>
+        <url-pattern>/viewUserTracks</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -77,6 +79,14 @@
             <param-value>/</param-value>
         </init-param>
     </filter>
+    <filter>
+        <filter-name>BuyTrackFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.BuyTrackFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>OwnTracksView</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.OwnTrackView</filter-class>
+    </filter>
 
 
     <filter-mapping>
@@ -106,6 +116,14 @@
     <filter-mapping>
         <filter-name>CommentAddFilter</filter-name>
         <url-pattern>/comment</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>BuyTrackFilter</filter-name>
+        <url-pattern>/buyTrack</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OwnTracksView</filter-name>
+        <url-pattern>/viewUserTracks</url-pattern>
     </filter-mapping>
     
     <welcome-file-list>

@@ -10,7 +10,7 @@ public class LoginFilter implements Filter {
     private static final String COMMAND_NAME = CommandEnum.LOGIN_COMMAND.toString();
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 

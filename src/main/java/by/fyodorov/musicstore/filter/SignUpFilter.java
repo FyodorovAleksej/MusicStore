@@ -10,7 +10,7 @@ public class SignUpFilter implements Filter {
     private static final String COMMAND_NAME = CommandEnum.SIGN_UP_COMMAND.toString();
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 

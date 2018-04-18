@@ -1,8 +1,7 @@
 package by.fyodorov.musicstore.customtag;
 
 import by.fyodorov.musicstore.application.RequestArgument;
-import by.fyodorov.musicstore.model.CommentEntity;
-import by.fyodorov.musicstore.model.CommentView;
+import by.fyodorov.musicstore.view.CommentView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

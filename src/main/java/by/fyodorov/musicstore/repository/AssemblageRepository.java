@@ -16,11 +16,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryConstant.*;
 
 public class AssemblageRepository {
     private static Logger LOGGER = LogManager.getLogger(AssemblageRepository.class);
+    private static Lock MODIFY_LOCK = new ReentrantLock();
 
     private static final String ADD_ASSEMBLAGE_SQL =
             "INSERT INTO " + ASSEMBLAGE_BD_SCHEME + "." + ASSEMBLAGE_BD_TABLE + " ("
@@ -100,5 +103,13 @@ public class AssemblageRepository {
 
     public void close() throws ConnectorException {
         util.closeConnection();
+    }
+
+    public static void modifyLock() {
+        MODIFY_LOCK.lock();
+    }
+
+    public static void modifyUnlock() {
+        MODIFY_LOCK.unlock();
     }
 }

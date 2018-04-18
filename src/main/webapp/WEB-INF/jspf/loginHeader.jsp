@@ -27,6 +27,10 @@
 <fmt:message key="main.welcome" var="welcome"/>
 <fmt:message key="main.role" var="as"/>
 <fmt:message key="main.logout" var="logout"/>
+<fmt:message key="main.ownTracks" var="ownTracks"/>
+<form action="/viewUserTracks" method="post" class="navbar-form pull-right">
+    <button type="submit" class="btn btn-primary">${ownTracks}</button>
+</form>
 <div class="navbar-form pull-right">
     <h4>${welcome}, <c:out value="${userName}"/> ${as} <c:out value="${userRole}"/></h4>
     <button type="button" class="btn btn-primary" onClick='location.href="/logout"'>${logout}</button>

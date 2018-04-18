@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.model;
+package by.fyodorov.musicstore.view;
 
 public class TrackView {
     private String name;

@@ -15,8 +15,13 @@ public class AssemblageReceiver {
     public LinkedList<AssemblageEntity> findAllAssemblages(String pattern) throws ConnectorException {
         LOGGER.debug("finding assemblage like pattern = \"" + pattern + "\"");
         AssemblageRepository albumRepository = new AssemblageRepository();
-        LinkedList<AssemblageEntity> list = albumRepository.prepareQuery(new AssemblageByNameSpecification(pattern));
-        albumRepository.close();
+        LinkedList<AssemblageEntity> list;
+        try {
+            list = albumRepository.prepareQuery(new AssemblageByNameSpecification(pattern));
+        }
+        finally {
+            albumRepository.close();
+        }
         return list;
     }
 
@@ -30,7 +35,9 @@ public class AssemblageReceiver {
         catch (ConnectorException e) {
             result = false;
         }
-        assemblageRepository.close();
+        finally {
+            assemblageRepository.close();
+        }
         return result;
     }
 }

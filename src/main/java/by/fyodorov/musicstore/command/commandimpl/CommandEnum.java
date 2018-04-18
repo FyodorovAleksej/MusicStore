@@ -5,6 +5,7 @@ import by.fyodorov.musicstore.receiver.CommentReceiver;
 import by.fyodorov.musicstore.receiver.PerformerReceiver;
 import by.fyodorov.musicstore.receiver.TrackReceiver;
 import by.fyodorov.musicstore.receiver.UserReceiver;
+import by.fyodorov.musicstore.view.TrackWithoutPriceView;
 
 public enum CommandEnum {
     LOGIN_COMMAND(new LoginCommandImpl(new UserReceiver())),
@@ -16,7 +17,11 @@ public enum CommandEnum {
     TRACK_INFO_COMMAND(new TrackInfoCommandImpl(new TrackReceiver(), new PerformerReceiver())),
     COMMENT_ADD_COMMAND(new CommentAddCommandImpl(new CommentReceiver())),
 
-    GETTING_TRACK_COMMAND(new GettingTrackCommandImpl(new TrackReceiver()));
+    BUY_TRACK_COMMAND(new TrackBuyCommandImpl(new UserReceiver())),
+
+    GETTING_TRACK_COMMAND(new GettingTrackCommandImpl(new TrackReceiver())),
+
+    OWN_TRACK_COMMAND(new GettingOwnTrackCommandImpl(new TrackReceiver()));
 
     private Command command;
 

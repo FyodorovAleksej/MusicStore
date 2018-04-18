@@ -9,7 +9,7 @@ public enum AlbumRepositoryConstant {
     ALBUM_PERFORMER_ID("performers_id"),
 
     ALBUM_BD_SCHEME("musicstore"),
-    ABUM_BD_TABLE("albums");
+    ALBUM_BD_TABLE("albums");
 
     private String name;
 

@@ -16,16 +16,26 @@ public class CommentReceiver {
     public LinkedList<CommentEntity> findCommentForTrackId(int id) throws ConnectorException {
         LOGGER.debug("finding comments for track with id = " + id);
         CommentRepository commentRepository = new CommentRepository();
-        LinkedList<CommentEntity> list = commentRepository.prepareQuery(new CommentByTrackIdSpecification(id));
-        commentRepository.close();
+        LinkedList<CommentEntity> list;
+        try {
+            list = commentRepository.prepareQuery(new CommentByTrackIdSpecification(id));
+        }
+        finally {
+            commentRepository.close();
+        }
         return list;
 
     }
 
     public boolean addComment(String text, String user, String trackName) throws ConnectorException {
         CommentRepository commentRepository = new CommentRepository();
-        int result = commentRepository.prepareUpdate(new CommentAddByTextAndUserSpecification(text, user, trackName));
-        commentRepository.close();
+        int result;
+        try {
+            result = commentRepository.prepareUpdate(new CommentAddByTextAndUserSpecification(text, user, trackName));
+        }
+        finally {
+            commentRepository.close();
+        }
         return result > 0;
     }
 }

@@ -1,6 +1,4 @@
-package by.fyodorov.musicstore.model;
-
-import java.util.Date;
+package by.fyodorov.musicstore.view;
 
 public class CommentView {
     private String userName;

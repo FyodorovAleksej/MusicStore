@@ -13,7 +13,7 @@ public class AuthorityFilter implements Filter {
     private String index;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         index = filterConfig.getInitParameter(INIT_INDEX);
     }
 

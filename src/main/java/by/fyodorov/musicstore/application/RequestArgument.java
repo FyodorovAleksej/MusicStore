@@ -21,6 +21,8 @@ public enum RequestArgument {
     TRACK_LIST("trackList", null),
     TRACK_ALL("trackAll", null),
 
+    TRACK_OWN_LIST("tracksOwn", null),
+
     TRACK_NAME_INFO("trackInfoName", null),
 
     TRACK_INFO_NAME("trackName", null),

@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
 
@@ -35,6 +37,7 @@ public class UserRepository {
     private static final String REMOVE_USER_SQL =
             "DELETE FROM " + USER_BD_SCHEME + "." + USER_BD_TABLE + " WHERE " +
                     USER_ID + " = \'%1$s\';";
+    private static final Lock MODIFY_LOCK = new ReentrantLock();
 
     private SqlUtil util;
 
@@ -55,13 +58,11 @@ public class UserRepository {
                 user.getPassword()));
     }
 
-    public void remove(UserEntity user) throws ConnectorException {
-        LOGGER.debug("remove user");
-        util.execUpdate(String.format(REMOVE_USER_SQL, user.getId()));
-    }
     public void update(UserEntity user) {
+        MODIFY_LOCK.lock();
         LOGGER.debug("update user");
         //util.execUpdate();
+        MODIFY_LOCK.unlock();
     }
 
     /*
@@ -103,8 +104,25 @@ public class UserRepository {
         return specification.fromSet(set);
     }
 
+    public int prepareUpdate(UserCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom update");
+        return util.execUpdatePrepare(specification.toSqlClauses(), specification.getArguments());
+    }
+
+    public long prepareLargeUpdate(UserCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom large update");
+        return util.execUpdateLargePrepare(specification.toSqlClauses(), specification.getArguments());
+    }
 
     public void close() throws ConnectorException {
         util.closeConnection();
+    }
+
+    public static void modifyLock() {
+        MODIFY_LOCK.lock();
+    }
+
+    public static void modifyUnlock() {
+        MODIFY_LOCK.unlock();
     }
 }

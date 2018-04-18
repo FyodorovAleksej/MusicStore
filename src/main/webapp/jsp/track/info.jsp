@@ -5,7 +5,6 @@
   Time: 10:05
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -46,6 +45,9 @@
     <h4>${trackDate}</h4>
     <h4>${performerName}</h4>
 </div>
+<form action="/buyTrack" method="post">
+    <button type="submit" class="btn btn-primary">Buy: <c:out value="${trackPrice}">AAA</c:out></button>
+</form>
 <hr/>
 <h4>Comments:</h4>
 <table>

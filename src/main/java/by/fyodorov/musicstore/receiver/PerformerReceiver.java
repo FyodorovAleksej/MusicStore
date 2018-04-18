@@ -15,8 +15,13 @@ public class PerformerReceiver {
     public PerformerEntity findPerformerId(int id) throws ConnectorException {
         LOGGER.debug("finding performers by id = \"" + id + "\"");
         PerformerRepository albumRepository = new PerformerRepository();
-        LinkedList<PerformerEntity> list = albumRepository.prepareQuery(new PerformerByIdSpecification(id));
-        albumRepository.close();
+        LinkedList<PerformerEntity> list;
+        try {
+            list = albumRepository.prepareQuery(new PerformerByIdSpecification(id));
+        }
+        finally {
+            albumRepository.close();
+        }
         if (!list.isEmpty()) {
             return list.getFirst();
         }
@@ -34,7 +39,9 @@ public class PerformerReceiver {
         catch (ConnectorException e) {
             result = false;
         }
-        performerRepository.close();
+        finally {
+            performerRepository.close();
+        }
         return result;
     }
 }

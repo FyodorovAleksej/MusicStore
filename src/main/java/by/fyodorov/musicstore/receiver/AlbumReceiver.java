@@ -15,8 +15,13 @@ public class AlbumReceiver implements CommandReceiver {
     public LinkedList<AlbumEntity> findAllAlbums(String pattern) throws ConnectorException {
         LOGGER.debug("finding album like pattern = \"" + pattern + "\"");
         AlbumRepository albumRepository = new AlbumRepository();
-        LinkedList<AlbumEntity> list = albumRepository.prepareQuery(new AlbumByNameSpecification(pattern));
-        albumRepository.close();
+        LinkedList<AlbumEntity> list;
+        try {
+            list = albumRepository.prepareQuery(new AlbumByNameSpecification(pattern));
+        }
+        finally {
+            albumRepository.close();
+        }
         return list;
     }
 
@@ -30,7 +35,9 @@ public class AlbumReceiver implements CommandReceiver {
         catch (ConnectorException e) {
             result = false;
         }
-        albumRepository.close();
+        finally {
+            albumRepository.close();
+        }
         return result;
     }
 }

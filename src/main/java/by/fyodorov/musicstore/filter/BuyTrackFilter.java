@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CommentAddFilter implements Filter {
-    private static final String COMMAND_NAME = CommandEnum.COMMENT_ADD_COMMAND.toString();
+public class BuyTrackFilter implements Filter {
+    private static final String COMMAND_NAME = CommandEnum.BUY_TRACK_COMMAND.toString();
     private static final String INIT_INDEX = "index";
     private String index;
 

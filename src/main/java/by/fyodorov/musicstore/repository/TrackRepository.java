@@ -16,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.*;
 
@@ -34,7 +36,7 @@ public class TrackRepository {
     private static final String REMOVE_TRACK_SQL =
             "DELETE FROM " + TRACK_BD_SCHEME + "." + TRACK_BD_TABLE + " WHERE " +
                     TRACK_ID + " = \'%1$s\';";
-
+    private static final Lock MODIFY_LOCK = new ReentrantLock();
     private SqlUtil util;
 
     public TrackRepository() throws ConnectorException {
@@ -53,12 +55,16 @@ public class TrackRepository {
     }
 
     public void remove(TrackEntity track) throws ConnectorException {
+        MODIFY_LOCK.lock();
         LOGGER.debug("remove track");
         util.execUpdate(String.format(REMOVE_TRACK_SQL, track.getId()));
+        MODIFY_LOCK.unlock();
     }
     public void update(TrackEntity track) {
+        MODIFY_LOCK.lock();
         LOGGER.debug("update track");
         //util.execUpdate();
+        MODIFY_LOCK.unlock();
     }
 
     /*
@@ -102,5 +108,13 @@ public class TrackRepository {
 
     public void close() throws ConnectorException {
         util.closeConnection();
+    }
+
+    public static void modifyLock() {
+        MODIFY_LOCK.lock();
+    }
+
+    public static void modifyUnlock() {
+        MODIFY_LOCK.unlock();
     }
 }

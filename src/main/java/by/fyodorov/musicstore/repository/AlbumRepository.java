@@ -17,14 +17,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static by.fyodorov.musicstore.specification.album.AlbumRepositoryConstant.*;
 
 public class AlbumRepository {
     private static Logger LOGGER = LogManager.getLogger(AlbumRepository.class);
-
+    private static Lock MODIFY_LOCK = new ReentrantLock();
     private static final String ADD_ALBUM_SQL =
-            "INSERT INTO " + ALBUM_BD_SCHEME + "." + ABUM_BD_TABLE + " ("
+            "INSERT INTO " + ALBUM_BD_SCHEME + "." + ALBUM_BD_TABLE + " ("
                     + ALBUM_NAME + ", "
                     + ALBUM_GENRE + ", "
                     + ALBUM_PRICE + ", "
@@ -33,7 +35,7 @@ public class AlbumRepository {
                     "VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', %5$s);";
 
     private static final String REMOVE_ALBUM_SQL =
-            "DELETE FROM " + ALBUM_BD_SCHEME + "." + ABUM_BD_TABLE + " WHERE " +
+            "DELETE FROM " + ALBUM_BD_SCHEME + "." + ALBUM_BD_TABLE + " WHERE " +
                     ALBUM_ID + " = %1$s;";
 
     private SqlUtil util;
@@ -100,5 +102,13 @@ public class AlbumRepository {
 
     public void close() throws ConnectorException {
         util.closeConnection();
+    }
+
+    public static void modifyLock() {
+        MODIFY_LOCK.lock();
+    }
+
+    public static void modifyUnlock() {
+        MODIFY_LOCK.unlock();
     }
 }
