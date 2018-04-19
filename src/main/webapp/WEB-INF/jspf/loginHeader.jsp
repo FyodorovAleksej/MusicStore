@@ -28,8 +28,17 @@
 <fmt:message key="main.role" var="as"/>
 <fmt:message key="main.logout" var="logout"/>
 <fmt:message key="main.ownTracks" var="ownTracks"/>
-<form action="/viewUserTracks" method="post" class="navbar-form pull-right">
+<fmt:message key="main.ownAlbums" var="ownAlbums"/>
+<fmt:message key="main.ownAssemblages" var="ownAssemblages"/>
+
+<form action="/viewUserTracks" method="get" class="navbar-form pull-right">
     <button type="submit" class="btn btn-primary">${ownTracks}</button>
+</form>
+<form action="/viewUserAlbums" method="get" class="navbar-form pull-right">
+    <button type="submit" class="btn btn-primary">${ownAlbums}</button>
+</form>
+<form action="/viewUserAssemblages" method="get" class="navbar-form pull-right">
+    <button type="submit" class="btn btn-primary">${ownAssemblages}</button>
 </form>
 <div class="navbar-form pull-right">
     <h4>${welcome}, <c:out value="${userName}"/> ${as} <c:out value="${userRole}"/></h4>

@@ -1,10 +1,7 @@
 package by.fyodorov.musicstore.command.commandimpl;
 
 import by.fyodorov.musicstore.command.Command;
-import by.fyodorov.musicstore.receiver.CommentReceiver;
-import by.fyodorov.musicstore.receiver.PerformerReceiver;
-import by.fyodorov.musicstore.receiver.TrackReceiver;
-import by.fyodorov.musicstore.receiver.UserReceiver;
+import by.fyodorov.musicstore.receiver.*;
 import by.fyodorov.musicstore.view.TrackWithoutPriceView;
 
 public enum CommandEnum {
@@ -21,7 +18,9 @@ public enum CommandEnum {
 
     GETTING_TRACK_COMMAND(new GettingTrackCommandImpl(new TrackReceiver())),
 
-    OWN_TRACK_COMMAND(new GettingOwnTrackCommandImpl(new TrackReceiver()));
+    OWN_TRACK_COMMAND(new GettingOwnTrackCommandImpl(new TrackReceiver())),
+    OWN_ALBUM_COMMAND(new GettingOwnAlbumCommandImpl(new AlbumReceiver())),
+    OWN_ASSEMBLAGE_COMMAND(new GettingOwnAssemblageCommandImpl(new AssemblageReceiver()));
 
     private Command command;
 

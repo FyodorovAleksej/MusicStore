@@ -4,9 +4,13 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.AlbumEntity;
 import by.fyodorov.musicstore.repository.AlbumRepository;
 import by.fyodorov.musicstore.specification.album.AlbumByNameSpecification;
+import by.fyodorov.musicstore.specification.album.custom.AlbumCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.album.custom.AlbumOfUserByNameCustomSelect;
+import by.fyodorov.musicstore.view.AlbumWithoutPriceView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class AlbumReceiver implements CommandReceiver {
@@ -39,5 +43,25 @@ public class AlbumReceiver implements CommandReceiver {
             albumRepository.close();
         }
         return result;
+    }
+
+    public LinkedList<AlbumWithoutPriceView> findAlbumForUser(String userName) throws ConnectorException {
+        AlbumRepository assemblageRepository = new AlbumRepository();
+        AlbumCustomSelectSpecification specification = new AlbumOfUserByNameCustomSelect(userName);
+        LinkedList<AlbumWithoutPriceView> assemblages = new LinkedList<>();
+        try {
+            LinkedList<HashMap<String, String>> arguments = assemblageRepository.customQuery(specification);
+            for (HashMap<String, String> map : arguments) {
+                assemblages.add(new AlbumWithoutPriceView(
+                        map.get(AlbumOfUserByNameCustomSelect.ALBUM_NAME_KEY),
+                        map.get(AlbumOfUserByNameCustomSelect.ALBUM_PERFORMER_KEY),
+                        map.get(AlbumOfUserByNameCustomSelect.ALBUM_DATE_KEY),
+                        map.get(AlbumOfUserByNameCustomSelect.ALBUM_GENRE_KEY)));
+            }
+        }
+        finally {
+            assemblageRepository.close();
+        }
+        return assemblages;
     }
 }

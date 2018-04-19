@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class OwnTrackView implements Filter {
-    private static final String COMMAND_NAME = CommandEnum.OWN_TRACK_COMMAND.toString();
+public class OwnAlbumViewFilter implements Filter {
+    private static final String COMMAND_NAME = CommandEnum.OWN_ALBUM_COMMAND.toString();
     private static final String INIT_INDEX = "index";
     private String index;
 

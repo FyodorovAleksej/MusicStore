@@ -4,36 +4,36 @@ import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.receiver.AlbumReceiver;
-import by.fyodorov.musicstore.view.AlbumWithoutPriceView;
+import by.fyodorov.musicstore.receiver.AssemblageReceiver;
+import by.fyodorov.musicstore.view.AssemblageWithoutPriceView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 
-public class GettingOwnAlbumCommandImpl implements Command {
-    private AlbumReceiver receiver;
+public class GettingOwnAssemblageCommandImpl implements Command {
+    private AssemblageReceiver receiver;
 
-    public GettingOwnAlbumCommandImpl(AlbumReceiver receiver) {
+    public GettingOwnAssemblageCommandImpl(AssemblageReceiver receiver) {
         this.receiver = receiver;
     }
 
     @Override
     public GoToInterface perform(RequestParameterMap request) throws CommandException {
         String name = (String) request.getSessionAttribute(RequestArgument.SESSION_LOGIN.getName());
-        LinkedList<AlbumWithoutPriceView> albums;
+        LinkedList<AssemblageWithoutPriceView> assemblages;
         try {
-            albums = receiver.findAlbumForUser(name);
-            if (albums.isEmpty()) {
-                request.setRequestParameter(RequestArgument.ALBUM_FIND_RESULT.getName(), "nothing to find");
+            assemblages = receiver.findAssemblageForUser(name);
+            if (assemblages.isEmpty()) {
+                request.setRequestParameter(RequestArgument.ASSEMBLAGE_FIND_RESULT.getName(), "nothing to find");
                 return new RedirectGoTo(PagesUrl.MAIN_PAGE.getPath());
             }
             else {
-                request.setRequestAttribute(RequestArgument.ALBUM_OWN_LIST.getName(), albums);
+                request.setRequestAttribute(RequestArgument.ASSEMBLAGE_OWN_LIST.getName(), assemblages);
             }
         } catch (ConnectorException e) {
-            throw new CommandException("can't getting from album database", e);
+            throw new CommandException("can't getting from assemblage database", e);
         }
-        return new ForwardGoTo(PagesUrl.ALBUM_OWN_VIEW_PAGE.getPath());
+        return new ForwardGoTo(PagesUrl.ASSEMBLAGE_OWN_VIEW_PAGE.getPath());
     }
 
     @Override

@@ -9,20 +9,32 @@ import java.util.LinkedList;
 
 import static by.fyodorov.musicstore.specification.album.AlbumRepositoryConstant.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryConstant.*;
 
 public class AlbumOfUserByNameCustomSelect implements AlbumCustomSelectSpecification {
-    public static final String ALBUM_NAME_KEY = "trackName";
+    public static final String ALBUM_NAME_KEY = "albumName";
+    public static final String ALBUM_PERFORMER_KEY = "albumPerformer";
+    public static final String ALBUM_GENRE_KEY = "albumGenre";
+    public static final String ALBUM_DATE_KEY = "albumDate";
 
     private static final String SELECT_USERS_ALBUMS = String.format(
-            "SELECT %s.%s FROM %s " +
-                    "JOIN %s ON %s.%s = %s.%s " +
-                    "JOIN %s ON %s.%s = %s.%s " +
-                    "WHERE %s.%s = ? ;\n",
+            "SELECT %s.%s, %s.%s, %s.%s, %s.%s FROM %s " +
+            "JOIN %s ON %s.%s = %s.%s " +
+            "JOIN %s ON %s.%s = %s.%s " +
+            "JOIN %s ON %s.%s = %s.%s " +
+            "WHERE %s.%s = ? ;\n",
+
             ALBUM_BD_TABLE, ALBUM_NAME,
+            ALBUM_BD_TABLE, ALBUM_GENRE,
+            ALBUM_BD_TABLE, ALBUM_DATE,
+            PERFORMER_BD_TABLE, PERFORMER_NAME,
             USER_HAS_ALBUMS_BD_TABLE,
             ALBUM_BD_TABLE,
             ALBUM_BD_TABLE, ALBUM_ID,
             USER_HAS_ALBUMS_BD_TABLE, USER_HAS_ALBUMS_ALBUM_ID,
+            PERFORMER_BD_TABLE,
+            PERFORMER_BD_TABLE, PERFORMER_ID,
+            USER_HAS_ALBUMS_BD_TABLE, USER_HAS_ALBUMS_PERFORMER_ID,
             USER_BD_TABLE,
             USER_BD_TABLE, USER_ID,
             USER_HAS_ALBUMS_BD_TABLE, USER_HAS_ALBUMS_USER_ID,
@@ -52,8 +64,15 @@ public class AlbumOfUserByNameCustomSelect implements AlbumCustomSelectSpecifica
         try {
             while (set.next()) {
                 HashMap<String, String> arguments = new HashMap<>();
-                String trackName = set.getString(ALBUM_NAME.toString());
-                arguments.put(ALBUM_NAME_KEY, trackName);
+                String albumName = set.getString(ALBUM_NAME.toString());
+                String albumGenre = set.getString(ALBUM_GENRE.toString());
+                String albumDate = set.getString(ALBUM_DATE.toString());
+                String albumPerformer = set.getString(PERFORMER_NAME.toString());
+
+                arguments.put(ALBUM_NAME_KEY, albumName);
+                arguments.put(ALBUM_GENRE_KEY, albumGenre);
+                arguments.put(ALBUM_DATE_KEY, albumDate);
+                arguments.put(ALBUM_PERFORMER_KEY, albumPerformer);
 
                 result.add(arguments);
             }

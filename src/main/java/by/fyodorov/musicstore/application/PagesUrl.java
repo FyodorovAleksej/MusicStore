@@ -8,6 +8,8 @@ public enum PagesUrl {
     TRACK_INFO_PAGE("/jsp/track/info.jsp"),
 
     TRACK_OWN_VIEW_PAGE("/jsp/track/ownTrack.jsp"),
+    ALBUM_OWN_VIEW_PAGE("/jsp/track/ownAlbum.jsp"),
+    ASSEMBLAGE_OWN_VIEW_PAGE("/jsp/track/ownAssemblage.jsp"),
 
     TRACK_INFO_WITH_ARG_PAGE("/trackInfo?trackInfoName=");
 

@@ -45,6 +45,8 @@
         <url-pattern>/comment</url-pattern>
         <url-pattern>/buyTrack</url-pattern>
         <url-pattern>/viewUserTracks</url-pattern>
+        <url-pattern>/viewUserAlbums</url-pattern>
+        <url-pattern>/viewUserAssemblages</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -84,8 +86,16 @@
         <filter-class>by.fyodorov.musicstore.filter.BuyTrackFilter</filter-class>
     </filter>
     <filter>
-        <filter-name>OwnTracksView</filter-name>
-        <filter-class>by.fyodorov.musicstore.filter.OwnTrackView</filter-class>
+        <filter-name>OwnTracksViewFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.OwnTrackViewFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>OwnAlbumsViewFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.OwnAlbumViewFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>OwnAssemblagesViewFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.OwnAssemblageViewFilter</filter-class>
     </filter>
 
 
@@ -122,9 +132,18 @@
         <url-pattern>/buyTrack</url-pattern>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>OwnTracksView</filter-name>
+        <filter-name>OwnTracksViewFilter</filter-name>
         <url-pattern>/viewUserTracks</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>OwnAlbumsViewFilter</filter-name>
+        <url-pattern>/viewUserAlbums</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OwnAssemblagesViewFilter</filter-name>
+        <url-pattern>/viewUserAssemblages</url-pattern>
+    </filter-mapping>
+
     
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

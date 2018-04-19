@@ -4,9 +4,13 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.AssemblageEntity;
 import by.fyodorov.musicstore.repository.AssemblageRepository;
 import by.fyodorov.musicstore.specification.assemblage.AssemblageByNameSpecification;
+import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageOfUserByNameCustomSelect;
+import by.fyodorov.musicstore.view.AssemblageWithoutPriceView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class AssemblageReceiver {
@@ -39,5 +43,25 @@ public class AssemblageReceiver {
             assemblageRepository.close();
         }
         return result;
+    }
+
+    public LinkedList<AssemblageWithoutPriceView> findAssemblageForUser(String userName) throws ConnectorException {
+        AssemblageRepository assemblageRepository = new AssemblageRepository();
+        AssemblageCustomSelectSpecification specification = new AssemblageOfUserByNameCustomSelect(userName);
+        LinkedList<AssemblageWithoutPriceView> assemblages = new LinkedList<>();
+        try {
+            LinkedList<HashMap<String, String>> arguments = assemblageRepository.customQuery(specification);
+            for (HashMap<String, String> map : arguments) {
+                assemblages.add(new AssemblageWithoutPriceView(
+                        map.get(AssemblageOfUserByNameCustomSelect.ASSEMBLAGE_NAME_KEY),
+                        map.get(AssemblageOfUserByNameCustomSelect.ASSEMBLAGE_GENRE_KEY),
+                        map.get(AssemblageOfUserByNameCustomSelect.ASSEMBLAGE_DATE_KEY),
+                        map.get(AssemblageOfUserByNameCustomSelect.ASSEMBLAGE_OWNER_KEY)));
+            }
+        }
+        finally {
+            assemblageRepository.close();
+        }
+        return assemblages;
     }
 }

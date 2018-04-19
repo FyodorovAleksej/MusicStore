@@ -154,6 +154,7 @@ public class UserReceiver implements CommandReceiver {
                     if (Integer.valueOf(cashResult) >= 0) {
                         result = userRepository.prepareUpdate(new UserUpdateCashAndBonusCustomSpecification(userName, cashResult, USER_BONUS_ALBUM)) > 0;
                         result = result && userRepository.prepareUpdate(new UserBuyAlbumCustomSpecification(userName, albumName)) > 0;
+                        result = result && userRepository.prepareUpdate(new UserInsertTracksFromAlbumCustomSelect(userName, albumName)) > 0;
                     }
                 }
             }

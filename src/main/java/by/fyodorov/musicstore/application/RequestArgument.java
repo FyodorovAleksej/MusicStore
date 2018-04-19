@@ -1,7 +1,5 @@
 package by.fyodorov.musicstore.application;
 
-import by.fyodorov.musicstore.model.TrackEntity;
-
 public enum RequestArgument {
     LOGIN("login", "\\w+"),
     PASSWORD("password", null),
@@ -20,6 +18,12 @@ public enum RequestArgument {
     TRACK_FIND_RESULT("trackFindResult", null),
     TRACK_LIST("trackList", null),
     TRACK_ALL("trackAll", null),
+
+    ASSEMBLAGE_FIND_RESULT("assemblageFindResult", null),
+    ASSEMBLAGE_OWN_LIST("assemblageOwnList", null),
+
+    ALBUM_FIND_RESULT("albumFindResult", null),
+    ALBUM_OWN_LIST("albumOwnList", null),
 
     TRACK_OWN_LIST("tracksOwn", null),
 

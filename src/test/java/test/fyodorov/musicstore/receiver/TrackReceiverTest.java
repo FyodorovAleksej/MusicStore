@@ -40,4 +40,6 @@ public class TrackReceiverTest {
     public void testFindTrackInfo() throws Exception {
         receiver.findTrackInfo("Katrine").forEach(System.out::println);
     }
+
+
 }

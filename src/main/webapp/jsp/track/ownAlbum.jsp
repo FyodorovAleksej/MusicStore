@@ -18,7 +18,7 @@
     <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
-<fmt:message key="main.ownAlbumHeader" var="albumHeader">
+<fmt:message key="main.ownAlbumHeader" var="albumHeader"/>
 <fmt:message key="main.albumNameLabel" var="nameLabel"/>
 <fmt:message key="main.albumGenreLabel" var="genreLabel"/>
 <fmt:message key="main.albumDateLabel" var="dateLabel"/>
@@ -45,7 +45,7 @@
             <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${performerLabel}</h4>
         </th>
     </tr>
-    <c:forEach items="${albumsOwn}" var="albumView">
+    <c:forEach items="${albumOwnList}" var="albumView">
         <tr>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
