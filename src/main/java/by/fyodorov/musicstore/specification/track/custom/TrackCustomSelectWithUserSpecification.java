@@ -16,10 +16,6 @@ import static by.fyodorov.musicstore.specification.performer.PerformerRepository
 
 
 public class TrackCustomSelectWithUserSpecification implements TrackCustomSelectSpecification {
-    /*
-    SELECT tracks.name, CAST(tracks.price*(1 - (users.discount/100)) as UNSIGNED) as summary, tracks.price
-    FROM tracks LEFT JOIN users ON users.nickName = 'Katrine';
-     */
     private static final String SUMMARY_COLUMN = "summary";
 
     private static final String SELECT_TRACK_INFO_FOR_USERNAME = String.format(

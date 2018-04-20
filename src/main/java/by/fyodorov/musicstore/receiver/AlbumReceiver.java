@@ -3,10 +3,16 @@ package by.fyodorov.musicstore.receiver;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.AlbumEntity;
 import by.fyodorov.musicstore.repository.AlbumRepository;
+import by.fyodorov.musicstore.repository.TrackRepository;
 import by.fyodorov.musicstore.specification.album.AlbumByNameSpecification;
 import by.fyodorov.musicstore.specification.album.custom.AlbumCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.album.custom.AlbumOfUserByNameCustomSelect;
+import by.fyodorov.musicstore.specification.album.custom.AlbumWithUserCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.track.custom.TrackCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.track.custom.TrackCustomSelectWithUserSpecification;
+import by.fyodorov.musicstore.view.AlbumView;
 import by.fyodorov.musicstore.view.AlbumWithoutPriceView;
+import by.fyodorov.musicstore.view.TrackView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,6 +49,29 @@ public class AlbumReceiver implements CommandReceiver {
             albumRepository.close();
         }
         return result;
+    }
+
+    public LinkedList<AlbumView> findAlbumInfo(String userName) throws ConnectorException {
+        AlbumRepository albumRepository = new AlbumRepository();
+        AlbumCustomSelectSpecification specification = new AlbumWithUserCustomSelectSpecification(userName);
+        LinkedList<AlbumView> albums = new LinkedList<>();
+        try {
+            LinkedList<HashMap<String, String>> arguments = albumRepository.customQuery(specification);
+            for (HashMap<String, String> map : arguments) {
+                int price = Integer.valueOf(map.get(AlbumWithUserCustomSelectSpecification.ALBUM_PRICE_KEY));
+                albums.add(new AlbumView(
+                        map.get(AlbumWithUserCustomSelectSpecification.ALBUM_NAME_KEY),
+                        map.get(AlbumWithUserCustomSelectSpecification.ALBUM_PERFORMER_KEY),
+                        map.get(AlbumWithUserCustomSelectSpecification.ALBUM_DATE_KEY),
+                        map.get(AlbumWithUserCustomSelectSpecification.ALBUM_GENRE_KEY),
+                        price,
+                        Integer.valueOf(map.getOrDefault(AlbumWithUserCustomSelectSpecification.ALBUM_PRICE_SUMMARY_KEY, Integer.toString(price)))));
+            }
+        }
+        finally {
+            albumRepository.close();
+        }
+        return albums;
     }
 
     public LinkedList<AlbumWithoutPriceView> findAlbumForUser(String userName) throws ConnectorException {

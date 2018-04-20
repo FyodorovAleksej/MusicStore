@@ -7,9 +7,9 @@ public enum PagesUrl {
     REGISTER_PAGE("/jsp/authority/register.jsp"),
     TRACK_INFO_PAGE("/jsp/track/info.jsp"),
 
-    TRACK_OWN_VIEW_PAGE("/jsp/track/ownTrack.jsp"),
-    ALBUM_OWN_VIEW_PAGE("/jsp/track/ownAlbum.jsp"),
-    ASSEMBLAGE_OWN_VIEW_PAGE("/jsp/track/ownAssemblage.jsp"),
+    TRACK_OWN_VIEW_PAGE("/jsp/own/ownTrack.jsp"),
+    ALBUM_OWN_VIEW_PAGE("/jsp/own/ownAlbum.jsp"),
+    ASSEMBLAGE_OWN_VIEW_PAGE("/jsp/own/ownAssemblage.jsp"),
 
     TRACK_INFO_WITH_ARG_PAGE("/trackInfo?trackInfoName=");
 
