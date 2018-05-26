@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
@@ -13,11 +13,11 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-public class RegisterCommandImpl implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(RegisterCommandImpl.class);
+public class RegisterCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
     private UserReceiver receiver;
 
-    public RegisterCommandImpl(UserReceiver receiver) {
+    public RegisterCommand(UserReceiver receiver) {
         this.receiver = receiver;
     }
 

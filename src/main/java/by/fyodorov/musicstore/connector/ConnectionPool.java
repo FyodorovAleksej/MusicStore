@@ -44,11 +44,15 @@ public class ConnectionPool {
     public static ConnectionPool getInstance(String path) throws ConnectorException {
         if (!isCreated.get()) {
             instanceLock.lock();
-            if (instance == null) {
-                instance = new ConnectionPool(path);
-                isCreated.set(true);
+            try {
+                if (instance == null) {
+                    instance = new ConnectionPool(path);
+                    isCreated.set(true);
+                }
             }
-            instanceLock.unlock();
+            finally {
+                instanceLock.unlock();
+            }
         }
         return instance;
     }
@@ -56,21 +60,29 @@ public class ConnectionPool {
     void releaseConnection(ProxyConnection connection) throws ConnectorException {
         LOGGER.debug("RELEASE CONNECTION");
         lock.lock();
-        if (!connection.isClosed()) {
-            connection.closeConnection();
+        try {
+            if (!connection.isClosed()) {
+                connection.closeConnection();
+            }
+            ProxyConnection proxyConnection = new ProxyConnection(connectionCreator.create());
+            connections.push(proxyConnection);
         }
-        ProxyConnection proxyConnection = new ProxyConnection(connectionCreator.create());
-        connections.push(proxyConnection);
-        lock.unlock();
+        finally {
+            lock.unlock();
+        }
         LOGGER.debug("COUNT OF CONNECTIONS = " + connections.size());
     }
 
     public void destroy() throws ConnectorException {
         lock.lock();
-        for (Connection connection : connections) {
-            ((ProxyConnection)connection).closeConnection();
+        try {
+            for (Connection connection : connections) {
+                ((ProxyConnection) connection).closeConnection();
+            }
         }
-        lock.unlock();
+        finally {
+            lock.unlock();
+        }
         try {
             DriverManager.deregisterDriver(new com.mysql.cj.jdbc.Driver());
         }

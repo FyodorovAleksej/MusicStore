@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.album.AlbumRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
+import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 public class AlbumWithUserCustomSelectSpecification implements AlbumCustomSelectSpecification {
     private static final String SUMMARY_COLUMN = "summary";
 
-    private static final String SELECT_TRACK_INFO_FOR_USERNAME = String.format(
+    private static final String SELECT_ALBUM_INFO_FOR_USERNAME = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s, %s.%s, " +
             "CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +
             "FROM %s LEFT JOIN %s ON %s.%s = ? " +
@@ -49,7 +49,7 @@ public class AlbumWithUserCustomSelectSpecification implements AlbumCustomSelect
 
     @Override
     public String toSqlClauses() {
-        return SELECT_TRACK_INFO_FOR_USERNAME;
+        return SELECT_ALBUM_INFO_FOR_USERNAME;
     }
 
     @Override

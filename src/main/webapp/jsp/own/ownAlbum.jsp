@@ -13,9 +13,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 <fmt:message key="main.ownAlbumHeader" var="albumHeader"/>
@@ -28,47 +25,51 @@
     <c:import url="${request.contextPath}/WEB-INF/jspf/languageSelect.jsp"/>
     <ctl:user-info/>
 </div>
-    <h1><c:out value="${albumHeader}"></c:out></h1>
+    <h1><c:out value="${albumHeader}"/></h1>
 <hr/>
 <table>
     <tr>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${nameLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${nameLabel}"/></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${genreLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${genreLabel}"/></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${dateLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${dateLabel}"/></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${performerLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${performerLabel}"/></h4>
         </th>
     </tr>
     <c:forEach items="${albumOwnList}" var="albumView">
         <tr>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${albumView.getName()}
+                    <c:out value="${albumView.getName()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${albumView.getGenre()}
+                    <c:out value="${albumView.getGenre()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${albumView.getDate()}
+                    <c:out value="${albumView.getDate()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${albumView.getPerformer()}
+                    <c:out value="${albumView.getPerformer()}"/>
                 </h5>
             </td>
         </tr>
     </c:forEach>
 </table>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.comment;
 
-import static by.fyodorov.musicstore.specification.comment.CommentRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.comment.CommentRepositoryType.*;
 
 public class CommentByTrackIdSpecification implements CommentRepositorySpecification {
     private static final String SELECT_BY_ID =

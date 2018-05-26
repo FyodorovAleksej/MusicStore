@@ -2,6 +2,7 @@ package by.fyodorov.musicstore.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import java.util.*;
 
 public class RequestParameterMap {
@@ -64,7 +65,6 @@ public class RequestParameterMap {
     public void setSessionAttribute(String name, Object value) {
         sessionAttributes.put(name, value);
     }
-
 
     public void refresh(HttpServletRequest request) {
         HttpSession session = request.getSession();

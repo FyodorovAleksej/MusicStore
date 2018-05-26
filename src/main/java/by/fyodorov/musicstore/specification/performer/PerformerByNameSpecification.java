@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.performer;
 
-import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 
 
 public class PerformerByNameSpecification implements PerformerRepositorySpecification {

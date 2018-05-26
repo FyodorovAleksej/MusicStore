@@ -11,6 +11,12 @@ public enum PagesUrl {
     ALBUM_OWN_VIEW_PAGE("/jsp/own/ownAlbum.jsp"),
     ASSEMBLAGE_OWN_VIEW_PAGE("/jsp/own/ownAssemblage.jsp"),
 
+    TRACK_SEARCH_PAGE("/jsp/search/searchTrack.jsp"),
+    ALBUM_SEARCH_PAGE("/jsp/search/searchAlbum.jsp"),
+    ASSEMBLAGE_SEARCH_PAGE("/jsp/search/searchAssemblage.jsp"),
+
+    USER_ADMIN_PAGE("/jsp/administrate/viewUsers.jsp"),
+
     TRACK_INFO_WITH_ARG_PAGE("/trackInfo?trackInfoName=");
 
     private String path;

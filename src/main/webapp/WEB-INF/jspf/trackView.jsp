@@ -19,9 +19,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -30,7 +27,7 @@
 <fmt:message key="main.trackPriceLabel" var="priceLabel"/>
 <fmt:message key="main.trackDateLabel" var="dateLabel"/>
 
-<h3>${trackAll}</h3>
+<h3><c:out value="${trackAll}"/></h3>
 <table align="center" border="0">
     <tr>
         <th>
@@ -38,26 +35,30 @@
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${nameLabel}
+                <c:out value="${nameLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${genreLabel}
+                <c:out value="${genreLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${priceLabel}
+                <c:out value="${priceLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${dateLabel}
+                <c:out value="${dateLabel}"/>
             </h4>
         </th>
     </tr>
-    ${tracksInfo}
+    <c:out value="${tracksInfo}"/>
 </table>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

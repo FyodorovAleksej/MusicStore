@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.album.AlbumRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
+import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 
 public class UserInsertTracksFromAlbumCustomSelect implements UserCustomSelectSpecification {
     private static final String INSERT_TRACK = String.format(

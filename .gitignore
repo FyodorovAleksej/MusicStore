@@ -10,6 +10,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Music Files
+*.mp3
+
 # Package Files #
 *.jar
 *.war

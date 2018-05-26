@@ -19,9 +19,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -32,10 +29,14 @@
 
 
 <form action="/login" method="post" class="navbar-form pull-right">
-    <input class="span2" type="text" placeholder="${loginLabel}" name="login">
-    <input class="span2" type="password" placeholder="${passwordLabel}" href="password" name="password">
-    <button type="submit" class="btn btn-primary">${signInSend}</button>
-    <button type="button" class="btn btn-primary" onClick='location.href="/jsp/authority/signUp.jsp"'>${signUpSend}</button>
+    <input class="span2" type="text" placeholder="<c:out value="${loginLabel}"/>" name="login">
+    <input class="span2" type="password" placeholder="<c:out value="${passwordLabel}"/>" href="password" name="password">
+    <button type="submit" class="btn btn-primary"><c:out value="${signInSend}"/></button>
+    <button type="button" class="btn btn-primary" onClick='location.href="/jsp/authority/signUp.jsp"'><c:out value="${signUpSend}"/></button>
 </form>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

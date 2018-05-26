@@ -13,9 +13,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 <fmt:message key="main.trackNameLabel" var="nameLabel"/>
@@ -31,42 +28,52 @@
 <table>
     <tr>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${nameLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${genreLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${nameLabel}"/></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${dateLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${genreLabel}"/></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${performerLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${dateLabel}"/></h4>
+        </th>
+        <th>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${performerLabel}"/></h4>
         </th>
     </tr>
     <c:forEach items="${tracksOwn}" var="trackView">
         <tr>
             <td>
+                <audio src="${request.contextPath}/tracks/${trackView.getName()}.mp3" controls preload="auto"></audio>
+            </td>
+            <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${trackView.getName()}
+                    <c:out value="${trackView.getName()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${trackView.getGenre()}
+                    <c:out value="${trackView.getGenre()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${trackView.getDate()}
+                    <c:out value="${trackView.getDate()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${trackView.getPerformer()}
+                    <c:out value="${trackView.getPerformer()}"/>
                 </h5>
             </td>
         </tr>
     </c:forEach>
 </table>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

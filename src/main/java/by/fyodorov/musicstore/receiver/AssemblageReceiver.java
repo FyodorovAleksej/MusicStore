@@ -2,10 +2,16 @@ package by.fyodorov.musicstore.receiver;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.AssemblageEntity;
+import by.fyodorov.musicstore.repository.AlbumRepository;
 import by.fyodorov.musicstore.repository.AssemblageRepository;
+import by.fyodorov.musicstore.specification.album.custom.AlbumCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.album.custom.AlbumWithUserCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.assemblage.AssemblageByNameSpecification;
 import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageOfUserByNameCustomSelect;
+import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageWithUserCustomSelectSpecification;
+import by.fyodorov.musicstore.view.AlbumView;
+import by.fyodorov.musicstore.view.AssemblageView;
 import by.fyodorov.musicstore.view.AssemblageWithoutPriceView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,6 +51,29 @@ public class AssemblageReceiver {
         return result;
     }
 
+    public LinkedList<AssemblageView> findAssemblageInfo(String userName) throws ConnectorException {
+        AssemblageRepository assemblageRepository = new AssemblageRepository();
+        AssemblageCustomSelectSpecification specification = new AssemblageWithUserCustomSelectSpecification(userName);
+        LinkedList<AssemblageView> assemblages = new LinkedList<>();
+        try {
+            LinkedList<HashMap<String, String>> arguments = assemblageRepository.customQuery(specification);
+            for (HashMap<String, String> map : arguments) {
+                int price = Integer.valueOf(map.get(AssemblageWithUserCustomSelectSpecification.ASSEMBLAGE_PRICE_KEY));
+                assemblages.add(new AssemblageView(
+                        map.get(AssemblageWithUserCustomSelectSpecification.ASSEMBLAGE_NAME_KEY),
+                        map.get(AssemblageWithUserCustomSelectSpecification.ASSEMBLAGE_DATE_KEY),
+                        map.get(AssemblageWithUserCustomSelectSpecification.ASSEMBLAGE_GENRE_KEY),
+                        map.get(AssemblageWithUserCustomSelectSpecification.ASSEMBLAGE_OWNER_KEY),
+                        price,
+                        Integer.valueOf(map.getOrDefault(AssemblageWithUserCustomSelectSpecification.ASSEMBLAGE_PRICE_SUMMARY_KEY, Integer.toString(price)))));
+            }
+        }
+        finally {
+            assemblageRepository.close();
+        }
+        return assemblages;
+    }
+
     public LinkedList<AssemblageWithoutPriceView> findAssemblageForUser(String userName) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
         AssemblageCustomSelectSpecification specification = new AssemblageOfUserByNameCustomSelect(userName);
@@ -64,4 +93,6 @@ public class AssemblageReceiver {
         }
         return assemblages;
     }
+
+
 }

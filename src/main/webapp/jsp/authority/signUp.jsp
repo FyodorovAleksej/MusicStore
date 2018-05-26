@@ -6,7 +6,6 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="text" />
 <html lang="${language}">
-<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,9 +13,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 <br/>
@@ -36,7 +32,7 @@
     <table align="center">
         <tr>
             <td>
-                <label for="loginRegister">${loginLabel}</label>
+                <label for="loginRegister"><c:out value="${loginLabel}"/></label>
             </td>
             <td>
                 <input type="text" class="text-left" id="loginRegister" style="margin-left: 10px; margin-bottom: 2px;" name="login">
@@ -44,7 +40,7 @@
         </tr>
         <tr>
             <td>
-                <label for="emailRegister">${emailLabel}</label>
+                <label for="emailRegister"><c:out value="${emailLabel}"/></label>
             </td>
             <td>
                 <input type="email" class="text-left" id="emailRegister" name="email" style="margin-left: 10px; margin-bottom: 2px;">
@@ -52,7 +48,7 @@
         </tr>
         <tr>
             <td>
-                <label for="passwordRegister">${passwordLabel}</label>
+                <label for="passwordRegister"><c:out value="${passwordLabel}"/></label>
             </td>
             <td>
                 <input type="password" class="text-left" id="passwordRegister" name="password" style="margin-left: 10px; margin-bottom: 2px;">
@@ -60,7 +56,7 @@
         </tr>
         <tr>
             <td>
-                <label for="repPasswordRegister">${repeatPasswordLabel}</label>
+                <label for="repPasswordRegister"><c:out value="${repeatPasswordLabel}"/></label>
             </td>
             <td>
                 <input type="password" class="text-left" id="repPasswordRegister" name="repeatPassword" style="margin-left: 10px; margin-bottom: 2px;">
@@ -68,12 +64,16 @@
         </tr>
         <tr>
             <td colspan="2" align="center">
-                <button type="submit" class="btn btn-primary" style="margin-top: 5px">${signUpSend}</button>
+                <button type="submit" class="btn btn-primary" style="margin-top: 5px"><c:out value="${signUpSend}"/></button>
             </td>
         </tr>
     </table>
 </form>
 <br/>
-<h4 class="text-center" align="center">${signUpResult}</h4>
+<h4 class="text-center" align="center"><c:out value="${signUpResult}"/></h4>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

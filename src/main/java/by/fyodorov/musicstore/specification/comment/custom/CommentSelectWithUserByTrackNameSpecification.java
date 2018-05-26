@@ -1,8 +1,8 @@
 package by.fyodorov.musicstore.specification.comment.custom;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.specification.track.TrackRepositoryConstant;
-import by.fyodorov.musicstore.specification.user.UserRepositoryConstant;
+import by.fyodorov.musicstore.specification.track.TrackRepositoryType;
+import by.fyodorov.musicstore.specification.user.UserRepositoryType;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -10,25 +10,25 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.comment.CommentRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.USER_USERNAME;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.USER_ID;
-import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.TRACK_NAME;
-import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.TRACK_ID;
+import static by.fyodorov.musicstore.specification.comment.CommentRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.USER_USERNAME;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.USER_ID;
+import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.TRACK_NAME;
+import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.TRACK_ID;
 
 public class CommentSelectWithUserByTrackNameSpecification implements CommentCustomSelectSpecification {
     private static final String SELECT_BY_NAME =
-            "SELECT " + UserRepositoryConstant.USER_BD_TABLE + "." + USER_USERNAME + ", "
+            "SELECT " + UserRepositoryType.USER_BD_TABLE + "." + USER_USERNAME + ", "
             + COMMENT_BD_TABLE + "." + COMMENT_TEXT + ", "
             + COMMENT_BD_TABLE + "." + COMMENT_DATE
             + " FROM " + COMMENT_BD_SCHEME + "." + COMMENT_BD_TABLE
-            + " JOIN " + UserRepositoryConstant.USER_BD_SCHEME + "." + UserRepositoryConstant.USER_BD_TABLE
-            + " ON " + UserRepositoryConstant.USER_BD_TABLE + "." + USER_ID
+            + " JOIN " + UserRepositoryType.USER_BD_SCHEME + "." + UserRepositoryType.USER_BD_TABLE
+            + " ON " + UserRepositoryType.USER_BD_TABLE + "." + USER_ID
             + " = " + COMMENT_BD_TABLE + "." + COMMENT_USER_ID + " "
-            + " JOIN " + TrackRepositoryConstant.TRACK_BD_SCHEME + "." + TrackRepositoryConstant.TRACK_BD_TABLE
-            + " ON " + TrackRepositoryConstant.TRACK_BD_TABLE + "." + TRACK_ID
+            + " JOIN " + TrackRepositoryType.TRACK_BD_SCHEME + "." + TrackRepositoryType.TRACK_BD_TABLE
+            + " ON " + TrackRepositoryType.TRACK_BD_TABLE + "." + TRACK_ID
             + " = " + COMMENT_BD_TABLE + "." + COMMENT_TRACK_ID
-            + " WHERE " + TrackRepositoryConstant.TRACK_BD_TABLE + "." + TRACK_NAME + " = ?;";
+            + " WHERE " + TrackRepositoryType.TRACK_BD_TABLE + "." + TRACK_NAME + " = ?;";
 
     private String trackName;
 

@@ -20,23 +20,18 @@
 
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="js/jquery-latest.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 
     <title>MusicStore</title>
 </head>
 <body>
-<fmt:message key="main.trackFindSend" var="findButton"/>
+<c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 <div class="navbar-form">
     <c:import url="/WEB-INF/jspf/languageSelect.jsp"/>
     <ctl:user-info/>
-
-<form action="/findTrack" method="get">
-    <input type="text" class="text" name="trackName">
-    <button type="submit" class="btn btn-primary">${findButton}</button>
-</form>
 </div>
-<ctl:track-view/>
+<!-- Bootstrap CSS -->
+<script src="js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="js/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.performer;
 
-public enum PerformerRepositoryConstant {
+public enum PerformerRepositoryType {
     PERFORMER_ID("performerId"),
     PERFORMER_NAME("performerName"),
 
@@ -9,7 +9,7 @@ public enum PerformerRepositoryConstant {
 
     private String name;
 
-    PerformerRepositoryConstant(String name) {
+    PerformerRepositoryType(String name) {
         this.name = name;
     }
 

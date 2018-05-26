@@ -19,6 +19,11 @@ public enum RequestArgument {
     TRACK_LIST("trackList", null),
     TRACK_ALL("trackAll", null),
 
+    ALBUM_SEARCH_LIST("albumSearchList", null),
+    ASSEMBLAGE_SEARCH_LIST("assemblageSearchList", null),
+    TRACK_SEARCH_LIST("trackSearchList", null),
+
+
     ASSEMBLAGE_FIND_RESULT("assemblageFindResult", null),
     ASSEMBLAGE_OWN_LIST("assemblageOwnList", null),
 
@@ -39,6 +44,15 @@ public enum RequestArgument {
     PERFORMER_INFO_NAME("performerName", null),
 
     TRACK_INFO_COMMENT_LIST("commentList", null),
+
+    USER_ADMIN_LIST("usersList", null),
+
+    FILE_KEY("inputFile", null),
+
+    TRACK_ADD_NAME("trackName", null),
+    TRACK_ADD_GENRE("trackGenre", null),
+    TRACK_ADD_PERFORMER("trackPerformer", null),
+    TRACK_ADD_PRICE("trackPrice", "\\d+"),
 
     SESSION_LOGIN("userName", LOGIN.getPattern()),
     SESSION_ROLE("userRole", null);

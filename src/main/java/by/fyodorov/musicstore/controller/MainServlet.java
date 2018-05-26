@@ -2,7 +2,7 @@ package by.fyodorov.musicstore.controller;
 
 import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.command.*;
-import by.fyodorov.musicstore.command.commandimpl.CommandCreator;
+import by.fyodorov.musicstore.command.impl.CommandCreator;
 import by.fyodorov.musicstore.connector.ConnectionPool;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import org.apache.logging.log4j.LogManager;

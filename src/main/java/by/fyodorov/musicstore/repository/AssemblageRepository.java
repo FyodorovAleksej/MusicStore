@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryType.*;
 
 public class AssemblageRepository {
     private static Logger LOGGER = LogManager.getLogger(AssemblageRepository.class);

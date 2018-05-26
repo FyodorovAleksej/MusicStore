@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.album.AlbumRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
+import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 
 public class AlbumOfUserByNameCustomSelect implements AlbumCustomSelectSpecification {
     public static final String ALBUM_NAME_KEY = "albumName";

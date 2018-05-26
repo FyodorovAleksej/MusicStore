@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 public class AssemblageOfUserByNameCustomSelect implements AssemblageCustomSelectSpecification {
     public static final String ASSEMBLAGE_NAME_KEY = "assemblageName";

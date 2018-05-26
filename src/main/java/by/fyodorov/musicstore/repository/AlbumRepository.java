@@ -20,11 +20,11 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static by.fyodorov.musicstore.specification.album.AlbumRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 
 public class AlbumRepository {
-    private static Logger LOGGER = LogManager.getLogger(AlbumRepository.class);
-    private static Lock MODIFY_LOCK = new ReentrantLock();
+    private static final Logger LOGGER = LogManager.getLogger(AlbumRepository.class);
+    private static final Lock MODIFY_LOCK = new ReentrantLock();
     private static final String ADD_ALBUM_SQL =
             "INSERT INTO " + ALBUM_BD_SCHEME + "." + ALBUM_BD_TABLE + " ("
                     + ALBUM_NAME + ", "

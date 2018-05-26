@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.assemblage;
 
-import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryType.*;
 
 public class AssemblageByNameSpecification implements AssemblageRepositorySpecification {
     private static final String SELECT_BY_NAME =

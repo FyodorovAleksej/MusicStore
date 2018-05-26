@@ -13,19 +13,21 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 <fmt:message key="main.albumNameLabel" var="nameLabel"/>
 <fmt:message key="main.albumGenreLabel" var="genreLabel"/>
 <fmt:message key="main.albumPriceLabel" var="priceLabel"/>
+<fmt:message key="main.albumSummaryLabel" var="summaryLabel"/>
 <fmt:message key="main.albumPerformerLabel" var="performerLabel"/>
 <fmt:message key="main.albumDateLabel" var="dateLabel"/>
 
-<h3>${albumsAll}</h3>
+<c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
+<c:import url="/WEB-INF/jspf/languageSelect.jsp"/>
+<ctl:user-info/>
+
+<h3><c:out value="${albumsAll}"/></h3>
 <table align="center" border="0">
     <tr>
         <th>
@@ -33,27 +35,32 @@
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${nameLabel}
+                <c:out value="${nameLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${genreLabel}
+                <c:out value="${genreLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${performerLabel}
+                <c:out value="${performerLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${dateLabel}
+                <c:out value="${dateLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${priceLabel}
+                <c:out value="${priceLabel}"/>
+            </h4>
+        </th>
+        <th>
+            <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
+                <c:out value="${summaryLabel}"/>
             </h4>
         </th>
     </tr>
@@ -61,37 +68,45 @@
         <tr>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-
                 </h4>
             </td>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                        ${albumSearch.getName()}
+                    <c:out value="${albumSearch.getName()}"/>
                 </h4>
             </td>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                        ${albumSearch.getGenre()}
+                    <c:out value="${albumSearch.getGenre()}"/>
                 </h4>
             </td>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                        ${albumSearch.getPerformer()}
+                    <c:out value="${albumSearch.getPerformer()}"/>
                 </h4>
             </td>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                        ${albumSearch.getDate()}
+                    <c:out value="${albumSearch.getDate()}"/>
                 </h4>
             </td>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                        ${albumSearch.getPrice()}
+                    <c:out value="${albumSearch.getPrice()}"/>
+                </h4>
+            </td>
+            <td>
+                <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
+                    <c:out value="${albumSearch.getSummary()}"/>
                 </h4>
             </td>
         </tr>
     </c:forEach>
 </table>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>
 

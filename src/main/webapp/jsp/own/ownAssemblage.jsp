@@ -13,9 +13,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 <fmt:message key="main.ownAssemblegeHeader" var="assemblageHeader"/>
@@ -28,47 +25,51 @@
     <c:import url="${request.contextPath}/WEB-INF/jspf/languageSelect.jsp"/>
     <ctl:user-info/>
 </div>
-<h1><c:out value="${assemblageHeader}"></c:out></h1>
+<h1><c:out value="${assemblageHeader}"/></h1>
 <hr/>
 <table>
     <tr>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${nameLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${nameLabel}"/></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${genreLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${genreLabel}"/></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${dateLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${dateLabel}"/></h4>
         </th>
         <th>
-            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">${ownerLabel}</h4>
+            <h4 style="padding-left: 25px; margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${ownerLabel}"/></h4>
         </th>
     </tr>
     <c:forEach items="${assemblageOwnList}" var="assemblageView">
         <tr>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${assemblageView.getName()}
+                    <c:out value="${assemblageView.getName()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${assemblageView.getGenre()}
+                    <c:out value="${assemblageView.getGenre()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${assemblageView.getDate()}
+                    <c:out value="${assemblageView.getDate()}"/>
                 </h5>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                        ${assemblageView.getOwner()}
+                    <c:out value="${assemblageView.getOwner()}"/>
                 </h5>
             </td>
         </tr>
     </c:forEach>
 </table>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

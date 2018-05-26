@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.model.UserBonusEnum.USER_BONUS_TRACK;
-import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.model.UserBonusType.USER_BONUS_TRACK;
+import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 public class UserCashAfterTrackOperationCustomSelect implements UserCustomSelectSpecification {
     public static final String SUMMARY_KEY = "summary";

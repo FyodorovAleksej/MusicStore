@@ -1,14 +1,14 @@
 package by.fyodorov.musicstore.specification.user.custom;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.model.UserBonusEnum;
+import by.fyodorov.musicstore.model.UserBonusType;
 
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.model.UserBonusEnum.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.model.UserBonusType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 public class UserUpdateCashAndBonusCustomSpecification implements UserCustomSelectSpecification {
     private static final String UPDATE_CASH_AND_BONUS = String.format(
@@ -25,7 +25,7 @@ public class UserUpdateCashAndBonusCustomSpecification implements UserCustomSele
     private int bonus;
     private String newCash;
 
-    public UserUpdateCashAndBonusCustomSpecification(String userName, String newCash, UserBonusEnum bonus) {
+    public UserUpdateCashAndBonusCustomSpecification(String userName, String newCash, UserBonusType bonus) {
         this.userName = userName;
         this.newCash = newCash;
         this.bonus = bonus.getValue();

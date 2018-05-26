@@ -1,7 +1,9 @@
 package by.fyodorov.musicstore.receiver;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
+import by.fyodorov.musicstore.specification.track.custom.TrackAddCustomSpecification;
 import by.fyodorov.musicstore.specification.track.custom.TrackOfUserByNameCustomSelect;
+import by.fyodorov.musicstore.validator.RequestParameterValidator;
 import by.fyodorov.musicstore.view.CommentView;
 import by.fyodorov.musicstore.model.TrackEntity;
 import by.fyodorov.musicstore.view.TrackView;
@@ -133,5 +135,21 @@ public class TrackReceiver implements CommandReceiver {
             trackRepository.close();
         }
         return tracks;
+    }
+
+    public void addNewTrack(String trackName, String genre, int price, String performerName) throws ConnectorException {
+        TrackRepository trackRepository = new TrackRepository();
+        TrackAddCustomSpecification specification = new TrackAddCustomSpecification(trackName, genre, price, performerName);
+        try {
+            trackRepository.prepareQuery(specification);
+        }
+        finally {
+            trackRepository.close();
+        }
+    }
+
+    public boolean validatePrice(String price) {
+        RequestParameterValidator validator = new RequestParameterValidator();
+        return validator.validateInteger(price);
     }
 }

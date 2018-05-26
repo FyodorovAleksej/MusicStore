@@ -1,6 +1,5 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
-import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
@@ -10,14 +9,13 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static by.fyodorov.musicstore.application.PagesUrl.TRACK_INFO_PAGE;
 import static by.fyodorov.musicstore.application.PagesUrl.TRACK_INFO_WITH_ARG_PAGE;
 
-public class CommentAddCommandImpl implements Command {
-    private static Logger LOGGER = LogManager.getLogger(CommentAddCommandImpl.class);
+public class CommentAddCommand implements Command {
+    private static Logger LOGGER = LogManager.getLogger(CommentAddCommand.class);
     private CommentReceiver receiver;
 
-    public CommentAddCommandImpl(CommentReceiver receiver) {
+    public CommentAddCommand(CommentReceiver receiver) {
         this.receiver = receiver;
     }
 

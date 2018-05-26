@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 public class UserRepository {
     private static Logger LOGGER = LogManager.getLogger(UserRepository.class);

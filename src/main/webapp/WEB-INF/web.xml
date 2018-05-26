@@ -34,6 +34,7 @@
             <file-size-threshold>1048576</file-size-threshold>
         </multipart-config-->
     </servlet>
+
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -47,6 +48,11 @@
         <url-pattern>/viewUserTracks</url-pattern>
         <url-pattern>/viewUserAlbums</url-pattern>
         <url-pattern>/viewUserAssemblages</url-pattern>
+        <url-pattern>/tracks</url-pattern>
+        <url-pattern>/albums</url-pattern>
+        <url-pattern>/assemblages</url-pattern>
+        <url-pattern>/admin</url-pattern>
+        <url-pattern>/addNewTrack</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -66,10 +72,6 @@
         <filter-class>by.fyodorov.musicstore.filter.SignUpFilter</filter-class>
     </filter>
     <filter>
-        <filter-name>TrackFindFilter</filter-name>
-        <filter-class>by.fyodorov.musicstore.filter.TrackFindFilter</filter-class>
-    </filter>
-    <filter>
         <filter-name>TrackInfoFilter</filter-name>
         <filter-class>by.fyodorov.musicstore.filter.TrackInfoFilter</filter-class>
     </filter>
@@ -84,19 +86,65 @@
     <filter>
         <filter-name>BuyTrackFilter</filter-name>
         <filter-class>by.fyodorov.musicstore.filter.BuyTrackFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
     </filter>
     <filter>
         <filter-name>OwnTracksViewFilter</filter-name>
         <filter-class>by.fyodorov.musicstore.filter.OwnTrackViewFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
     </filter>
     <filter>
         <filter-name>OwnAlbumsViewFilter</filter-name>
         <filter-class>by.fyodorov.musicstore.filter.OwnAlbumViewFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
     </filter>
     <filter>
         <filter-name>OwnAssemblagesViewFilter</filter-name>
         <filter-class>by.fyodorov.musicstore.filter.OwnAssemblageViewFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
     </filter>
+    <filter>
+        <filter-name>TrackSearchViewFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.TrackFindFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AlbumSearchViewFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.AlbumFindFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AssemblageSearchViewFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.AssemblageFindFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>UserAdminFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.UserAdminFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>TrackAddFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.TrackAddFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+
+
 
 
     <filter-mapping>
@@ -114,10 +162,6 @@
     <filter-mapping>
         <filter-name>SignUpFilter</filter-name>
         <url-pattern>/signUp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>TrackFindFilter</filter-name>
-        <url-pattern>/findTrack</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>TrackInfoFilter</filter-name>
@@ -142,6 +186,26 @@
     <filter-mapping>
         <filter-name>OwnAssemblagesViewFilter</filter-name>
         <url-pattern>/viewUserAssemblages</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TrackSearchViewFilter</filter-name>
+        <url-pattern>/tracks</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AlbumSearchViewFilter</filter-name>
+        <url-pattern>/albums</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AssemblageSearchViewFilter</filter-name>
+        <url-pattern>/assemblages</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserAdminFilter</filter-name>
+        <url-pattern>/admin</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TrackAddFilter</filter-name>
+        <url-pattern>/addNewTrack</url-pattern>
     </filter-mapping>
 
     

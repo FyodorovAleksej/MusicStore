@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.command.Command;
 import by.fyodorov.musicstore.command.GoToInterface;
@@ -9,8 +9,8 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class LogoutCommandImpl implements Command {
-    private static Logger LOGGER = LogManager.getLogger(LogoutCommandImpl.class);
+public class LogoutCommand implements Command {
+    private static Logger LOGGER = LogManager.getLogger(LogoutCommand.class);
 
     @Override
     public GoToInterface perform(RequestParameterMap requestInfo) {

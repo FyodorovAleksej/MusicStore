@@ -22,7 +22,7 @@ public class AuthorityFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String role = (String) request.getSession().getAttribute(RequestArgument.SESSION_ROLE.getName());
-        if (role == null || UserRole.GUEST.getName().equals(role)) {
+        if (role == null || UserRole.GUEST.toString().equals(role)) {
             response.sendRedirect(request.getContextPath() + index);
         }
         filterChain.doFilter(request, response);

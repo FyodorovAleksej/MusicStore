@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.command.*;
@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import static by.fyodorov.musicstore.application.PagesUrl.TRACK_INFO_WITH_ARG_PAGE;
 
-public class TrackBuyCommandImpl implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(TrackBuyCommandImpl.class);
+public class TrackBuyCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(TrackBuyCommand.class);
     private UserReceiver receiver;
 
-    public TrackBuyCommandImpl(UserReceiver receiver) {
+    public TrackBuyCommand(UserReceiver receiver) {
         this.receiver = receiver;
     }
 

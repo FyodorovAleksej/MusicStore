@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.album;
 
-public enum AlbumRepositoryConstant {
+public enum AlbumRepositoryType {
     ALBUM_ID("albumId"),
     ALBUM_NAME("name"),
     ALBUM_GENRE("genre"),
@@ -21,7 +21,7 @@ public enum AlbumRepositoryConstant {
 
     private String name;
 
-    AlbumRepositoryConstant(String name) {
+    AlbumRepositoryType(String name) {
         this.name = name;
     }
 

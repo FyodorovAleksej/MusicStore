@@ -1,5 +1,7 @@
 package by.fyodorov.musicstore.view;
 
+import by.fyodorov.musicstore.model.TrackEntity;
+
 public class TrackView {
     private String name;
     private String performer;

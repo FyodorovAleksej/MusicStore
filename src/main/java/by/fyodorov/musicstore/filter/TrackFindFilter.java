@@ -1,13 +1,13 @@
 package by.fyodorov.musicstore.filter;
 
 import by.fyodorov.musicstore.application.RequestArgument;
-import by.fyodorov.musicstore.command.commandimpl.CommandEnum;
+import by.fyodorov.musicstore.command.impl.CommandType;
 
 import javax.servlet.*;
 import java.io.IOException;
 
 public class TrackFindFilter implements Filter {
-    private static final String COMMAND_NAME = CommandEnum.GETTING_TRACK_COMMAND.toString();
+    private static final String COMMAND_NAME = CommandType.TRACK_SEARCH_COMMAND.toString();
 
     @Override
     public void init(FilterConfig filterConfig) {

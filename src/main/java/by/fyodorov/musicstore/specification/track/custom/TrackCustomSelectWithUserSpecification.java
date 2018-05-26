@@ -2,15 +2,14 @@ package by.fyodorov.musicstore.specification.track.custom;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
+import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 
 
 

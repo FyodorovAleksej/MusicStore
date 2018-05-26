@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.track;
 
-public enum TrackRepositoryConstant {
+public enum TrackRepositoryType {
     TRACK_ID("trackId"),
     TRACK_NAME("name"),
     TRACK_GENRE("genre"),
@@ -13,7 +13,7 @@ public enum TrackRepositoryConstant {
 
     private String name;
 
-    TrackRepositoryConstant(String name) {
+    TrackRepositoryType(String name) {
         this.name = name;
     }
 

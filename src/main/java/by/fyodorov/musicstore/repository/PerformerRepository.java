@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 
 public class PerformerRepository {
     private static Logger LOGGER = LogManager.getLogger(PerformerRepository.class);

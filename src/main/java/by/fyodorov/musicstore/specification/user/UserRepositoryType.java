@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.user;
 
-public enum UserRepositoryConstant {
+public enum UserRepositoryType {
     USER_ID("userId"),
     USER_USERNAME("nickName"),
     USER_EMAIL("email"),
@@ -36,7 +36,7 @@ public enum UserRepositoryConstant {
 
     private String name;
 
-    UserRepositoryConstant(String name) {
+    UserRepositoryType(String name) {
         this.name = name;
     }
 

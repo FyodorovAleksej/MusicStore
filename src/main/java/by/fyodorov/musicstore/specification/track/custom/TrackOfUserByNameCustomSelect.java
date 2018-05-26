@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
+import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 public class TrackOfUserByNameCustomSelect implements TrackCustomSelectSpecification {
     public static final String TRACK_NAME_KEY = "trackName";

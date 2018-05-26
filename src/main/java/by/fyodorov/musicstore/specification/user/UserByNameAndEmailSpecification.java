@@ -1,7 +1,7 @@
 package by.fyodorov.musicstore.specification.user;
 
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.USER_USERNAME;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.USER_USERNAME;
 
 public class UserByNameAndEmailSpecification implements UserRepositorySpecification {
     private static final String SELECT_BY_NAME =

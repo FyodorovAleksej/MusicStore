@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.comment;
 
-public enum CommentRepositoryConstant {
+public enum CommentRepositoryType {
     COMMENT_ID("commentsId"),
     COMMENT_TEXT("text"),
     COMMENT_DATE("date"),
@@ -13,7 +13,7 @@ public enum CommentRepositoryConstant {
 
     private String name;
 
-    CommentRepositoryConstant(String name) {
+    CommentRepositoryType(String name) {
         this.name = name;
     }
 

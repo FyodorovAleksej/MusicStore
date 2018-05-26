@@ -2,7 +2,7 @@ package by.fyodorov.musicstore.filter;
 
 import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.application.UserRole;
-import by.fyodorov.musicstore.command.commandimpl.CommandEnum;
+import by.fyodorov.musicstore.command.impl.CommandType;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OwnAlbumViewFilter implements Filter {
-    private static final String COMMAND_NAME = CommandEnum.OWN_ALBUM_COMMAND.toString();
+    private static final String COMMAND_NAME = CommandType.OWN_ALBUM_COMMAND.toString();
     private static final String INIT_INDEX = "index";
     private String index;
 
@@ -24,7 +24,7 @@ public class OwnAlbumViewFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String role = (String) request.getSession().getAttribute(RequestArgument.SESSION_ROLE.getName());
-        if (role == null || UserRole.GUEST.getName().equals(role)) {
+        if (role == null || UserRole.GUEST.toString().equals(role)) {
             response.sendRedirect(request.getContextPath() + index);
             return;
         }

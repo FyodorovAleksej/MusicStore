@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.comment.CommentRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.comment.CommentRepositoryType.*;
 
 public class CommentRepository {
     private static Logger LOGGER = LogManager.getLogger(CommentRepository.class);

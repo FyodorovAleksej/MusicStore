@@ -1,13 +1,13 @@
 package by.fyodorov.musicstore.model;
 
-public enum UserBonusEnum {
+public enum UserBonusType {
     USER_BONUS_TRACK(1),
     USER_BONUS_ALBUM(2),
     USER_BONUS_ASSEMBLAGE(4);
 
     private int value;
 
-    UserBonusEnum(int value) {
+    UserBonusType(int value) {
         this.value = value;
     }
 

@@ -1,7 +1,7 @@
 package by.fyodorov.musicstore.specification.assemblage;
 
 
-public enum AssemblageRepositoryConstant {
+public enum AssemblageRepositoryType {
     ASSEMBLAGE_ID("assemblageId"),
     ASSEMBLAGE_NAME("name"),
     ASSEMBLAGE_GENRE("genre"),
@@ -14,7 +14,7 @@ public enum AssemblageRepositoryConstant {
 
     private String name;
 
-    AssemblageRepositoryConstant(String name) {
+    AssemblageRepositoryType(String name) {
         this.name = name;
     }
 

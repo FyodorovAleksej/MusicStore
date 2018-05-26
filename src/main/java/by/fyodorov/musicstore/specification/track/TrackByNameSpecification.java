@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.track;
 
-import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 
 public class TrackByNameSpecification implements TrackRepositorySpecification {
     private static final String SELECT_BY_NAME =

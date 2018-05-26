@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 
 public class TrackRepository {
     private static Logger LOGGER = LogManager.getLogger(TrackRepository.class);

@@ -14,14 +14,14 @@ import by.fyodorov.musicstore.specification.user.UserByNameAndPasswordSpecificat
 import by.fyodorov.musicstore.specification.user.UserByNameSpecification;
 import by.fyodorov.musicstore.specification.user.custom.*;
 import by.fyodorov.musicstore.validator.RequestParameterValidator;
-import by.fyodorov.musicstore.view.TrackWithoutPriceView;
+import by.fyodorov.musicstore.view.UserView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.model.UserBonusEnum.*;
+import static by.fyodorov.musicstore.model.UserBonusType.*;
 
 public class UserReceiver implements CommandReceiver {
     private static Logger LOGGER = LogManager.getLogger(UserReceiver.class);
@@ -41,19 +41,34 @@ public class UserReceiver implements CommandReceiver {
     public UserEntity findUser(String name) throws ConnectorException {
         LOGGER.debug("finding user = \"" + name + "\"");
         UserRepository userRepository = new UserRepository();
-
         LinkedList<UserEntity> list = userRepository.prepareQuery(new UserByNameSpecification(name));
 
         userRepository.close();
         if (!list.isEmpty()) {
             return list.getFirst();
         }
-
-        /*
-        if (STUB_NAME.equalsIgnoreCase(name)) {
-            return new UserEntity(0, STUB_NAME, STUB_EMAIL, STUB_ROLE, STUB_CASH, STUB_BONUS, STUB_DISCOUNT, STUB_PASSWORD);
-        }*/
         return null;
+    }
+
+    public LinkedList<UserView> findAllUsers() throws ConnectorException {
+        LOGGER.debug("finding users");
+        UserRepository userRepository = new UserRepository();
+        LinkedList<UserView> users = new LinkedList<>();
+        try {
+            LinkedList<HashMap<String, String>> argList = userRepository.customQuery(new UserAllCustomSelect());
+            for (HashMap<String, String> map : argList) {
+                users.add(new UserView(
+                        Integer.valueOf(map.get(UserAllCustomSelect.USER_ID_KEY)),
+                        map.get(UserAllCustomSelect.USER_NAME_KEY),
+                        map.get(UserAllCustomSelect.USER_EMAIL_KEY),
+                        map.get(UserAllCustomSelect.USER_ROLE_KEY)
+                ));
+            }
+        }
+        finally {
+            userRepository.close();
+        }
+        return users;
     }
 
     public UserEntity findUserByMail(String name, String email) throws ConnectorException {

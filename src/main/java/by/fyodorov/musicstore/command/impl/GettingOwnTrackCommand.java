@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
@@ -10,10 +10,10 @@ import by.fyodorov.musicstore.view.TrackWithoutPriceView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 
-public class GettingOwnTrackCommandImpl implements Command {
+public class GettingOwnTrackCommand implements Command {
     private TrackReceiver receiver;
 
-    public GettingOwnTrackCommandImpl(TrackReceiver receiver) {
+    public GettingOwnTrackCommand(TrackReceiver receiver) {
         this.receiver = receiver;
     }
 

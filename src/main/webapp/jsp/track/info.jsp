@@ -20,9 +20,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 <fmt:message key="main.commentSend" var="commentButton"/>
@@ -49,7 +46,7 @@
     <button type="submit" class="btn btn-primary">Buy: <c:out value="${trackPrice}">AAA</c:out></button>
 </form>
 <hr/>
-<h4>Comments:</h4>
+<h4><c:out value="Comments:"/></h4>
 <table>
     <tr>
         <th>
@@ -66,17 +63,17 @@
     <tr>
         <td>
             <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                ${comment.getUserName()}
+                <c:out value="${comment.getUserName()}"/>
             </h5>
         </td>
         <td>
             <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                ${comment.getText()}
+                <c:out value="${comment.getText()}"/>
             </h5>
         </td>
         <td>
             <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">
-                ${comment.getDate()}
+                <c:out value="${comment.getDate()}"/>
             </h5>
         </td>
     </tr>
@@ -86,5 +83,9 @@
     <textarea type="text" name="newComment" style="padding-left: 25px;"></textarea>
     <button type="submit" class="btn btn-primary">comment</button>
 </form>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -3,25 +3,17 @@ package by.fyodorov.musicstore.specification.comment.custom;
 import by.fyodorov.musicstore.connector.ConnectorException;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.comment.CommentRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.track.TrackRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.comment.CommentRepositoryType.*;
+import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 public class CommentAddByTextAndUserSpecification implements CommentCustomSelectSpecification {
-    /*
-    INSERT INTO `musicstore`.`comments` (`text`, `date`, `users_userId`, `tracks_trackId`, `tracks_performers_id`)
-SELECT 'nice',                                             -- text
-CURDATE(),	                                              -- date
-users.userId,                                             -- users_userId
-tracks.trackId,                                           -- tracks_trackId
-tracks.performers_id                                      -- tracks_performers_id
-FROM users, tracks WHERE users.nickName = 'Akela'          -- user nickName
-AND tracks.name = 'outbreak';                             -- track name
-            */
+    private static final String STRING_ENDL = "\n";
+    private static final String HTML_ENDL = "<br/>";
+
     private static final String ADD_SQL =
             String.format("INSERT INTO %s.%s (%s, %s, %s, %s, %s) " +
                     "SELECT ?, CURDATE(), %s.%s, %s.%s, %s.%s " +
@@ -60,7 +52,7 @@ AND tracks.name = 'outbreak';                             -- track name
     @Override
     public String[] getArguments() {
         String[] result = new String[3];
-        result[0] = text;
+        result[0] = text;//.replaceAll(STRING_ENDL, HTML_ENDL);
         result[1] = userName;
         result[2] = trackName;
         return result;

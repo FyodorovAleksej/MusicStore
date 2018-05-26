@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Alexey
-  Date: 13.02.2018
-  Time: 10:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -21,12 +14,17 @@
     <title>MusicStore</title>
 </head>
 <body>
+<fmt:message key="main.signUpSend" var="sendButton"/>
 <br/>
 <c:import url="${request.contextPath}/WEB-INF/jspf/languageSelect.jsp"/>
 <form action="${pageContext.request.contextPath}/register" method="post">
     <input type="text" name="uuid"/>
-    <button type="submit" class="btn btn-primary">Send</button>
+    <button type="submit" class="btn btn-primary"><c:out value="${sendButton}"/></button>
 </form>
 <h2>${uuidResult}</h2>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

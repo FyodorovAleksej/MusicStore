@@ -19,9 +19,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
-    <script src="${request.contextPath}/js/jquery-latest.js"></script>
-    <script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -33,21 +30,25 @@
     <tr>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${userNameLabel}
+                <c:out value="${userNameLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${commentTextLabel}
+                <c:out value="${commentTextLabel}"/>
             </h4>
         </th>
         <th>
             <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                ${commentDateLabel}
+                <c:out value="${commentDateLabel}"/>
             </h4>
         </th>
     </tr>
-    ${comments}
+    <c:out value="${comments}"/>
 </table>
+<!-- Bootstrap -->
+<script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
+<script src="${request.contextPath}/js/jquery-latest.js"></script>
+<script src="${request.contextPath}/js/bootstrap.min.js"></script>
 </body>
 </html>

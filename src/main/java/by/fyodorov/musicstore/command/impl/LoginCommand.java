@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
@@ -12,11 +12,11 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-public class LoginCommandImpl implements Command {
-    private static Logger LOGGER = LogManager.getLogger(LoginCommandImpl.class);
+public class LoginCommand implements Command {
+    private static Logger LOGGER = LogManager.getLogger(LoginCommand.class);
     private UserReceiver receiver;
 
-    public LoginCommandImpl(UserReceiver receiver) {
+    public LoginCommand(UserReceiver receiver) {
         this.receiver = receiver;
     }
 

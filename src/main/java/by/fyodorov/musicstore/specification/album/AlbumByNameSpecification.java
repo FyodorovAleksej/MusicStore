@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.specification.album;
 
-import static by.fyodorov.musicstore.specification.album.AlbumRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 
 public class AlbumByNameSpecification implements AlbumRepositorySpecification {
     private static final String SELECT_BY_NAME =

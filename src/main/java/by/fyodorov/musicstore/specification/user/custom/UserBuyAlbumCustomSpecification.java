@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import static by.fyodorov.musicstore.specification.album.AlbumRepositoryConstant.*;
-import static by.fyodorov.musicstore.specification.user.UserRepositoryConstant.*;
+import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
+import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 public class UserBuyAlbumCustomSpecification implements UserCustomSelectSpecification {
     private static final String BUY_TRANSACTION = String.format(

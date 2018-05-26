@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
@@ -10,10 +10,10 @@ import by.fyodorov.musicstore.view.AssemblageWithoutPriceView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 
-public class GettingOwnAssemblageCommandImpl implements Command {
+public class GettingOwnAssemblageCommand implements Command {
     private AssemblageReceiver receiver;
 
-    public GettingOwnAssemblageCommandImpl(AssemblageReceiver receiver) {
+    public GettingOwnAssemblageCommand(AssemblageReceiver receiver) {
         this.receiver = receiver;
     }
 

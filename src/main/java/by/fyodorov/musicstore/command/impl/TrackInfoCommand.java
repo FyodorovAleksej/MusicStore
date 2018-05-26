@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
@@ -12,11 +12,11 @@ import by.fyodorov.musicstore.receiver.TrackReceiver;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
-public class TrackInfoCommandImpl implements Command {
+public class TrackInfoCommand implements Command {
     private TrackReceiver trackReceiver;
     private PerformerReceiver performerReceiver;
 
-    TrackInfoCommandImpl(TrackReceiver trackReceiver, PerformerReceiver performerReceiver) {
+    TrackInfoCommand(TrackReceiver trackReceiver, PerformerReceiver performerReceiver) {
         this.trackReceiver = trackReceiver;
         this.performerReceiver = performerReceiver;
     }

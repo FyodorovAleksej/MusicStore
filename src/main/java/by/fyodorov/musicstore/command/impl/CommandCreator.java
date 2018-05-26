@@ -1,4 +1,4 @@
-package by.fyodorov.musicstore.command.commandimpl;
+package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.command.Command;
 import by.fyodorov.musicstore.command.CommandException;
@@ -10,10 +10,10 @@ public class CommandCreator {
 
     public Command createCommand(String command) throws CommandException {
         if (command == null) {
-            return CommandEnum.getDefault().getCommand();
+            return CommandType.getDefault().getCommand();
         }
         try {
-            CommandEnum commandType = CommandEnum.valueOf(command.toUpperCase());
+            CommandType commandType = CommandType.valueOf(command.toUpperCase());
             return commandType.getCommand();
         }
         catch (IllegalArgumentException e) {
