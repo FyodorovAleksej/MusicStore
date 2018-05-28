@@ -25,10 +25,7 @@
 </head>
 <body>
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
-<div class="navbar-form">
-    <c:import url="/WEB-INF/jspf/languageSelect.jsp"/>
-    <ctl:user-info/>
-</div>
+
 <!-- Bootstrap CSS -->
 <script src="js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
 <script src="js/jquery-latest.js"></script>

@@ -13,7 +13,12 @@ public enum CommandType {
     TRACK_INFO_COMMAND(new TrackInfoCommand(new TrackReceiver(), new PerformerReceiver())),
     COMMENT_ADD_COMMAND(new CommentAddCommand(new CommentReceiver())),
 
+    ALBUM_INFO_COMMAND(new AlbumInfoCommand(new AlbumReceiver(), new TrackReceiver())),
+    ASSEMBLAGE_INFO_COMMAND(new AssemblageInfoCommand(new AssemblageReceiver(), new TrackReceiver())),
+
     BUY_TRACK_COMMAND(new TrackBuyCommand(new UserReceiver())),
+    BUY_ALBUM_COMMAND(new AlbumBuyCommand(new UserReceiver())),
+    BUY_ASSEMBLAGE_COMMAND(new AssemblageBuyCommand(new UserReceiver())),
 
     TRACK_SEARCH_COMMAND(new GettingTrackCommand(new TrackReceiver())),
     ALBUM_SEARCH_COMMAND(new GettingAlbumCommand(new AlbumReceiver())),
@@ -25,6 +30,8 @@ public enum CommandType {
 
     TRACK_ADD_COMMAND(new TrackAddCommand(new TrackReceiver())),
 
+    USER_INFO_COMMAND(new UserInfoCommand(new UserReceiver())),
+    USER_EDIT_COMMAND(new EditUserCommand(new UserReceiver())),
     ADMIN_USER_COMMAND(new GettingUsersCommand(new UserReceiver()));
 
     private Command command;

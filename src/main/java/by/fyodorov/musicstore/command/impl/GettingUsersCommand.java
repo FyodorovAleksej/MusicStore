@@ -5,7 +5,6 @@ import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.receiver.UserReceiver;
-import by.fyodorov.musicstore.view.TrackView;
 import by.fyodorov.musicstore.view.UserView;
 
 import javax.servlet.http.HttpServletRequest;

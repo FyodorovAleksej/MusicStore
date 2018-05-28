@@ -19,10 +19,10 @@ public class AlbumOfUserByNameCustomSelect implements AlbumCustomSelectSpecifica
 
     private static final String SELECT_USERS_ALBUMS = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s FROM %s " +
-            "JOIN %s ON %s.%s = %s.%s " +
-            "JOIN %s ON %s.%s = %s.%s " +
-            "JOIN %s ON %s.%s = %s.%s " +
-            "WHERE %s.%s = ? ;\n",
+                    "JOIN %s ON %s.%s = %s.%s " +
+                    "JOIN %s ON %s.%s = %s.%s " +
+                    "JOIN %s ON %s.%s = %s.%s " +
+                    "WHERE %s.%s = ? ;\n",
 
             ALBUM_BD_TABLE, ALBUM_NAME,
             ALBUM_BD_TABLE, ALBUM_GENRE,
@@ -76,8 +76,7 @@ public class AlbumOfUserByNameCustomSelect implements AlbumCustomSelectSpecifica
 
                 result.add(arguments);
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't read result set from Album DB", e);
         }
         return result;

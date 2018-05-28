@@ -6,8 +6,8 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.connector.SqlUtil;
 import by.fyodorov.musicstore.controller.ContextParameter;
 import by.fyodorov.musicstore.model.TrackEntity;
-import by.fyodorov.musicstore.specification.track.custom.TrackCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.track.TrackRepositorySpecification;
+import by.fyodorov.musicstore.specification.track.custom.TrackCustomSelectSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -60,6 +60,7 @@ public class TrackRepository {
         util.execUpdate(String.format(REMOVE_TRACK_SQL, track.getId()));
         MODIFY_LOCK.unlock();
     }
+
     public void update(TrackEntity track) {
         MODIFY_LOCK.lock();
         LOGGER.debug("update track");
@@ -90,8 +91,7 @@ public class TrackRepository {
 
                 list.add(new TrackEntity(id, name, genre, price, date, performerId));
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't read result set from Track DB", e);
         }
         list.forEach(LOGGER::debug);

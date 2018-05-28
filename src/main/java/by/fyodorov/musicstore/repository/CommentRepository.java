@@ -6,8 +6,8 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.connector.SqlUtil;
 import by.fyodorov.musicstore.controller.ContextParameter;
 import by.fyodorov.musicstore.model.CommentEntity;
-import by.fyodorov.musicstore.specification.comment.custom.CommentCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.comment.CommentRepositorySpecification;
+import by.fyodorov.musicstore.specification.comment.custom.CommentCustomSelectSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

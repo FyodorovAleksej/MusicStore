@@ -16,7 +16,13 @@ public enum PagesUrl {
     ASSEMBLAGE_SEARCH_PAGE("/jsp/search/searchAssemblage.jsp"),
 
     USER_ADMIN_PAGE("/jsp/administrate/viewUsers.jsp"),
+    USER_INFO_PAGE("/jsp/administrate/editUser.jsp"),
+    USER_INFO_WITH_ARG_PAGE("/infoUser?infoUser="),
 
+    ALBUM_INFO_WITH_ARG_PAGE("/albumInfo?albumInfoName="),
+    ALBUM_INFO_PAGE("/jsp/album/info.jsp"),
+    ASSEMBLAGE_INFO_WITH_ARG_PAGE("/assemblageInfo?assemblageInfoName="),
+    ASSEMBLAGE_INFO_PAGE("/jsp/assemblage/info.jsp"),
     TRACK_INFO_WITH_ARG_PAGE("/trackInfo?trackInfoName=");
 
     private String path;

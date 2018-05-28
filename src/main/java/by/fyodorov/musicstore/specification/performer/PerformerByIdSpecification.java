@@ -1,7 +1,6 @@
 package by.fyodorov.musicstore.specification.performer;
 
 import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
-import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.PERFORMER_NAME;
 
 public class PerformerByIdSpecification implements PerformerRepositorySpecification {
     private static final String SELECT_BY_ID =

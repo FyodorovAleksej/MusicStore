@@ -2,19 +2,20 @@ package by.fyodorov.musicstore.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 import java.util.*;
 
 public class RequestParameterMap {
     private HashMap<String, Object> requestAttributes;
     private HashMap<String, Object> sessionAttributes;
     private HashMap<String, String> requestParameters;
+    private HashMap<String, String[]> requestMultipleParametres;
     private String contextPath;
 
     public RequestParameterMap(HttpServletRequest request) {
         requestAttributes = new HashMap<>();
         sessionAttributes = new HashMap<>();
         requestParameters = new HashMap<>();
+        requestMultipleParametres = new HashMap<>();
 
         contextPath = request.getContextPath();
 
@@ -33,7 +34,12 @@ public class RequestParameterMap {
         Enumeration<String> paramNames = request.getParameterNames();
         while (paramNames.hasMoreElements()) {
             String name = paramNames.nextElement();
-            requestParameters.put(name, request.getParameter(name));
+            String[] params = request.getParameterValues(name);
+            if (params.length > 1) {
+                requestMultipleParametres.put(name, request.getParameterValues(name));
+            } else {
+                requestParameters.put(name, request.getParameter(name));
+            }
         }
     }
 
@@ -53,6 +59,10 @@ public class RequestParameterMap {
         return contextPath;
     }
 
+    public String[] getRequestMultipleAttribute(String name) {
+        return requestMultipleParametres.get(name);
+    }
+
 
     public void setRequestParameter(String name, String value) {
         requestParameters.put(name, value);
@@ -64,6 +74,10 @@ public class RequestParameterMap {
 
     public void setSessionAttribute(String name, Object value) {
         sessionAttributes.put(name, value);
+    }
+
+    public void setRequestMultipleParameter(String name, String[] values) {
+        requestMultipleParametres.put(name, values);
     }
 
     public void refresh(HttpServletRequest request) {
@@ -85,9 +99,11 @@ public class RequestParameterMap {
 
         requestNames = request.getAttributeNames();
         mapNames = requestAttributes.keySet();
+        Set<String> multipleMapNames = requestMultipleParametres.keySet();
 
         requestList = Collections.list(requestNames);
         requestList.removeAll(mapNames);
+        requestList.removeAll(multipleMapNames);
 
         for (String name : requestList) {
             request.setAttribute(name, null);
@@ -95,6 +111,10 @@ public class RequestParameterMap {
 
         for (String name : mapNames) {
             request.setAttribute(name, requestAttributes.get(name));
+        }
+
+        for (String name : multipleMapNames) {
+            request.setAttribute(name, requestMultipleParametres.get(name));
         }
     }
 }

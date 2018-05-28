@@ -21,10 +21,7 @@
 <fmt:message key="main.albumDateLabel" var="dateLabel"/>
 <fmt:message key="main.performerNameLabel" var="performerLabel"/>
 
-<div class="navbar-form">
-    <c:import url="${request.contextPath}/WEB-INF/jspf/languageSelect.jsp"/>
-    <ctl:user-info/>
-</div>
+<c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
     <h1><c:out value="${albumHeader}"/></h1>
 <hr/>
 <table>

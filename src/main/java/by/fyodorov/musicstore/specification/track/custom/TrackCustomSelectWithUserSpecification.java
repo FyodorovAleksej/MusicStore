@@ -7,20 +7,18 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
-import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
-
-
-
 
 public class TrackCustomSelectWithUserSpecification implements TrackCustomSelectSpecification {
     private static final String SUMMARY_COLUMN = "summary";
 
     private static final String SELECT_TRACK_INFO_FOR_USERNAME = String.format(
-            "SELECT + %s.%s, %s.%s, %s.%s, %s.%s, %s.%s, CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +
+            "SELECT %s.%s, %s.%s, %s.%s, %s.%s, %s.%s, CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +
                     "FROM %s LEFT JOIN %s ON %s.%s = ? " +
                     "JOIN %s ON %s.%s = %s.%s",
+
             TRACK_BD_TABLE, TRACK_NAME,
             TRACK_BD_TABLE, TRACK_GENRE,
             PERFORMER_BD_TABLE, PERFORMER_NAME,

@@ -47,6 +47,39 @@ public enum RequestArgument {
 
     USER_ADMIN_LIST("usersList", null),
 
+    USER_NAME_INFO("infoUser", null),
+    USER_INFO("userEditName", null),
+    USER_ROLE_INFO("userEditRole", null),
+    USER_ROLE_USER_INFO("userEditUserRole", null),
+    USER_ROLE_ADMIN_INFO("userEditAdminRole", null),
+    USER_BONUS_INFO("userBonus", null),
+    USER_BONUS_TRACK_INFO("userEditTrackBonus", null),
+    USER_BONUS_ALBUM_INFO("userEditAlbumBonus", null),
+    USER_BONUS_ASSEMBLAGE_INFO("userEditAssemblageBonus", null),
+    USER_DISCOUNT_INFO("userEditDiscount", "\\d+"),
+
+    ALBUM_SESSION_NAME("albumSessionName", null),
+    ALBUM_NAME_FOR_INFO("albumInfoName", null),
+    ALBUM_INFO_NAME("albumName", null),
+    ALBUM_INFO_GENRE("albumInfoGenre", null),
+    ALBUM_INFO_PRICE("albumInfoPrice", null),
+    ALBUM_INFO_DATE("albumInfoDate", null),
+    ALBUM_INFO_PERFORMER("albumInfoPerformer", null),
+    ALBUM_INFO_SUMMARY("albumInfoSummary", null),
+
+    ALBUM_TRACKS_LIST("albumTrackList", null),
+
+    ASSEMBLAGE_SESSION_NAME("assemblageSessionName", null),
+    ASSEMBLAGE_NAME_FOR_INFO("assemblageInfoName", null),
+    ASSEMBLAGE_INFO_NAME("assemblageName", null),
+    ASSEMBLAGE_INFO_GENRE("assemblageInfoGenre", null),
+    ASSEMBLAGE_INFO_PRICE("assemblageInfoPrice", null),
+    ASSEMBLAGE_INFO_DATE("assemblageInfoDate", null),
+    ASSEMBLAGE_INFO_OWNER("assemblageInfoPrice", null),
+    ASSEMBLAGE_INFO_SUMMARY("assemblageInfoSummary", null),
+
+    ASSEMBLAGE_TRACKS_LIST("assemblageTrackList", null),
+
     FILE_KEY("inputFile", null),
 
     TRACK_ADD_NAME("trackName", null),

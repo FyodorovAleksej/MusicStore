@@ -26,8 +26,6 @@
 <fmt:message key="tracks.addTrackLabel" var="addLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
-<c:import url="/WEB-INF/jspf/languageSelect.jsp"/>
-<ctl:user-info/>
 
 <button type="button" class="btn btn-primary" onClick='location.href="${request.contextPath}/jsp/administrate/addTrack.jsp"'><c:out value="${addLabel}"/></button>
 <table align="center" border="0">

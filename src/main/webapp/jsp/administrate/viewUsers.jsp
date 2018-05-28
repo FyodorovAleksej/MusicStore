@@ -22,8 +22,6 @@
 <fmt:message key="main.userEditLabel" var="editLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
-<c:import url="/WEB-INF/jspf/languageSelect.jsp"/>
-<ctl:user-info/>
 
 <table align="center" border="0">
     <tr>
@@ -50,7 +48,7 @@
         <tr>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                    <button type="button" style = "margin-left: 10px; margin-bottom: 4px; margin-right: 20px;" class="btn btn-primary" onClick='location.href="/editUser?editUser=${user.getUserName()}"'>
+                    <button type="button" style = "margin-left: 10px; margin-bottom: 4px; margin-right: 20px;" class="btn btn-primary" onClick='location.href="/infoUser?infoUser=${user.getUserName()}"'>
                         <c:out value="${editLabel}"/>
                     </button>
                 </h4>

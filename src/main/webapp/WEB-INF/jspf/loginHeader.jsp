@@ -21,17 +21,19 @@
 <fmt:message key="main.ownAlbums" var="ownAlbums"/>
 <fmt:message key="main.ownAssemblages" var="ownAssemblages"/>
 
-<form action="/viewUserTracks" method="get" class="navbar-form pull-right">
+
+<form action="/viewUserTracks" method="get" class="nav-item">
     <button type="submit" class="btn btn-primary"><c:out value="${ownTracks}"/></button>
 </form>
-<form action="/viewUserAlbums" method="get" class="navbar-form pull-right">
+<form action="/viewUserAlbums" method="get" class="nav-item">
     <button type="submit" class="btn btn-primary"><c:out value="${ownAlbums}"/></button>
 </form>
-<form action="/viewUserAssemblages" method="get" class="navbar-form pull-right">
+<form action="/viewUserAssemblages" method="get" class="nav-item">
     <button type="submit" class="btn btn-primary"><c:out value="${ownAssemblages}"/></button>
 </form>
-<div class="navbar-form pull-right">
-    <h4><c:out value="${welcome}, ${userName} ${as} ${userRole}"/></h4>
+<br/>
+<div class="nav-item">
+    <h4 style="color:#66fff5"><c:out value="${welcome}, ${userName} ${as} ${userRole}"/></h4>
     <button type="button" class="btn btn-primary" onClick='location.href="/logout"'><c:out value="${logout}"/></button>
 </div>
 <!-- Bootstrap -->

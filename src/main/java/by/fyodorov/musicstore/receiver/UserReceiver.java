@@ -169,7 +169,7 @@ public class UserReceiver implements CommandReceiver {
                     if (Integer.valueOf(cashResult) >= 0) {
                         result = userRepository.prepareUpdate(new UserUpdateCashAndBonusCustomSpecification(userName, cashResult, USER_BONUS_ALBUM)) > 0;
                         result = result && userRepository.prepareUpdate(new UserBuyAlbumCustomSpecification(userName, albumName)) > 0;
-                        result = result && userRepository.prepareUpdate(new UserInsertTracksFromAlbumCustomSelect(userName, albumName)) > 0;
+                        result = result && userRepository.prepareUpdate(new UserInsertTracksFromAlbumCustomSelect(userName, albumName)) >= 0;
                     }
                 }
             }
@@ -203,6 +203,7 @@ public class UserReceiver implements CommandReceiver {
                     if (Integer.valueOf(cashResult) >= 0) {
                         result = userRepository.prepareUpdate(new UserUpdateCashAndBonusCustomSpecification(userName, cashResult, USER_BONUS_ASSEMBLAGE)) > 0;
                         result = result && userRepository.prepareUpdate(new UserBuyAssemblageCustomSpecification(userName, assemblageName)) > 0;
+                        result = result && userRepository.prepareUpdate(new UserInsertTracksFromAssemblageCustomSelect(userName, assemblageName)) >= 0;
                     }
                 }
             }
@@ -215,6 +216,18 @@ public class UserReceiver implements CommandReceiver {
             AssemblageRepository.modifyUnlock();
             UserRepository.modifyUnlock();
             assemblageRepository.close();
+            userRepository.close();
+        }
+        return result;
+    }
+
+    public boolean updateUser(String userName, String role, String bonus, int discount) throws ConnectorException {
+        UserRepository userRepository = new UserRepository();
+        boolean result;
+        try {
+            result = userRepository.prepareUpdate(new UserEditCustomSelectSpecification(userName, role, bonus, discount)) > 0;
+        }
+        finally {
             userRepository.close();
         }
         return result;

@@ -22,10 +22,9 @@
 <fmt:message key="main.albumSummaryLabel" var="summaryLabel"/>
 <fmt:message key="main.albumPerformerLabel" var="performerLabel"/>
 <fmt:message key="main.albumDateLabel" var="dateLabel"/>
+<fmt:message key="main.albumInfoLabel" var="infoLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
-<c:import url="/WEB-INF/jspf/languageSelect.jsp"/>
-<ctl:user-info/>
 
 <h3><c:out value="${albumsAll}"/></h3>
 <table align="center" border="0">
@@ -68,6 +67,9 @@
         <tr>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
+                    <button type="button" style = "margin-left: 10px; margin-bottom: 4px; margin-right: 20px;" class="btn btn-primary" onClick='location.href="/albumInfo?albumInfoName=${albumSearch.getName()}"'>
+                        <c:out value="${infoLabel}"/>
+                    </button>
                 </h4>
             </td>
             <td>

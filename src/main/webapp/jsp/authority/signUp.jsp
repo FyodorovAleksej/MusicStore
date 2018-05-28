@@ -16,7 +16,7 @@
 </head>
 <body>
 <br/>
-<c:import url="${request.contextPath}/WEB-INF/jspf/languageSelect.jsp"/>
+<c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 <fmt:message key="main.signUpLabel" var="signUpLabel"/>
 <fmt:message key="main.loginLabel" var="loginLabel"/>
 <fmt:message key="main.emailLabel" var="emailLabel"/>

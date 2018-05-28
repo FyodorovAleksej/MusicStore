@@ -16,9 +16,9 @@ public class AlbumWithUserCustomSelectSpecification implements AlbumCustomSelect
 
     private static final String SELECT_ALBUM_INFO_FOR_USERNAME = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s, %s.%s, " +
-            "CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +
-            "FROM %s LEFT JOIN %s ON %s.%s = ? " +
-            "JOIN %s ON %s.%s = %s.%s ;",
+                    "CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +
+                    "FROM %s LEFT JOIN %s ON %s.%s = ? " +
+                    "JOIN %s ON %s.%s = %s.%s ;",
 
             ALBUM_BD_TABLE, ALBUM_NAME,
             ALBUM_BD_TABLE, ALBUM_GENRE,
@@ -81,8 +81,7 @@ public class AlbumWithUserCustomSelectSpecification implements AlbumCustomSelect
 
                 result.add(arguments);
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't read result set from Album DB", e);
         }
         return result;

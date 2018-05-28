@@ -1,13 +1,13 @@
 package by.fyodorov.musicstore.repository;
 
+import by.fyodorov.musicstore.application.InitParameter;
 import by.fyodorov.musicstore.connector.ConnectionPool;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.connector.SqlUtil;
 import by.fyodorov.musicstore.controller.ContextParameter;
-import by.fyodorov.musicstore.application.InitParameter;
 import by.fyodorov.musicstore.model.UserEntity;
-import by.fyodorov.musicstore.specification.user.custom.UserCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.user.UserRepositorySpecification;
+import by.fyodorov.musicstore.specification.user.custom.UserCustomSelectSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -90,8 +90,7 @@ public class UserRepository {
 
                 list.add(new UserEntity(id, userName, email, role, cash, bonus, discount, password));
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't read result set from User DB", e);
         }
         list.forEach(LOGGER::debug);

@@ -20,10 +20,7 @@
 <fmt:message key="main.trackDateLabel" var="dateLabel"/>
 <fmt:message key="main.performerNameLabel" var="performerLabel"/>
 
-<div class="navbar-form">
-    <c:import url="${request.contextPath}/WEB-INF/jspf/languageSelect.jsp"/>
-    <ctl:user-info/>
-</div>
+<c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 <hr/>
 <table>
     <tr>

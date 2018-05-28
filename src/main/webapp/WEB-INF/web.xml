@@ -27,12 +27,12 @@
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>by.fyodorov.musicstore.controller.MainServlet</servlet-class>
 
-        <!--multipart-config>
-            <location>/</location>
+        <multipart-config>
+            <location>/uploads/</location>
             <max-file-size>20848820</max-file-size>
             <max-request-size>418018841</max-request-size>
             <file-size-threshold>1048576</file-size-threshold>
-        </multipart-config-->
+        </multipart-config>
     </servlet>
 
     <servlet-mapping>
@@ -43,16 +43,22 @@
         <url-pattern>/logout</url-pattern>
         <url-pattern>/findTrack</url-pattern>
         <url-pattern>/trackInfo</url-pattern>
+        <url-pattern>/albumInfo</url-pattern>
+        <url-pattern>/assemblageInfo</url-pattern>
         <url-pattern>/comment</url-pattern>
         <url-pattern>/buyTrack</url-pattern>
+        <url-pattern>/buyAlbum</url-pattern>
+        <url-pattern>/buyAssemblage</url-pattern>
         <url-pattern>/viewUserTracks</url-pattern>
         <url-pattern>/viewUserAlbums</url-pattern>
-        <url-pattern>/viewUserAssemblages</url-pattern>
+        <url-pattern>/viewUserAssemblage</url-pattern>
         <url-pattern>/tracks</url-pattern>
         <url-pattern>/albums</url-pattern>
         <url-pattern>/assemblages</url-pattern>
         <url-pattern>/admin</url-pattern>
         <url-pattern>/addNewTrack</url-pattern>
+        <url-pattern>/editUser</url-pattern>
+        <url-pattern>/infoUser</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -143,7 +149,38 @@
             <param-value>/</param-value>
         </init-param>
     </filter>
-
+    <filter>
+        <filter-name>AlbumInfoFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.AlbumInfoFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AssemblageInfoFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.AssemblageInfoFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>BuyAlbumFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.BuyAlbumFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>BuyAssemblageFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.BuyAssemblageFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>UserInfoFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.UserInfoFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>UserEditFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.UserEditFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
 
 
 
@@ -207,6 +244,30 @@
         <filter-name>TrackAddFilter</filter-name>
         <url-pattern>/addNewTrack</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AlbumInfoFilter</filter-name>
+        <url-pattern>/albumInfo</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AssemblageInfoFilter</filter-name>
+        <url-pattern>/assemblageInfo</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>BuyAlbumFilter</filter-name>
+        <url-pattern>/buyAlbum</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>BuyAssemblageFilter</filter-name>
+        <url-pattern>/buyAssemblage</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserInfoFilter</filter-name>
+        <url-pattern>/infoUser</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserEditFilter</filter-name>
+        <url-pattern>/editUser</url-pattern>
+    </filter-mapping>
 
     
     <welcome-file-list>
@@ -214,7 +275,11 @@
     </welcome-file-list>
     <error-page>
         <error-code>512</error-code>
-        <location>/jsp/errorPage.jsp</location>
+        <location>/jsp/error/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/error/errorPage404.jsp</location>
     </error-page>
     <jsp-config>
         <taglib>

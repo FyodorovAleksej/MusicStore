@@ -25,9 +25,8 @@
 
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
-<c:import url="/WEB-INF/jspf/languageSelect.jsp"/>
-<ctl:user-info/>
-<form action="/addNewTrack" method="post">
+
+<form action="/addNewTrack" method="post" enctype='multipart/form-data'>
     <table align="center">
         <tr>
             <td>
@@ -50,7 +49,7 @@
                 <label for="price"><c:out value="${trackPriceLabel}"/></label>
             </td>
             <td>
-                <input type="number" class="text-left" id="price" name="trackPrice" style="margin-left: 10px; margin-bottom: 2px;">
+                <input type="number" min="0" class="text-left" id="price" name="trackPrice" value="0" style="margin-left: 10px; margin-bottom: 2px;">
             </td>
         </tr>
         <tr>
@@ -66,7 +65,7 @@
                 <label for="file"><c:out value="${trackFileLabel}"/></label>
             </td>
             <td>
-                <input type="file" accept=".mp3, .wav" id="file" name="trackFile" class="btn" style="margin-left: 10px; margin-bottom: 2px;"/>
+                <input type="file" accept=".mp3, .wav" id="file" name="inputFile" class="btn" style="margin-left: 10px; margin-bottom: 2px;"/>
             </td>
         </tr>
         <tr>

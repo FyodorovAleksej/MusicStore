@@ -2,15 +2,12 @@ package by.fyodorov.musicstore.receiver;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.AssemblageEntity;
-import by.fyodorov.musicstore.repository.AlbumRepository;
 import by.fyodorov.musicstore.repository.AssemblageRepository;
-import by.fyodorov.musicstore.specification.album.custom.AlbumCustomSelectSpecification;
-import by.fyodorov.musicstore.specification.album.custom.AlbumWithUserCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.assemblage.AssemblageByNameSpecification;
 import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageInfoForUserCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageOfUserByNameCustomSelect;
 import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageWithUserCustomSelectSpecification;
-import by.fyodorov.musicstore.view.AlbumView;
 import by.fyodorov.musicstore.view.AssemblageView;
 import by.fyodorov.musicstore.view.AssemblageWithoutPriceView;
 import org.apache.logging.log4j.LogManager;
@@ -18,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Optional;
 
 public class AssemblageReceiver {
     private static Logger LOGGER = LogManager.getLogger(AssemblageReceiver.class);
@@ -94,5 +92,28 @@ public class AssemblageReceiver {
         return assemblages;
     }
 
+    public Optional<AssemblageView> assemblageInfoForUser(String assemblageName, String userName) throws ConnectorException {
+        AssemblageRepository assemblageRepository = new AssemblageRepository();
+        AssemblageCustomSelectSpecification specification = new AssemblageInfoForUserCustomSelectSpecification(assemblageName, userName);
+        Optional<AssemblageView> result = Optional.empty();
+        try {
+            LinkedList<HashMap<String, String>> arguments = assemblageRepository.customQuery(specification);
+            if (!arguments.isEmpty()) {
+                HashMap<String, String> map = arguments.getFirst();
+                int price = Integer.valueOf(map.get(AssemblageInfoForUserCustomSelectSpecification.ASSEMBLAGE_PRICE_KEY));
+                result = Optional.of(new AssemblageView(
+                        map.get(AssemblageInfoForUserCustomSelectSpecification.ASSEMBLAGE_NAME_KEY),
+                        map.get(AssemblageInfoForUserCustomSelectSpecification.ASSEMBLAGE_DATE_KEY),
+                        map.get(AssemblageInfoForUserCustomSelectSpecification.ASSEMBLAGE_GENRE_KEY),
+                        map.get(AssemblageInfoForUserCustomSelectSpecification.ASSEMBLAGE_OWNER_KEY),
+                        price,
+                        Integer.valueOf(map.getOrDefault(AssemblageInfoForUserCustomSelectSpecification.ASSEMBLAGE_PRICE_SUMMARY_KEY, Integer.toString(price)))));
+            }
+        }
+        finally {
+            assemblageRepository.close();
+        }
+        return result;
+    }
 
 }

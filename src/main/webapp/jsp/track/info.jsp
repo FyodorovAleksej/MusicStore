@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Alexey
-  Date: 09.04.2018
-  Time: 10:05
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -29,10 +22,7 @@
 <fmt:message key="main.trackDateLabel" var="dateLabel"/>
 <fmt:message key="main.performerNameLabel" var="performerLabel"/>
 
-<div class="navbar-form">
-    <c:import url="${request.contextPath}/WEB-INF/jspf/languageSelect.jsp"/>
-    <ctl:user-info/>
-</div>
+<c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
 <div class="main-page form-horizontal">
     <h3>${trackName}</h3>
@@ -43,7 +33,7 @@
     <h4>${performerName}</h4>
 </div>
 <form action="/buyTrack" method="post">
-    <button type="submit" class="btn btn-primary">Buy: <c:out value="${trackPrice}">AAA</c:out></button>
+    <button type="submit" class="btn btn-primary">Buy: <c:out value="${trackPrice}"></c:out></button>
 </form>
 <hr/>
 <h4><c:out value="Comments:"/></h4>

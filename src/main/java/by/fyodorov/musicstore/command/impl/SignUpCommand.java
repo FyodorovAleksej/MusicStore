@@ -1,11 +1,11 @@
 package by.fyodorov.musicstore.command.impl;
 
+import by.fyodorov.musicstore.application.InitParameter;
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.controller.ContextParameter;
-import by.fyodorov.musicstore.application.InitParameter;
 import by.fyodorov.musicstore.model.UserEntity;
 import by.fyodorov.musicstore.receiver.UserReceiver;
 import by.fyodorov.musicstore.util.MailException;

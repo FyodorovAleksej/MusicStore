@@ -2,9 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="ctl" uri="customTags" %>
-<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
-<fmt:setLocale value="${language}" />
-<fmt:setBundle basename="text" />
+<c:set var="language"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="text"/>
 <html>
 <head>
     <meta charset="utf-8">
@@ -22,10 +24,9 @@
 <fmt:message key="main.assemblageSummaryLabel" var="summaryLabel"/>
 <fmt:message key="main.assemblageOwnerLabel" var="performerLabel"/>
 <fmt:message key="main.assemblageDateLabel" var="dateLabel"/>
+<fmt:message key="main.assemblageInfoLabel" var="infoLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
-<c:import url="/WEB-INF/jspf/languageSelect.jsp"/>
-<ctl:user-info/>
 
 <h3><c:out value="${albumsAll}"/></h3>
 <table align="center" border="0">
@@ -68,7 +69,11 @@
         <tr>
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-
+                    <button type="button" style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"
+                            class="btn btn-primary"
+                            onClick='location.href="/assemblageInfo?assemblageInfoName=${assemblageSearch.getName()}"'>
+                        <c:out value="${infoLabel}"/>
+                    </button>
                 </h4>
             </td>
             <td>

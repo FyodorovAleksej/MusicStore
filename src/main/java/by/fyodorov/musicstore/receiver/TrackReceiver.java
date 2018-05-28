@@ -1,8 +1,7 @@
 package by.fyodorov.musicstore.receiver;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.specification.track.custom.TrackAddCustomSpecification;
-import by.fyodorov.musicstore.specification.track.custom.TrackOfUserByNameCustomSelect;
+import by.fyodorov.musicstore.specification.track.custom.*;
 import by.fyodorov.musicstore.validator.RequestParameterValidator;
 import by.fyodorov.musicstore.view.CommentView;
 import by.fyodorov.musicstore.model.TrackEntity;
@@ -12,8 +11,6 @@ import by.fyodorov.musicstore.repository.TrackRepository;
 import by.fyodorov.musicstore.specification.comment.custom.CommentCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.comment.custom.CommentSelectWithUserByTrackNameSpecification;
 import by.fyodorov.musicstore.specification.track.TrackByNameSpecification;
-import by.fyodorov.musicstore.specification.track.custom.TrackCustomSelectSpecification;
-import by.fyodorov.musicstore.specification.track.custom.TrackCustomSelectWithUserSpecification;
 import by.fyodorov.musicstore.view.TrackWithoutPriceView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -137,6 +134,52 @@ public class TrackReceiver implements CommandReceiver {
         return tracks;
     }
 
+    public LinkedList<TrackView> findTracksInAlbum(String albumName, String userName) throws ConnectorException {
+        TrackRepository trackRepository = new TrackRepository();
+        TrackCustomSelectSpecification specification = new TrackInAlbumForUserCustomSelectSpecification(albumName, userName);
+        LinkedList<TrackView> tracks = new LinkedList<>();
+        try {
+            LinkedList<HashMap<String, String>> arguments = trackRepository.customQuery(specification);
+            for (HashMap<String, String> map : arguments) {
+                int price = Integer.valueOf(map.get(TrackInAlbumForUserCustomSelectSpecification.TRACK_PRICE_KEY));
+                tracks.add(new TrackView(
+                        map.get(TrackInAlbumForUserCustomSelectSpecification.TRACK_NAME_KEY),
+                        map.get(TrackInAlbumForUserCustomSelectSpecification.PERFORMER_KEY),
+                        map.get(TrackInAlbumForUserCustomSelectSpecification.TRACK_DATE_KEY),
+                        map.get(TrackInAlbumForUserCustomSelectSpecification.TRACK_GENRE_KEY),
+                        price,
+                        Integer.valueOf(map.getOrDefault(TrackInAlbumForUserCustomSelectSpecification.TRACK_PRICE_SUMMARY_KEY, Integer.toString(price)))));
+            }
+        }
+        finally {
+            trackRepository.close();
+        }
+        return tracks;
+    }
+
+    public LinkedList<TrackView> findTracksInAssemblage(String assemblageName, String userName) throws ConnectorException {
+        TrackRepository trackRepository = new TrackRepository();
+        TrackCustomSelectSpecification specification = new TrackInAssemblageForUserCustomSelectSpecification(assemblageName, userName);
+        LinkedList<TrackView> tracks = new LinkedList<>();
+        try {
+            LinkedList<HashMap<String, String>> arguments = trackRepository.customQuery(specification);
+            for (HashMap<String, String> map : arguments) {
+                int price = Integer.valueOf(map.get(TrackInAssemblageForUserCustomSelectSpecification.TRACK_PRICE_KEY));
+                tracks.add(new TrackView(
+                        map.get(TrackInAssemblageForUserCustomSelectSpecification.TRACK_NAME_KEY),
+                        map.get(TrackInAssemblageForUserCustomSelectSpecification.PERFORMER_KEY),
+                        map.get(TrackInAssemblageForUserCustomSelectSpecification.TRACK_DATE_KEY),
+                        map.get(TrackInAssemblageForUserCustomSelectSpecification.TRACK_GENRE_KEY),
+                        price,
+                        Integer.valueOf(map.getOrDefault(TrackInAssemblageForUserCustomSelectSpecification.TRACK_PRICE_SUMMARY_KEY, Integer.toString(price)))));
+            }
+        }
+        finally {
+            trackRepository.close();
+        }
+        return tracks;
+    }
+
     public void addNewTrack(String trackName, String genre, int price, String performerName) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackAddCustomSpecification specification = new TrackAddCustomSpecification(trackName, genre, price, performerName);
@@ -150,6 +193,6 @@ public class TrackReceiver implements CommandReceiver {
 
     public boolean validatePrice(String price) {
         RequestParameterValidator validator = new RequestParameterValidator();
-        return validator.validateInteger(price);
+        return validator.validateInteger(price) && Integer.valueOf(price) >= 0;
     }
 }
