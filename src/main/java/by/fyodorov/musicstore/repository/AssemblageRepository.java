@@ -99,6 +99,10 @@ public class AssemblageRepository {
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
         return specification.fromSet(set);
     }
+    public int prepareUpdate(AssemblageCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom update");
+        return util.execUpdatePrepare(specification.toSqlClauses(), specification.getArguments());
+    }
 
 
     public void close() throws ConnectorException {

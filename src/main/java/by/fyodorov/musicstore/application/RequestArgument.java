@@ -69,6 +69,12 @@ public enum RequestArgument {
 
     ALBUM_TRACKS_LIST("albumTrackList", null),
 
+    ALBUM_ADD_NAME("albumName", null),
+    ALBUM_ADD_GENRE("albumGenre", null),
+    ALBUM_ADD_PRICE("albumPrice", null),
+    ALBUM_ADD_PERFORMER("albumPerformer", null),
+    ALBUM_ADD_TRACKS("chooseTrack", null),
+
     ASSEMBLAGE_SESSION_NAME("assemblageSessionName", null),
     ASSEMBLAGE_NAME_FOR_INFO("assemblageInfoName", null),
     ASSEMBLAGE_INFO_NAME("assemblageName", null),
@@ -80,12 +86,20 @@ public enum RequestArgument {
 
     ASSEMBLAGE_TRACKS_LIST("assemblageTrackList", null),
 
+    ASSEMBLAGE_ADD_NAME("assemblageName", null),
+    ASSEMBLAGE_ADD_GENRE("assemblageGenre", null),
+    ASSEMBLAGE_ADD_PRICE("assemblagePrice", null),
+    ASSEMBLAGE_ADD_TRACKS("chooseTrack", null),
+
     FILE_KEY("inputFile", null),
 
     TRACK_ADD_NAME("trackName", null),
     TRACK_ADD_GENRE("trackGenre", null),
     TRACK_ADD_PERFORMER("trackPerformer", null),
     TRACK_ADD_PRICE("trackPrice", "\\d+"),
+
+    PERFORMER_LIST("performersList", null),
+
 
     SESSION_LOGIN("userName", LOGIN.getPattern()),
     SESSION_ROLE("userRole", null);

@@ -4,10 +4,7 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.AssemblageEntity;
 import by.fyodorov.musicstore.repository.AssemblageRepository;
 import by.fyodorov.musicstore.specification.assemblage.AssemblageByNameSpecification;
-import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageCustomSelectSpecification;
-import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageInfoForUserCustomSelectSpecification;
-import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageOfUserByNameCustomSelect;
-import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageWithUserCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.assemblage.custom.*;
 import by.fyodorov.musicstore.view.AssemblageView;
 import by.fyodorov.musicstore.view.AssemblageWithoutPriceView;
 import org.apache.logging.log4j.LogManager;
@@ -111,6 +108,57 @@ public class AssemblageReceiver {
             }
         }
         finally {
+            assemblageRepository.close();
+        }
+        return result;
+    }
+
+    public boolean addNewAssemblage(String assemblage, String genre, int price, String performer) throws ConnectorException {
+        AssemblageRepository assemblageRepository = new AssemblageRepository();
+        boolean result;
+        try {
+            assemblageRepository.prepareUpdate(new AssemblageAddCustomSelectSpecification(assemblage, genre, price, performer));
+            result = true;
+        }
+        catch (ConnectorException e) {
+            result = false;
+        }
+        finally {
+            assemblageRepository.close();
+        }
+        return result;
+    }
+
+    public boolean addNewAssemblage(String assemblage, String genre, int price, String owner, String[] tracks) throws ConnectorException {
+        AssemblageRepository assemblageRepository = new AssemblageRepository();
+        boolean result;
+        AssemblageRepository.modifyLock();
+        try {
+            AssemblageRepository.modifyLock();
+            result = assemblageRepository.prepareUpdate(new AssemblageAddCustomSelectSpecification(assemblage, genre, price, owner)) > 0;
+            for (String track : tracks) {
+                result = result && assemblageRepository.prepareUpdate(new AssemblageInsertTrackCustomSelectSpecification(assemblage, track)) > 0;
+            }
+        }
+        catch (ConnectorException e) {
+            result = false;
+        }
+        finally {
+            AssemblageRepository.modifyUnlock();
+            assemblageRepository.close();
+        }
+        return result;
+    }
+
+    public boolean assemblageClear(String albumName) throws ConnectorException {
+        AssemblageRepository assemblageRepository = new AssemblageRepository();
+        boolean result;
+        AssemblageRepository.modifyLock();
+        try {
+            result = assemblageRepository.prepareUpdate(new AssemblageClearCustomSelectSpecification(albumName)) > 0;
+        }
+        finally {
+            AssemblageRepository.modifyUnlock();
             assemblageRepository.close();
         }
         return result;

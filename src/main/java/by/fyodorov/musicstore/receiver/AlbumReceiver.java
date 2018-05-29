@@ -3,11 +3,10 @@ package by.fyodorov.musicstore.receiver;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.AlbumEntity;
 import by.fyodorov.musicstore.repository.AlbumRepository;
+import by.fyodorov.musicstore.repository.TrackRepository;
 import by.fyodorov.musicstore.specification.album.AlbumByNameSpecification;
-import by.fyodorov.musicstore.specification.album.custom.AlbumCustomSelectSpecification;
-import by.fyodorov.musicstore.specification.album.custom.AlbumInfoForUserCustomSelectSpecification;
-import by.fyodorov.musicstore.specification.album.custom.AlbumOfUserByNameCustomSelect;
-import by.fyodorov.musicstore.specification.album.custom.AlbumWithUserCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.album.custom.*;
+import by.fyodorov.musicstore.validator.RequestParameterValidator;
 import by.fyodorov.musicstore.view.AlbumView;
 import by.fyodorov.musicstore.view.AlbumWithoutPriceView;
 import org.apache.logging.log4j.LogManager;
@@ -111,6 +110,40 @@ public class AlbumReceiver implements CommandReceiver {
             }
         }
         finally {
+            albumRepository.close();
+        }
+        return result;
+    }
+
+    public boolean addNewAlbum(String album, String genre, int price, String performer, String[] tracks) throws ConnectorException {
+        AlbumRepository albumRepository = new AlbumRepository();
+        boolean result;
+        AlbumRepository.modifyLock();
+        try {
+            result = albumRepository.prepareUpdate(new AlbumAddCustomSelectSpecification(album, genre, price, performer)) > 0;
+            for (String track : tracks) {
+                result = result && albumRepository.prepareUpdate(new AlbumInsertTrackCustomSelectSpecification(album, track)) > 0;
+            }
+        }
+        catch (ConnectorException e) {
+            result = false;
+        }
+        finally {
+            AlbumRepository.modifyUnlock();
+            albumRepository.close();
+        }
+        return result;
+    }
+
+    public boolean albumClear(String albumName) throws ConnectorException {
+        AlbumRepository albumRepository = new AlbumRepository();
+        boolean result;
+        AlbumRepository.modifyLock();
+        try {
+            result = albumRepository.prepareUpdate(new AlbumClearCustomSelectSpecification(albumName)) > 0;
+        }
+        finally {
+            AlbumRepository.modifyUnlock();
             albumRepository.close();
         }
         return result;

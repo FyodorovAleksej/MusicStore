@@ -32,8 +32,8 @@
 <form action="/viewUserAssemblages" method="get" class="navbar-form pull-right">
     <button type="submit" class="btn btn-primary">${ownAssemblages}</button>
 </form>
-<div class="navbar-form pull-right">
-    <h4><c:out value="${welcome}, ${userName} ${as} ${userRole}"/></h4>
+<div class="nav-item">
+    <h4 style="color:#66fff5"><c:out value="${welcome}, ${userName} ${as} ${userRole}"/></h4>
     <button type="button" class="btn btn-primary" onClick='location.href="/logout"'><c:out value="${logout}"/></button>
 </div>
 <!-- Bootstrap -->

@@ -25,9 +25,11 @@
 <fmt:message key="main.assemblageOwnerLabel" var="performerLabel"/>
 <fmt:message key="main.assemblageDateLabel" var="dateLabel"/>
 <fmt:message key="main.assemblageInfoLabel" var="infoLabel"/>
+<fmt:message key="add.addAssemblageLabel" var="addLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
+<button type="button" class="btn btn-primary" onClick='location.href="/prepareAddAssemblage"'><c:out value="${addLabel}"/></button>
 <h3><c:out value="${albumsAll}"/></h3>
 <table align="center" border="0">
     <tr>

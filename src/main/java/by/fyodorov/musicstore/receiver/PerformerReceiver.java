@@ -4,9 +4,11 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.PerformerEntity;
 import by.fyodorov.musicstore.repository.PerformerRepository;
 import by.fyodorov.musicstore.specification.performer.PerformerByIdSpecification;
+import by.fyodorov.musicstore.specification.performer.custom.PerformerAllCustomSelectSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class PerformerReceiver {
@@ -43,5 +45,20 @@ public class PerformerReceiver {
             performerRepository.close();
         }
         return result;
+    }
+
+    public LinkedList<String> findAllPerformers() throws ConnectorException {
+        PerformerRepository repository = new PerformerRepository();
+        LinkedList<String> performers = new LinkedList<>();
+        try {
+            LinkedList<HashMap<String, String>> arguments = repository.customQuery(new PerformerAllCustomSelectSpecification());
+            for (HashMap<String, String> map : arguments) {
+                performers.add(map.get(PerformerAllCustomSelectSpecification.PERFORMER_NAME_KEY));
+            }
+        }
+        finally {
+            repository.close();
+        }
+        return performers;
     }
 }

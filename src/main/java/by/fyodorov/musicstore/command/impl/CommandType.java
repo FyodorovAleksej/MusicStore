@@ -32,7 +32,13 @@ public enum CommandType {
 
     USER_INFO_COMMAND(new UserInfoCommand(new UserReceiver())),
     USER_EDIT_COMMAND(new EditUserCommand(new UserReceiver())),
-    ADMIN_USER_COMMAND(new GettingUsersCommand(new UserReceiver()));
+    ADMIN_USER_COMMAND(new GettingUsersCommand(new UserReceiver())),
+
+    ADD_ALBUM_PREPARE_COMMAND(new AddAlbumPrepareCommand(new TrackReceiver(), new PerformerReceiver())),
+    ADD_ASSEMBLAGE_PREPARE_COMMAND(new AddAssemblagePrepareCommand(new TrackReceiver())),
+
+    ADD_ALBUM_COMMAND(new AddAlbumCommand(new AlbumReceiver())),
+    ADD_ASSEMBLAGE_COMMAND(new AddAssemblageCommand(new AssemblageReceiver()));
 
     private Command command;
 

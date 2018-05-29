@@ -23,7 +23,14 @@ public enum PagesUrl {
     ALBUM_INFO_PAGE("/jsp/album/info.jsp"),
     ASSEMBLAGE_INFO_WITH_ARG_PAGE("/assemblageInfo?assemblageInfoName="),
     ASSEMBLAGE_INFO_PAGE("/jsp/assemblage/info.jsp"),
-    TRACK_INFO_WITH_ARG_PAGE("/trackInfo?trackInfoName=");
+    TRACK_INFO_WITH_ARG_PAGE("/trackInfo?trackInfoName="),
+
+    ALBUM_ADD_PAGE("/jsp/album/addAlbum.jsp"),
+    ASSEMBLAGE_ADD_PAGE("/jsp/assemblage/addAssemblage.jsp"),
+
+    ALL_TRACKS_PAGE("/tracks"),
+    ALL_ALBUMS_PAGE("/albums"),
+    ALL_ASSEMBLAGES_PAGE("/assemblages");
 
     private String path;
 

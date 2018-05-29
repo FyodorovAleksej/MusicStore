@@ -18,6 +18,10 @@ public class RequestParameterValidator {
 
     public boolean validateInteger(String integer) {return validate(integer, RequestArgument.TRACK_ADD_PRICE);}
 
+    public boolean validatePrice(String price) {
+        return validateInteger(price) && Integer.valueOf(price) >= 0;
+    }
+
 
     private boolean validate(String value, RequestArgument argumentType) {
         if (value == null) {

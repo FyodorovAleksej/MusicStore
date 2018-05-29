@@ -25,7 +25,6 @@ public class GettingOwnAssemblageCommand implements Command {
             assemblages = receiver.findAssemblageForUser(name);
             if (assemblages.isEmpty()) {
                 request.setRequestParameter(RequestArgument.ASSEMBLAGE_FIND_RESULT.getName(), "nothing to find");
-                return new RedirectGoTo(PagesUrl.MAIN_PAGE.getPath());
             }
             else {
                 request.setRequestAttribute(RequestArgument.ASSEMBLAGE_OWN_LIST.getName(), assemblages);

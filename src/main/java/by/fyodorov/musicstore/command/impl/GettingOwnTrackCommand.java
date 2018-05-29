@@ -25,7 +25,6 @@ public class GettingOwnTrackCommand implements Command {
             tracks = receiver.findTracksForUser(name);
             if (tracks.isEmpty()) {
                 request.setRequestParameter(RequestArgument.TRACK_FIND_RESULT.getName(), "nothing to find");
-                return new RedirectGoTo(PagesUrl.MAIN_PAGE.getPath());
             }
             else {
                 request.setRequestAttribute(RequestArgument.TRACK_OWN_LIST.getName(), tracks);

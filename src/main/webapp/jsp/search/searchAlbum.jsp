@@ -23,9 +23,11 @@
 <fmt:message key="main.albumPerformerLabel" var="performerLabel"/>
 <fmt:message key="main.albumDateLabel" var="dateLabel"/>
 <fmt:message key="main.albumInfoLabel" var="infoLabel"/>
+<fmt:message key="add.addAlbumLabel" var="addLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
+<button type="button" class="btn btn-primary" onClick='location.href="/prepareAddAlbum"'><c:out value="${addLabel}"/></button>
 <h3><c:out value="${albumsAll}"/></h3>
 <table align="center" border="0">
     <tr>

@@ -25,7 +25,6 @@ public class GettingOwnAlbumCommand implements Command {
             albums = receiver.findAlbumForUser(name);
             if (albums.isEmpty()) {
                 request.setRequestParameter(RequestArgument.ALBUM_FIND_RESULT.getName(), "nothing to find");
-                return new RedirectGoTo(PagesUrl.MAIN_PAGE.getPath());
             }
             else {
                 request.setRequestAttribute(RequestArgument.ALBUM_OWN_LIST.getName(), albums);

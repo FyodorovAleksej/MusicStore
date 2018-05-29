@@ -6,6 +6,7 @@ import by.fyodorov.musicstore.application.UserRole;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.receiver.TrackReceiver;
+import by.fyodorov.musicstore.validator.RequestParameterValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,6 +16,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static by.fyodorov.musicstore.application.PagesUrl.ALL_TRACKS_PAGE;
 import static by.fyodorov.musicstore.application.PagesUrl.MAIN_PAGE;
 
 public class TrackAddCommand implements Command {
@@ -33,10 +35,11 @@ public class TrackAddCommand implements Command {
         String trackName = request.getParameter(RequestArgument.TRACK_ADD_NAME.getName());
         String trackPrice = request.getParameter(RequestArgument.TRACK_ADD_PRICE.getName());
         String trackGenre = request.getParameter(RequestArgument.TRACK_ADD_GENRE.getName());
+        RequestParameterValidator validator = new RequestParameterValidator();
 
         LOGGER.debug(String.format("adding track - (%s, %s, %s)", userName, trackName, performer));
         try {
-            if (UserRole.ADMIN.toString().equals(userRole) && performer != null && trackName != null && validPrice(trackPrice) && trackGenre != null) {
+            if (UserRole.ADMIN.toString().equals(userRole) && performer != null && trackName != null && validator.validatePrice(trackPrice) && trackGenre != null) {
                 Part filePart = (Part) request.getRequestAttribute(RequestArgument.FILE_KEY.getName());
                 InputStream inputStream = filePart.getInputStream();
                 FileWriter writer = new FileWriter(request.getContextPath() + InitParameter.FILE_PATH + trackName + InitParameter.TRACK_EXTENSION);
@@ -57,15 +60,11 @@ public class TrackAddCommand implements Command {
         catch (IOException e) {
             throw new CommandException("Can't copy new track", e);
         }
-        return new RedirectGoTo(request.getContextPath() + MAIN_PAGE.getPath());
+        return new RedirectGoTo(ALL_TRACKS_PAGE.getPath());
     }
 
     @Override
     public void refresh(HttpServletRequest request) {
 
-    }
-
-    private boolean validPrice(String price) {
-        return  receiver.validatePrice(price);
     }
 }

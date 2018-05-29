@@ -100,15 +100,22 @@ public class AlbumRepository {
         return specification.fromSet(set);
     }
 
+    public int prepareUpdate(AlbumCustomSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom update");
+        return util.execUpdatePrepare(specification.toSqlClauses(), specification.getArguments());
+    }
+
     public void close() throws ConnectorException {
         util.closeConnection();
     }
 
     public static void modifyLock() {
         MODIFY_LOCK.lock();
+        LOGGER.debug("-------------------------- ALBUM MODIFY LOCK");
     }
 
     public static void modifyUnlock() {
         MODIFY_LOCK.unlock();
+        LOGGER.debug("-------------------------- ALBUM MODIFY UNLOCK");
     }
 }
