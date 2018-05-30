@@ -28,6 +28,9 @@ public enum PagesUrl {
     ALBUM_ADD_PAGE("/jsp/album/addAlbum.jsp"),
     ASSEMBLAGE_ADD_PAGE("/jsp/assemblage/addAssemblage.jsp"),
 
+    ALBUM_EDIT_PAGE("/jsp/album/editAlbum.jsp"),
+    ASSEMBLAGE_EDIT_PAGE("/jsp/assemblage/editAssemblage.jsp"),
+
     ALL_TRACKS_PAGE("/tracks"),
     ALL_ALBUMS_PAGE("/albums"),
     ALL_ASSEMBLAGES_PAGE("/assemblages");

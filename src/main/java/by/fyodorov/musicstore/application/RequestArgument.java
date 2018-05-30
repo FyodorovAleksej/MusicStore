@@ -91,6 +91,38 @@ public enum RequestArgument {
     ASSEMBLAGE_ADD_PRICE("assemblagePrice", null),
     ASSEMBLAGE_ADD_TRACKS("chooseTrack", null),
 
+
+    ALBUM_EDIT_OLD_NAME("albumOldName", null),
+    ALBUM_EDIT_OLD_CLASSIC_GENRE("classicGenre", null),
+    ALBUM_EDIT_OLD_ELECTRO_GENRE("electroGenre", null),
+    ALBUM_EDIT_OLD_POP_GENRE("popGenre", null),
+    ALBUM_EDIT_OLD_ROCK_GENRE("rockGenre", null),
+    ALBUM_EDIT_OLD_JAZZ_GENRE("jazzGenre", null),
+    ALBUM_EDIT_OLD_BLUES_GENRE("bluesGenre", null),
+    ALBUM_EDIT_OLD_PRICE("albumOldPrice", null),
+    ALBUM_EDIT_OLD_PERFORMER("albumOldPerformer", null),
+
+    ALBUM_EDIT_NAME("albumName", null),
+    ALBUM_EDIT_GENRE("albumGenre", null),
+    ALBUM_EDIT_PRICE("albumPrice", null),
+    ALBUM_EDIT_PERFORMER("albumPerformer", null),
+    ALBUM_EDIT_TRACKS("chooseTrack", null),
+
+    ASSEMBLAGE_EDIT_OLD_NAME("assemblageOldName", null),
+    ASSEMBLAGE_EDIT_OLD_CLASSIC_GENRE("classicGenre", null),
+    ASSEMBLAGE_EDIT_OLD_ELECTRO_GENRE("electroGenre", null),
+    ASSEMBLAGE_EDIT_OLD_POP_GENRE("popGenre", null),
+    ASSEMBLAGE_EDIT_OLD_ROCK_GENRE("rockGenre", null),
+    ASSEMBLAGE_EDIT_OLD_JAZZ_GENRE("jazzGenre", null),
+    ASSEMBLAGE_EDIT_OLD_BLUES_GENRE("bluesGenre", null),
+    ASSEMBLAGE_EDIT_OLD_PRICE("assemblageOldPrice", null),
+    ASSEMBLAGE_EDIT_OLD_PERFORMER("assemblageOldPerformer", null),
+
+    ASSEMBLAGE_EDIT_NAME("assemblageName", null),
+    ASSEMBLAGE_EDIT_GENRE("assemblageGenre", null),
+    ASSEMBLAGE_EDIT_PRICE("assemblagePrice", null),
+    ASSEMBLAGE_EDIT_TRACKS("chooseTrack", null),
+
     FILE_KEY("inputFile", null),
 
     TRACK_ADD_NAME("trackName", null),

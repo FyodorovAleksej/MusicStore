@@ -63,6 +63,12 @@
         <url-pattern>/prepareAddAssemblage</url-pattern>
         <url-pattern>/addNewAlbum</url-pattern>
         <url-pattern>/addNewAssemblage</url-pattern>
+        <url-pattern>/editAssemblageApply</url-pattern>
+        <url-pattern>/editAssemblage</url-pattern>
+        <url-pattern>/editAlbumApply</url-pattern>
+        <url-pattern>/editAlbum</url-pattern>
+        <url-pattern>/removeAlbum</url-pattern>
+        <url-pattern>/removeAssemblage</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -154,6 +160,14 @@
         </init-param>
     </filter>
     <filter>
+        <filter-name>UserEditFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.UserEditFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
         <filter-name>TrackAddFilter</filter-name>
         <filter-class>by.fyodorov.musicstore.filter.TrackAddFilter</filter-class>
         <init-param>
@@ -204,6 +218,38 @@
     <filter>
         <filter-name>AddAssemblageFilter</filter-name>
         <filter-class>by.fyodorov.musicstore.filter.AssemblageAddFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>EditAssemblageFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.EditAssemblageFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>EditAlbumFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.EditAlbumFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>EditAssemblageApplyFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.EditAssemblageApplyFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>EditAlbumApplyFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.EditAlbumApplyFilter</filter-class>
         <init-param>
             <param-name>index</param-name>
             <param-value>/</param-value>
@@ -273,6 +319,10 @@
         <url-pattern>/infoUser</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>UserEditFilter</filter-name>
+        <url-pattern>/editUser</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>TrackAddFilter</filter-name>
         <url-pattern>/addNewTrack</url-pattern>
     </filter-mapping>
@@ -308,6 +358,23 @@
         <filter-name>AddAssemblageFilter</filter-name>
         <url-pattern>/addNewAssemblage</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>EditAssemblageFilter</filter-name>
+        <url-pattern>/editAssemblage</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>EditAlbumFilter</filter-name>
+        <url-pattern>/editAlbum</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>EditAssemblageApplyFilter</filter-name>
+        <url-pattern>/editAssemblageApply</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>EditAlbumApplyFilter</filter-name>
+        <url-pattern>/editAlbumApply</url-pattern>
+    </filter-mapping>
+
 
     
     <welcome-file-list>

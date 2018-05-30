@@ -38,7 +38,16 @@ public enum CommandType {
     ADD_ASSEMBLAGE_PREPARE_COMMAND(new AddAssemblagePrepareCommand(new TrackReceiver())),
 
     ADD_ALBUM_COMMAND(new AddAlbumCommand(new AlbumReceiver())),
-    ADD_ASSEMBLAGE_COMMAND(new AddAssemblageCommand(new AssemblageReceiver()));
+    ADD_ASSEMBLAGE_COMMAND(new AddAssemblageCommand(new AssemblageReceiver())),
+
+    EDIT_ALBUM_COMMAND(new EditAlbumPrepareCommand(new TrackReceiver(), new PerformerReceiver(), new AlbumReceiver())),
+    EDIT_ASSEMBLAGE_COMMAND(new EditAssemblagePrepareCommand(new TrackReceiver(), new AssemblageReceiver())),
+
+    EDIT_ALBUM_APPLY_COMMAND(new EditAlbumCommand(new AlbumReceiver())),
+    EDIT_ASSEMBLAGE_APPLY_COMMAND(new EditAssemblageCommand(new AssemblageReceiver())),
+
+    REMOVE_ALBUM_COMMAND(new RemoveAlbumCommand(new AlbumReceiver())),
+    REMOVE_ASSEMBLAGE_COMMAND(new RemoveAssemblageCommand(new AssemblageReceiver()));
 
     private Command command;
 

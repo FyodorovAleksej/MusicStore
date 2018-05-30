@@ -111,11 +111,9 @@ public class AlbumRepository {
 
     public static void modifyLock() {
         MODIFY_LOCK.lock();
-        LOGGER.debug("-------------------------- ALBUM MODIFY LOCK");
     }
 
     public static void modifyUnlock() {
         MODIFY_LOCK.unlock();
-        LOGGER.debug("-------------------------- ALBUM MODIFY UNLOCK");
     }
 }

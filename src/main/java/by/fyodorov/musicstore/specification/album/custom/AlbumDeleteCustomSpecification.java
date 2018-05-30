@@ -1,7 +1,6 @@
 package by.fyodorov.musicstore.specification.album.custom;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.specification.assemblage.custom.AssemblageCustomSelectSpecification;
 
 import java.sql.ResultSet;
 import java.util.HashMap;
@@ -9,20 +8,16 @@ import java.util.LinkedList;
 
 import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 
-public class AlbumClearCustomSelectSpecification implements AlbumCustomSelectSpecification {
+public class AlbumDeleteCustomSpecification implements AlbumCustomSelectSpecification {
     private static final String DELETE_SQL =
             String.format("DELETE FROM %s.%s " +
-                            "WHERE %s = " +
-                            "(SELECT %s.%s FROM %s WHERE %s.%s = ? );",
-                    ALBUM_HAS_TRACKS_BD_SCHEME, ALBUM_HAS_TRACKS_BD_TABLE,
-                    ALBUM_HAS_TRACKS_ALBUM_ID,
-                    ALBUM_BD_TABLE, ALBUM_ID,
-                    ALBUM_BD_TABLE,
-                    ALBUM_BD_TABLE, ALBUM_NAME);
+                            "WHERE %s = ? ;",
+                    ALBUM_BD_SCHEME, ALBUM_BD_TABLE,
+                    ALBUM_NAME);
 
     private String albumName;
 
-    public AlbumClearCustomSelectSpecification(String albumName) {
+    public AlbumDeleteCustomSpecification(String albumName) {
         this.albumName = albumName;
     }
 

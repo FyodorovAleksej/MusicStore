@@ -24,11 +24,10 @@
 <fmt:message key="add.trackPerformerLabel" var="trackPerformerLabel"/>
 <fmt:message key="add.trackDateLabel" var="trackDateLabel"/>
 
-<fmt:message key="add.albumNameLabel" var="albumNameLabel"/>
-<fmt:message key="add.albumGenreLabel" var="albumGenreLabel"/>
-<fmt:message key="add.albumPriceLabel" var="albumPriceLabel"/>
-<fmt:message key="add.albumPerformerLabel" var="albumPerformerLabel"/>
-<fmt:message key="add.albumAddSendLabel" var="albumAddSendLabel"/>
+<fmt:message key="add.assemblageNameLabel" var="assemblageNameLabel"/>
+<fmt:message key="add.assemblageGenreLabel" var="assemblageGenreLabel"/>
+<fmt:message key="add.assemblagePriceLabel" var="assemblagePriceLabel"/>
+<fmt:message key="main.assemblageEditLabel" var="assemblageEditSendLabel"/>
 <fmt:message key="add.trackChooseLabel" var="trackChooseLabel"/>
 
 <fmt:message key="genre.classicGenre" var="classicGenreLabel"/>
@@ -41,63 +40,52 @@
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
-<form action="/addNewAlbum" method="post">
+<form action="/editAssemblageApply" method="post">
     <table align="center">
         <tr>
             <td>
-                <label for="name"><c:out value="${albumNameLabel}"/></label>
+                <label for="name"><c:out value="${assemblageNameLabel}"/></label>
             </td>
             <td>
                 <input type="text" class="text-left" id="name" style="margin-left: 10px; margin-bottom: 2px;"
-                       name="assemblageName">
+                       name="assemblageName" value="${assemblageOldName}">
             </td>
         </tr>
         <tr>
             <td>
-                <label for="price"><c:out value="${albumPriceLabel}"/></label>
+                <label for="price"><c:out value="${assemblagePriceLabel}"/></label>
             </td>
             <td>
-                <input type="number" min="0" class="text-left" id="price" name="albumPrice" value="0"
+                <input type="number" min="0" class="text-left" id="price" name="assemblagePrice" value="${assemblageOldPrice}"
                        style="margin-left: 10px; margin-bottom: 2px;">
             </td>
         </tr>
-        <tr>
-            <td>
-                <label for="performer"><c:out value="${trackPerformerLabel}"/></label>
-            </td>
-            <td>
-                <select id="performer" name="albumPerformer">
-                    <c:forEach items="${performersList}" var="performerEntity">
-                        <option value="${performerEntity}"><c:out value="${performerEntity}"/></option>
-                    </c:forEach>
-                </select>
-            </td>
         </tr>
     </table>
     <fieldset>
-        <legend><c:out value="${albumGenreLabel}"/></legend>
+        <legend><c:out value="${assemblageGenreLabel}"/></legend>
         <div>
-            <input type="checkbox" id="classic" name="albumGenre" value="classic" ${classicGenre}>
+            <input type="checkbox" id="classic" name="assemblageGenre" value="classic" ${classicGenre}>
             <label for="classic"><c:out value="${classicGenreLabel}"/></label>
         </div>
         <div>
-            <input type="checkbox" id="electro" name="albumGenre" value="electro" ${electroGenre}>
+            <input type="checkbox" id="electro" name="assemblageGenre" value="electro" ${electroGenre}>
             <label for="electro"><c:out value="${electroGenreLabel}"/></label>
         </div>
         <div>
-            <input type="checkbox" id="pop" name="albumGenre" value="pop" ${popGenre}>
+            <input type="checkbox" id="pop" name="assemblageGenre" value="pop" ${popGenre}>
             <label for="pop"><c:out value="${popGenreLabel}"/></label>
         </div>
         <div>
-            <input type="checkbox" id="rock" name="albumGenre" value="rock" ${rockGenre}>
+            <input type="checkbox" id="rock" name="assemblageGenre" value="rock" ${rockGenre}>
             <label for="rock"><c:out value="${rockGenreLabel}"/></label>
         </div>
         <div>
-            <input type="checkbox" id="jazz" name="albumGenre" value="jazz" ${jazzGenre}>
+            <input type="checkbox" id="jazz" name="assemblageGenre" value="jazz" ${jazzGenre}>
             <label for="jazz"><c:out value="${jazzGenreLabel}"/></label>
         </div>
         <div>
-            <input type="checkbox" id="blues" name="albumGenre" value="blues" ${bluesGenre}>
+            <input type="checkbox" id="blues" name="assemblageGenre" value="blues" ${bluesGenre}>
             <label for="blues"><c:out value="${bluesGenreLabel}"/></label>
         </div>
     </fieldset>
@@ -133,7 +121,7 @@
             <tr>
                 <td>
                     <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                        <input type="checkbox" id="trackCheck" name="chooseTrack" value="${trackSearch.getName()}">
+                        <input type="checkbox" id="trackCheck" name="chooseTrack" value="${trackSearch.getName()}" ${trackSearch.isCheck() ? 'checked' : ''}>
                     </h4>
                 </td>
                 <td>
@@ -160,7 +148,7 @@
         </c:forEach>
     </table>
 
-    <button type="submit" class="btn btn-primary" style="margin-top: 5px"><c:out value="${albumAddSendLabel}"/></button>
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(255,155,0,0.80); margin-top: 5px"><c:out value="${assemblageEditSendLabel}"/></button>
 </form>
 <!-- Bootstrap -->
 <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>

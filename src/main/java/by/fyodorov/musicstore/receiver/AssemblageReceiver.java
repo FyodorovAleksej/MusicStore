@@ -134,7 +134,6 @@ public class AssemblageReceiver {
         boolean result;
         AssemblageRepository.modifyLock();
         try {
-            AssemblageRepository.modifyLock();
             result = assemblageRepository.prepareUpdate(new AssemblageAddCustomSelectSpecification(assemblage, genre, price, owner)) > 0;
             for (String track : tracks) {
                 result = result && assemblageRepository.prepareUpdate(new AssemblageInsertTrackCustomSelectSpecification(assemblage, track)) > 0;
@@ -150,12 +149,47 @@ public class AssemblageReceiver {
         return result;
     }
 
-    public boolean assemblageClear(String albumName) throws ConnectorException {
+    public boolean editAssemblage(String oldName, String newName, String genre, int price, String[] tracks) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
         boolean result;
         AssemblageRepository.modifyLock();
         try {
-            result = assemblageRepository.prepareUpdate(new AssemblageClearCustomSelectSpecification(albumName)) > 0;
+            result = assemblageRepository.prepareUpdate(new AssemblageEditCustomSelectSpecification(oldName, newName, genre, price)) > 0;
+            result = result && assemblageRepository.prepareUpdate(new AssemblageClearCustomSelectSpecification(newName)) > 0;
+            for (String track : tracks) {
+                result = result && assemblageRepository.prepareUpdate(new AssemblageInsertTrackCustomSelectSpecification(newName, track)) > 0;
+            }
+        }
+        catch (ConnectorException e) {
+            result = false;
+        }
+        finally {
+            AssemblageRepository.modifyUnlock();
+            assemblageRepository.close();
+        }
+        return result;
+    }
+
+    public boolean assemblageClear(String assemblageName) throws ConnectorException {
+        AssemblageRepository assemblageRepository = new AssemblageRepository();
+        boolean result;
+        AssemblageRepository.modifyLock();
+        try {
+            result = assemblageRepository.prepareUpdate(new AssemblageClearCustomSelectSpecification(assemblageName)) > 0;
+        }
+        finally {
+            AssemblageRepository.modifyUnlock();
+            assemblageRepository.close();
+        }
+        return result;
+    }
+
+    public boolean removeAssemblage(String assemblageName) throws ConnectorException {
+        AssemblageRepository assemblageRepository = new AssemblageRepository();
+        boolean result;
+        AssemblageRepository.modifyLock();
+        try {
+            result = assemblageRepository.prepareUpdate(new AssemblageDeleteCustomSpecification(assemblageName)) > 0;
         }
         finally {
             AssemblageRepository.modifyUnlock();

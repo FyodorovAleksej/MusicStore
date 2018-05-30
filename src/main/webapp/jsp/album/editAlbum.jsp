@@ -28,7 +28,7 @@
 <fmt:message key="add.albumGenreLabel" var="albumGenreLabel"/>
 <fmt:message key="add.albumPriceLabel" var="albumPriceLabel"/>
 <fmt:message key="add.albumPerformerLabel" var="albumPerformerLabel"/>
-<fmt:message key="add.albumAddSendLabel" var="albumAddSendLabel"/>
+<fmt:message key="main.albumEditLabel" var="albumEditSendLabel"/>
 <fmt:message key="add.trackChooseLabel" var="trackChooseLabel"/>
 
 <fmt:message key="genre.classicGenre" var="classicGenreLabel"/>
@@ -41,7 +41,7 @@
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
-<form action="/addNewAlbum" method="post">
+<form action="/editAlbumApply" method="post">
     <table align="center">
         <tr>
             <td>
@@ -49,7 +49,7 @@
             </td>
             <td>
                 <input type="text" class="text-left" id="name" style="margin-left: 10px; margin-bottom: 2px;"
-                       name="assemblageName">
+                       name="assemblageName" value="${albumOldName}">
             </td>
         </tr>
         <tr>
@@ -57,7 +57,7 @@
                 <label for="price"><c:out value="${albumPriceLabel}"/></label>
             </td>
             <td>
-                <input type="number" min="0" class="text-left" id="price" name="albumPrice" value="0"
+                <input type="number" min="0" class="text-left" id="price" name="albumPrice" value="${albumOldPrice}"
                        style="margin-left: 10px; margin-bottom: 2px;">
             </td>
         </tr>
@@ -66,9 +66,9 @@
                 <label for="performer"><c:out value="${trackPerformerLabel}"/></label>
             </td>
             <td>
-                <select id="performer" name="albumPerformer">
+                <select id="performer" name="albumPerformer" style="margin-left: 10px; margin-bottom: 2px;">
                     <c:forEach items="${performersList}" var="performerEntity">
-                        <option value="${performerEntity}"><c:out value="${performerEntity}"/></option>
+                        <option value="${performerEntity}" ${performerEntity == albumOldPerformer ? 'selected' : ''}><c:out value="${performerEntity}"/></option>
                     </c:forEach>
                 </select>
             </td>
@@ -133,7 +133,7 @@
             <tr>
                 <td>
                     <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                        <input type="checkbox" id="trackCheck" name="chooseTrack" value="${trackSearch.getName()}">
+                        <input type="checkbox" id="trackCheck" name="chooseTrack" value="${trackSearch.getName()}" ${trackSearch.isCheck() ? 'checked' : ''}>
                     </h4>
                 </td>
                 <td>
@@ -160,7 +160,7 @@
         </c:forEach>
     </table>
 
-    <button type="submit" class="btn btn-primary" style="margin-top: 5px"><c:out value="${albumAddSendLabel}"/></button>
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(255,155,0,0.80); margin-top: 5px"><c:out value="${albumEditSendLabel}"/></button>
 </form>
 <!-- Bootstrap -->
 <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>

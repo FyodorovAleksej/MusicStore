@@ -135,12 +135,47 @@ public class AlbumReceiver implements CommandReceiver {
         return result;
     }
 
+    public boolean editAlbum(String oldName, String newName, String genre, int price, String performer, String[] tracks) throws ConnectorException {
+        AlbumRepository albumRepository = new AlbumRepository();
+        boolean result;
+        AlbumRepository.modifyLock();
+        try {
+            result = albumRepository.prepareUpdate(new AlbumEditCustomSelectSpecification(oldName, newName, genre, price, performer)) > 0;
+            result = result && albumRepository.prepareUpdate(new AlbumClearCustomSelectSpecification(newName)) > 0;
+            for (String track : tracks) {
+                result = result && albumRepository.prepareUpdate(new AlbumInsertTrackCustomSelectSpecification(newName, track)) > 0;
+            }
+        }
+        catch (ConnectorException e) {
+            result = false;
+        }
+        finally {
+            AlbumRepository.modifyUnlock();
+            albumRepository.close();
+        }
+        return result;
+    }
+
     public boolean albumClear(String albumName) throws ConnectorException {
         AlbumRepository albumRepository = new AlbumRepository();
         boolean result;
         AlbumRepository.modifyLock();
         try {
             result = albumRepository.prepareUpdate(new AlbumClearCustomSelectSpecification(albumName)) > 0;
+        }
+        finally {
+            AlbumRepository.modifyUnlock();
+            albumRepository.close();
+        }
+        return result;
+    }
+
+    public boolean removeAlbum(String albumName) throws ConnectorException {
+        AlbumRepository albumRepository = new AlbumRepository();
+        boolean result;
+        AlbumRepository.modifyLock();
+        try {
+            result = albumRepository.prepareUpdate(new AlbumDeleteCustomSpecification(albumName)) > 0;
         }
         finally {
             AlbumRepository.modifyUnlock();

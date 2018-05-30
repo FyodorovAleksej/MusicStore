@@ -5,7 +5,6 @@ import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.application.UserRole;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.model.TrackEntity;
 import by.fyodorov.musicstore.receiver.PerformerReceiver;
 import by.fyodorov.musicstore.receiver.TrackReceiver;
 import by.fyodorov.musicstore.view.TrackView;

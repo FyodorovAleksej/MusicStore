@@ -60,7 +60,15 @@ public class RequestParameterMap {
     }
 
     public String[] getRequestMultipleAttribute(String name) {
-        return requestMultipleParametres.get(name);
+        if (requestMultipleParametres.containsKey(name)) {
+            return requestMultipleParametres.get(name);
+        }
+        if (requestParameters.containsKey(name)) {
+            String[] res = new String[1];
+            res[0] = requestParameters.get(name);
+            return res;
+        }
+        return new String[0];
     }
 
 

@@ -1,7 +1,5 @@
 package by.fyodorov.musicstore.view;
 
-import by.fyodorov.musicstore.model.TrackEntity;
-
 public class TrackView {
     private String name;
     private String performer;
@@ -9,6 +7,7 @@ public class TrackView {
     private String genre;
     private int price;
     private int summary;
+    private boolean check;
 
     public TrackView(String name, String performer, String date, String genre, int price, int summary) {
         this.name = name;
@@ -17,6 +16,7 @@ public class TrackView {
         this.genre = genre;
         this.price = price;
         this.summary = summary;
+        this.check = false;
     }
 
     public String getName() {
@@ -43,6 +43,14 @@ public class TrackView {
         return summary;
     }
 
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
     @Override
     public int hashCode() {
         return  name.hashCode() +
@@ -50,7 +58,8 @@ public class TrackView {
                 date.hashCode() +
                 genre.hashCode() +
                 Integer.hashCode(price) +
-                Integer.hashCode(summary);
+                Integer.hashCode(summary) +
+                Boolean.hashCode(check);
     }
 
     @Override
@@ -67,7 +76,8 @@ public class TrackView {
                 this.date.equals(view.date) &&
                 this.genre.equals(view.genre) &&
                 this.price == view.price &&
-                this.summary == view.summary;
+                this.summary == view.summary &&
+                this.check == view.check;
     }
 
     @Override

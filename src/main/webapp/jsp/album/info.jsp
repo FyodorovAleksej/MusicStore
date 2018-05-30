@@ -24,19 +24,21 @@
 <fmt:message key="main.trackInfoLabel" var="infoLabel"/>
 <fmt:message key="main.albumBuyLabel" var="buyLabel"/>
 <fmt:message key="main.albumTracksLabel" var="tracksLabel"/>
+<fmt:message key="main.albumEditLabel" var="editLabel"/>
+<fmt:message key="main.albumRemoveLabel" var="removeLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
 <div class="main-page form-horizontal">
-    <h3>${albumName}</h3>
-    <h4>${albumName}</h4>
+    <h3>${assemblageName}</h3>
+    <h4>${assemblageName}</h4>
     <h4>${albumInfoGenre}</h4>
     <h4>${albumInfoPrice}</h4>
     <h4>${albumInfoDate}</h4>
     <h4>${albumInfoPerformer}</h4>
 </div>
 <form action="/buyAlbum" method="post">
-    <button type="submit" class="btn btn-primary"><c:out value="${buyLabel}${albumInfoSummary}"></c:out></button>
+    <button type="submit" class="btn btn-primary"><c:out value="${buyLabel}${albumInfoSummary}"/></button>
 </form>
 <hr/>
 <h4><c:out value="${tracksLabel}"/></h4>
@@ -118,6 +120,12 @@
         </tr>
     </c:forEach>
 </table>
+<form action="/editAlbum" method="post">
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(255,155,0,0.80)"><c:out value="${editLabel}"/></button>
+</form>
+<form action="/removeAlbum" method="post">
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(255,55,35,0.80)"><c:out value="${removeLabel}"/></button>
+</form>
 <!-- Bootstrap -->
 <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
 <script src="${request.contextPath}/js/jquery-latest.js"></script>

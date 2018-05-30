@@ -26,6 +26,8 @@
 <fmt:message key="main.trackInfoLabel" var="infoLabel"/>
 <fmt:message key="main.assemblageBuyLabel" var="buyLabel"/>
 <fmt:message key="main.assemblageTracksLabel" var="tracksLabel"/>
+<fmt:message key="main.assemblageEditLabel" var="editLabel"/>
+<fmt:message key="main.assemblageRemoveLabel" var="removeLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
@@ -122,6 +124,12 @@
         </tr>
     </c:forEach>
 </table>
+<form action="/editAssemblage" method="post">
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(255,155,0,0.80)"><c:out value="${editLabel}"/></button>
+</form>
+<form action="/removeAssemblage" method="post">
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(255,55,35,0.80)"><c:out value="${removeLabel}"/></button>
+</form>
 <!-- Bootstrap -->
 <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
 <script src="${request.contextPath}/js/jquery-latest.js"></script>
