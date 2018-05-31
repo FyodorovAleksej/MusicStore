@@ -1,12 +1,9 @@
 package by.fyodorov.musicstore.receiver;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.model.AlbumEntity;
 import by.fyodorov.musicstore.repository.AlbumRepository;
-import by.fyodorov.musicstore.repository.TrackRepository;
-import by.fyodorov.musicstore.specification.album.AlbumByNameSpecification;
+import by.fyodorov.musicstore.specification.album.AlbumCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.album.custom.*;
-import by.fyodorov.musicstore.validator.RequestParameterValidator;
 import by.fyodorov.musicstore.view.AlbumView;
 import by.fyodorov.musicstore.view.AlbumWithoutPriceView;
 import org.apache.logging.log4j.LogManager;
@@ -18,35 +15,6 @@ import java.util.Optional;
 
 public class AlbumReceiver implements CommandReceiver {
     private static Logger LOGGER = LogManager.getLogger(AlbumReceiver.class);
-
-    public LinkedList<AlbumEntity> findAllAlbums(String pattern) throws ConnectorException {
-        LOGGER.debug("finding album like pattern = \"" + pattern + "\"");
-        AlbumRepository albumRepository = new AlbumRepository();
-        LinkedList<AlbumEntity> list;
-        try {
-            list = albumRepository.prepareQuery(new AlbumByNameSpecification(pattern));
-        }
-        finally {
-            albumRepository.close();
-        }
-        return list;
-    }
-
-    public boolean addAlbum(AlbumEntity entity) throws ConnectorException {
-        AlbumRepository albumRepository = new AlbumRepository();
-        boolean result;
-        try {
-            albumRepository.add(entity);
-            result = true;
-        }
-        catch (ConnectorException e) {
-            result = false;
-        }
-        finally {
-            albumRepository.close();
-        }
-        return result;
-    }
 
     public LinkedList<AlbumView> findAlbumInfo(String userName) throws ConnectorException {
         AlbumRepository albumRepository = new AlbumRepository();
@@ -64,8 +32,7 @@ public class AlbumReceiver implements CommandReceiver {
                         price,
                         Integer.valueOf(map.getOrDefault(AlbumWithUserCustomSelectSpecification.ALBUM_PRICE_SUMMARY_KEY, Integer.toString(price)))));
             }
-        }
-        finally {
+        } finally {
             albumRepository.close();
         }
         return albums;
@@ -73,19 +40,18 @@ public class AlbumReceiver implements CommandReceiver {
 
     public LinkedList<AlbumWithoutPriceView> findAlbumForUser(String userName) throws ConnectorException {
         AlbumRepository assemblageRepository = new AlbumRepository();
-        AlbumCustomSelectSpecification specification = new AlbumOfUserByNameCustomSelect(userName);
+        AlbumCustomSelectSpecification specification = new AlbumOfUserByNameCustomSelectSpecification(userName);
         LinkedList<AlbumWithoutPriceView> albums = new LinkedList<>();
         try {
             LinkedList<HashMap<String, String>> arguments = assemblageRepository.customQuery(specification);
             for (HashMap<String, String> map : arguments) {
                 albums.add(new AlbumWithoutPriceView(
-                        map.get(AlbumOfUserByNameCustomSelect.ALBUM_NAME_KEY),
-                        map.get(AlbumOfUserByNameCustomSelect.ALBUM_PERFORMER_KEY),
-                        map.get(AlbumOfUserByNameCustomSelect.ALBUM_DATE_KEY),
-                        map.get(AlbumOfUserByNameCustomSelect.ALBUM_GENRE_KEY)));
+                        map.get(AlbumOfUserByNameCustomSelectSpecification.ALBUM_NAME_KEY),
+                        map.get(AlbumOfUserByNameCustomSelectSpecification.ALBUM_PERFORMER_KEY),
+                        map.get(AlbumOfUserByNameCustomSelectSpecification.ALBUM_DATE_KEY),
+                        map.get(AlbumOfUserByNameCustomSelectSpecification.ALBUM_GENRE_KEY)));
             }
-        }
-        finally {
+        } finally {
             assemblageRepository.close();
         }
         return albums;
@@ -108,8 +74,7 @@ public class AlbumReceiver implements CommandReceiver {
                         price,
                         Integer.valueOf(map.getOrDefault(AlbumInfoForUserCustomSelectSpecification.ALBUM_PRICE_SUMMARY_KEY, Integer.toString(price)))));
             }
-        }
-        finally {
+        } finally {
             albumRepository.close();
         }
         return result;
@@ -120,15 +85,13 @@ public class AlbumReceiver implements CommandReceiver {
         boolean result;
         AlbumRepository.modifyLock();
         try {
-            result = albumRepository.prepareUpdate(new AlbumAddCustomSelectSpecification(album, genre, price, performer)) > 0;
+            result = albumRepository.prepareUpdate(new AlbumAddCustomUpdateSpecification(album, genre, price, performer)) > 0;
             for (String track : tracks) {
-                result = result && albumRepository.prepareUpdate(new AlbumInsertTrackCustomSelectSpecification(album, track)) > 0;
+                result = result && albumRepository.prepareUpdate(new AlbumInsertTrackCustomUpdateSpecification(album, track)) > 0;
             }
-        }
-        catch (ConnectorException e) {
+        } catch (ConnectorException e) {
             result = false;
-        }
-        finally {
+        } finally {
             AlbumRepository.modifyUnlock();
             albumRepository.close();
         }
@@ -140,30 +103,14 @@ public class AlbumReceiver implements CommandReceiver {
         boolean result;
         AlbumRepository.modifyLock();
         try {
-            result = albumRepository.prepareUpdate(new AlbumEditCustomSelectSpecification(oldName, newName, genre, price, performer)) > 0;
-            result = result && albumRepository.prepareUpdate(new AlbumClearCustomSelectSpecification(newName)) > 0;
+            result = albumRepository.prepareUpdate(new AlbumEditCustomUpdateSpecification(oldName, newName, genre, price, performer)) > 0;
+            result = result && albumRepository.prepareUpdate(new AlbumClearCustomUpdateSpecification(newName)) >= 0;
             for (String track : tracks) {
-                result = result && albumRepository.prepareUpdate(new AlbumInsertTrackCustomSelectSpecification(newName, track)) > 0;
+                result = result && albumRepository.prepareUpdate(new AlbumInsertTrackCustomUpdateSpecification(newName, track)) > 0;
             }
-        }
-        catch (ConnectorException e) {
+        } catch (ConnectorException e) {
             result = false;
-        }
-        finally {
-            AlbumRepository.modifyUnlock();
-            albumRepository.close();
-        }
-        return result;
-    }
-
-    public boolean albumClear(String albumName) throws ConnectorException {
-        AlbumRepository albumRepository = new AlbumRepository();
-        boolean result;
-        AlbumRepository.modifyLock();
-        try {
-            result = albumRepository.prepareUpdate(new AlbumClearCustomSelectSpecification(albumName)) > 0;
-        }
-        finally {
+        } finally {
             AlbumRepository.modifyUnlock();
             albumRepository.close();
         }
@@ -175,9 +122,8 @@ public class AlbumReceiver implements CommandReceiver {
         boolean result;
         AlbumRepository.modifyLock();
         try {
-            result = albumRepository.prepareUpdate(new AlbumDeleteCustomSpecification(albumName)) > 0;
-        }
-        finally {
+            result = albumRepository.prepareUpdate(new AlbumDeleteCustomUpdateSpecification(albumName)) > 0;
+        } finally {
             AlbumRepository.modifyUnlock();
             albumRepository.close();
         }

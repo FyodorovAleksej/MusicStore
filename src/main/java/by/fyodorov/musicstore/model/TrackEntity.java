@@ -53,7 +53,6 @@ public class TrackEntity extends EntityBase {
     }
 
 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -81,7 +80,7 @@ public class TrackEntity extends EntityBase {
 
     @Override
     public int hashCode() {
-        return  Integer.hashCode(id) +
+        return Integer.hashCode(id) +
                 name.hashCode() +
                 genre.hashCode() +
                 Integer.hashCode(price) +
@@ -91,11 +90,11 @@ public class TrackEntity extends EntityBase {
 
     @Override
     public String toString() {
-        return  "id = "            + id          + "\n" +
-                "name = "          + name        + "\n" +
-                "genre = "         + genre       + "\n" +
-                "price = "         + price       + "\n" +
-                "date = "          + date        + "\n" +
+        return "id = " + id + "\n" +
+                "name = " + name + "\n" +
+                "genre = " + genre + "\n" +
+                "price = " + price + "\n" +
+                "date = " + date + "\n" +
                 "performers_id = " + performerId;
     }
 
@@ -107,7 +106,7 @@ public class TrackEntity extends EntityBase {
         if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        TrackEntity track = (TrackEntity)obj;
+        TrackEntity track = (TrackEntity) obj;
         return (track.id == this.id &&
                 track.name.equals(this.name) &&
                 track.genre.equals(this.genre) &&

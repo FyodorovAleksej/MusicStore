@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+/**
+ * proxy class of connection
+ */
 public class ProxyConnection implements Connection {
     private Connection connection;
 
@@ -17,11 +20,14 @@ public class ProxyConnection implements Connection {
         ConnectionPool.getInstance(null).releaseConnection(this);
     }
 
+    /**
+     * used method for closing connection
+     * @throws ConnectorException - when can't close connection
+     */
     void closeConnection() throws ConnectorException {
         try {
             connection.close();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't close connection", e);
         }
     }
@@ -30,8 +36,7 @@ public class ProxyConnection implements Connection {
     public Statement createStatement() throws ConnectorException {
         try {
             return connection.createStatement();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't create statement", e);
         }
     }
@@ -40,8 +45,7 @@ public class ProxyConnection implements Connection {
     public PreparedStatement prepareStatement(String sql) throws ConnectorException {
         try {
             return connection.prepareStatement(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare statement", e);
         }
     }
@@ -50,8 +54,7 @@ public class ProxyConnection implements Connection {
     public CallableStatement prepareCall(String sql) throws ConnectorException {
         try {
             return connection.prepareCall(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare call", e);
         }
     }
@@ -60,8 +63,7 @@ public class ProxyConnection implements Connection {
     public String nativeSQL(String sql) throws ConnectorException {
         try {
             return connection.nativeSQL(sql);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't transform to native SQL", e);
         }
     }
@@ -70,8 +72,7 @@ public class ProxyConnection implements Connection {
     public void setAutoCommit(boolean autoCommit) throws ConnectorException {
         try {
             connection.setAutoCommit(autoCommit);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't setting auto commit", e);
         }
     }
@@ -80,8 +81,7 @@ public class ProxyConnection implements Connection {
     public boolean getAutoCommit() throws ConnectorException {
         try {
             return connection.getAutoCommit();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting auto commit", e);
         }
     }
@@ -90,8 +90,7 @@ public class ProxyConnection implements Connection {
     public void commit() throws ConnectorException {
         try {
             connection.commit();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't commit", e);
         }
     }
@@ -100,8 +99,7 @@ public class ProxyConnection implements Connection {
     public void rollback() throws ConnectorException {
         try {
             connection.rollback();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't rollback", e);
         }
     }
@@ -110,8 +108,7 @@ public class ProxyConnection implements Connection {
     public boolean isClosed() throws ConnectorException {
         try {
             return connection.isClosed();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting is closed", e);
         }
     }
@@ -120,8 +117,7 @@ public class ProxyConnection implements Connection {
     public DatabaseMetaData getMetaData() throws ConnectorException {
         try {
             return connection.getMetaData();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting meta data", e);
         }
     }
@@ -130,8 +126,7 @@ public class ProxyConnection implements Connection {
     public void setReadOnly(boolean readOnly) throws ConnectorException {
         try {
             connection.setReadOnly(readOnly);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't set is read only", e);
         }
     }
@@ -140,8 +135,7 @@ public class ProxyConnection implements Connection {
     public boolean isReadOnly() throws ConnectorException {
         try {
             return connection.isReadOnly();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting is read only", e);
         }
     }
@@ -150,8 +144,7 @@ public class ProxyConnection implements Connection {
     public void setCatalog(String catalog) throws ConnectorException {
         try {
             connection.setCatalog(catalog);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't set catalog", e);
         }
     }
@@ -160,8 +153,7 @@ public class ProxyConnection implements Connection {
     public String getCatalog() throws ConnectorException {
         try {
             return connection.getCatalog();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't get catalog", e);
         }
     }
@@ -170,8 +162,7 @@ public class ProxyConnection implements Connection {
     public void setTransactionIsolation(int level) throws ConnectorException {
         try {
             connection.setTransactionIsolation(level);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't set transaction isolation", e);
         }
     }
@@ -180,8 +171,7 @@ public class ProxyConnection implements Connection {
     public int getTransactionIsolation() throws ConnectorException {
         try {
             return connection.getTransactionIsolation();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't get transaction isolation", e);
         }
     }
@@ -190,8 +180,7 @@ public class ProxyConnection implements Connection {
     public SQLWarning getWarnings() throws ConnectorException {
         try {
             return connection.getWarnings();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting warnings", e);
         }
     }
@@ -200,8 +189,7 @@ public class ProxyConnection implements Connection {
     public void clearWarnings() throws ConnectorException {
         try {
             connection.clearWarnings();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't clear warnings", e);
         }
     }
@@ -210,8 +198,7 @@ public class ProxyConnection implements Connection {
     public Statement createStatement(int resultSetType, int resultSetConcurrency) throws ConnectorException {
         try {
             return connection.createStatement(resultSetType, resultSetConcurrency);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't create statement", e);
         }
     }
@@ -220,8 +207,7 @@ public class ProxyConnection implements Connection {
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) throws ConnectorException {
         try {
             return connection.prepareStatement(sql, resultSetType, resultSetConcurrency);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare statement", e);
         }
     }
@@ -230,8 +216,7 @@ public class ProxyConnection implements Connection {
     public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) throws ConnectorException {
         try {
             return connection.prepareCall(sql, resultSetType, resultSetConcurrency);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare call", e);
         }
     }
@@ -240,8 +225,7 @@ public class ProxyConnection implements Connection {
     public Map<String, Class<?>> getTypeMap() throws ConnectorException {
         try {
             return connection.getTypeMap();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting type map", e);
         }
     }
@@ -250,8 +234,7 @@ public class ProxyConnection implements Connection {
     public void setTypeMap(Map<String, Class<?>> map) throws ConnectorException {
         try {
             connection.setTypeMap(map);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't setting type map", e);
         }
     }
@@ -260,8 +243,7 @@ public class ProxyConnection implements Connection {
     public void setHoldability(int holdability) throws ConnectorException {
         try {
             connection.setHoldability(holdability);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't setting holdability", e);
         }
     }
@@ -270,8 +252,7 @@ public class ProxyConnection implements Connection {
     public int getHoldability() throws ConnectorException {
         try {
             return connection.getHoldability();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting holdability", e);
         }
     }
@@ -280,8 +261,7 @@ public class ProxyConnection implements Connection {
     public Savepoint setSavepoint() throws ConnectorException {
         try {
             return connection.setSavepoint();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't setting savepoint", e);
         }
     }
@@ -290,8 +270,7 @@ public class ProxyConnection implements Connection {
     public Savepoint setSavepoint(String name) throws ConnectorException {
         try {
             return connection.setSavepoint(name);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't setting savepoint", e);
         }
     }
@@ -300,8 +279,7 @@ public class ProxyConnection implements Connection {
     public void rollback(Savepoint savepoint) throws ConnectorException {
         try {
             connection.rollback();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't rollback", e);
         }
     }
@@ -310,8 +288,7 @@ public class ProxyConnection implements Connection {
     public void releaseSavepoint(Savepoint savepoint) throws ConnectorException {
         try {
             connection.releaseSavepoint(savepoint);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't release savepoint", e);
         }
 
@@ -321,8 +298,7 @@ public class ProxyConnection implements Connection {
     public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws ConnectorException {
         try {
             return connection.createStatement(resultSetType, resultSetConcurrency, resultSetHoldability);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't creating statement", e);
         }
     }
@@ -331,8 +307,7 @@ public class ProxyConnection implements Connection {
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws ConnectorException {
         try {
             return connection.prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare statement", e);
         }
     }
@@ -341,8 +316,7 @@ public class ProxyConnection implements Connection {
     public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws ConnectorException {
         try {
             return connection.prepareCall(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare call", e);
         }
     }
@@ -351,8 +325,7 @@ public class ProxyConnection implements Connection {
     public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys) throws ConnectorException {
         try {
             return connection.prepareStatement(sql, autoGeneratedKeys);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare statement", e);
         }
     }
@@ -361,8 +334,7 @@ public class ProxyConnection implements Connection {
     public PreparedStatement prepareStatement(String sql, int[] columnIndexes) throws ConnectorException {
         try {
             return connection.prepareStatement(sql, columnIndexes);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare statement", e);
         }
     }
@@ -371,8 +343,7 @@ public class ProxyConnection implements Connection {
     public PreparedStatement prepareStatement(String sql, String[] columnNames) throws ConnectorException {
         try {
             return connection.prepareStatement(sql, columnNames);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't prepare statement", e);
         }
     }
@@ -381,8 +352,7 @@ public class ProxyConnection implements Connection {
     public Clob createClob() throws ConnectorException {
         try {
             return connection.createClob();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't create clob", e);
         }
     }
@@ -391,8 +361,7 @@ public class ProxyConnection implements Connection {
     public Blob createBlob() throws ConnectorException {
         try {
             return connection.createBlob();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't create blob", e);
         }
     }
@@ -401,8 +370,7 @@ public class ProxyConnection implements Connection {
     public NClob createNClob() throws ConnectorException {
         try {
             return connection.createNClob();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't create nclob", e);
         }
     }
@@ -411,8 +379,7 @@ public class ProxyConnection implements Connection {
     public SQLXML createSQLXML() throws ConnectorException {
         try {
             return connection.createSQLXML();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't create sql xml", e);
         }
     }
@@ -421,8 +388,7 @@ public class ProxyConnection implements Connection {
     public boolean isValid(int timeout) throws ConnectorException {
         try {
             return connection.isValid(timeout);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting is valid", e);
         }
     }
@@ -431,8 +397,7 @@ public class ProxyConnection implements Connection {
     public void setClientInfo(String name, String value) throws ConnectorInfoException {
         try {
             connection.setClientInfo(name, value);
-        }
-        catch (SQLClientInfoException e) {
+        } catch (SQLClientInfoException e) {
             throw new ConnectorInfoException("can't set client info", e);
         }
     }
@@ -441,8 +406,7 @@ public class ProxyConnection implements Connection {
     public void setClientInfo(Properties properties) throws ConnectorInfoException {
         try {
             connection.setClientInfo(properties);
-        }
-        catch (SQLClientInfoException e) {
+        } catch (SQLClientInfoException e) {
             throw new ConnectorInfoException("can't set client info", e);
         }
     }
@@ -451,8 +415,7 @@ public class ProxyConnection implements Connection {
     public String getClientInfo(String name) throws ConnectorException {
         try {
             return connection.getClientInfo(name);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting client info", e);
         }
     }
@@ -461,8 +424,7 @@ public class ProxyConnection implements Connection {
     public Properties getClientInfo() throws ConnectorException {
         try {
             return connection.getClientInfo();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting client info", e);
         }
     }
@@ -471,8 +433,7 @@ public class ProxyConnection implements Connection {
     public Array createArrayOf(String typeName, Object[] elements) throws ConnectorException {
         try {
             return connection.createArrayOf(typeName, elements);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't create array", e);
         }
     }
@@ -481,8 +442,7 @@ public class ProxyConnection implements Connection {
     public Struct createStruct(String typeName, Object[] attributes) throws ConnectorException {
         try {
             return connection.createStruct(typeName, attributes);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't create struct", e);
         }
     }
@@ -491,8 +451,7 @@ public class ProxyConnection implements Connection {
     public void setSchema(String schema) throws ConnectorException {
         try {
             connection.setSchema(schema);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't setting schema", e);
         }
 
@@ -502,8 +461,7 @@ public class ProxyConnection implements Connection {
     public String getSchema() throws ConnectorException {
         try {
             return connection.getSchema();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting schema", e);
         }
     }
@@ -512,8 +470,7 @@ public class ProxyConnection implements Connection {
     public void abort(Executor executor) throws ConnectorException {
         try {
             connection.abort(executor);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't abort", e);
         }
     }
@@ -522,8 +479,7 @@ public class ProxyConnection implements Connection {
     public void setNetworkTimeout(Executor executor, int milliseconds) throws ConnectorException {
         try {
             connection.setNetworkTimeout(executor, milliseconds);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't setting network timeout", e);
         }
 
@@ -533,8 +489,7 @@ public class ProxyConnection implements Connection {
     public int getNetworkTimeout() throws ConnectorException {
         try {
             return connection.getNetworkTimeout();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting network timeout", e);
         }
     }
@@ -543,8 +498,7 @@ public class ProxyConnection implements Connection {
     public <T> T unwrap(Class<T> iface) throws ConnectorException {
         try {
             return connection.unwrap(iface);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't unwrap", e);
         }
     }
@@ -553,8 +507,7 @@ public class ProxyConnection implements Connection {
     public boolean isWrapperFor(Class<?> iface) throws ConnectorException {
         try {
             return connection.isWrapperFor(iface);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't getting is wrapper for", e);
         }
     }

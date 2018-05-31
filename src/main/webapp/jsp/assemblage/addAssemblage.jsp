@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>users</title>
+    <title>Add assemblage</title>
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
@@ -20,7 +20,6 @@
 
 <fmt:message key="add.trackNameLabel" var="trackNameLabel"/>
 <fmt:message key="add.trackGenreLabel" var="trackGenreLabel"/>
-<fmt:message key="add.trackPriceLabel" var="trackPriceLabel"/>
 <fmt:message key="add.trackPerformerLabel" var="trackPerformerLabel"/>
 <fmt:message key="add.trackDateLabel" var="trackDateLabel"/>
 

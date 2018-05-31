@@ -1,21 +1,13 @@
 package by.fyodorov.musicstore.specification.track.custom;
 
-import by.fyodorov.musicstore.connector.ConnectorException;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.LinkedList;
+import by.fyodorov.musicstore.specification.track.TrackCustomSelectSpecification;
 
 import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class TrackInAlbumForUserCustomSelectSpecification implements TrackCustomSelectSpecification {
-
-    private static final String SUMMARY_COLUMN = "summary";
-
+public class TrackInAlbumForUserCustomSelectSpecification extends TrackCustomSelectSpecification {
     private static final String SELECT_TRACK_INFO_FOR_USERNAME = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s, %s.%s, CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +
                     "FROM %s JOIN %s ON %s.%s = %s.%s " +
@@ -46,13 +38,6 @@ public class TrackInAlbumForUserCustomSelectSpecification implements TrackCustom
             TRACK_BD_TABLE, TRACK_PERFORMER_FK,
             ALBUM_BD_TABLE, ALBUM_NAME);
 
-    public static final String TRACK_NAME_KEY = "trackName";
-    public static final String TRACK_GENRE_KEY = "trackGenre";
-    public static final String PERFORMER_KEY = "performerName";
-    public static final String TRACK_DATE_KEY = "trackDate";
-    public static final String TRACK_PRICE_KEY = "trackPrice";
-    public static final String TRACK_PRICE_SUMMARY_KEY = "trackSummaryPrice";
-
     private String albumName;
     private String userName;
 
@@ -71,35 +56,6 @@ public class TrackInAlbumForUserCustomSelectSpecification implements TrackCustom
         String[] result = new String[2];
         result[0] = userName;
         result[1] = albumName;
-        return result;
-    }
-
-    @Override
-    public LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
-        LinkedList<HashMap<String, String>> result = new LinkedList<>();
-        try {
-            while (set.next()) {
-                HashMap<String, String> arguments = new HashMap<>();
-                String trackName = set.getString(TRACK_NAME.toString());
-                String genre = set.getString(TRACK_GENRE.toString());
-                String performer = set.getString(PERFORMER_NAME.toString());
-                String date = set.getDate(TRACK_DATE.toString()).toString();
-                String price = Integer.toString(set.getInt(TRACK_PRICE.toString()));
-                String summary = Integer.toString(set.getInt(SUMMARY_COLUMN));
-
-                arguments.put(TRACK_NAME_KEY, trackName);
-                arguments.put(TRACK_GENRE_KEY, genre);
-                arguments.put(PERFORMER_KEY, performer);
-                arguments.put(TRACK_DATE_KEY, date);
-                arguments.put(TRACK_PRICE_KEY, price);
-                arguments.put(TRACK_PRICE_SUMMARY_KEY, summary);
-
-                result.add(arguments);
-            }
-        }
-        catch (SQLException e) {
-            throw new ConnectorException("can't read result set from Track DB", e);
-        }
         return result;
     }
 }

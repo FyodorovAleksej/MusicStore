@@ -16,7 +16,9 @@ public class RequestParameterValidator {
         return validate(email, RequestArgument.EMAIL);
     }
 
-    public boolean validateInteger(String integer) {return validate(integer, RequestArgument.TRACK_ADD_PRICE);}
+    public boolean validateInteger(String integer) {
+        return validate(integer, RequestArgument.TRACK_ADD_PRICE);
+    }
 
     public boolean validatePrice(String price) {
         return validateInteger(price) && Integer.valueOf(price) >= 0;

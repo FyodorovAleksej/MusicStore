@@ -43,7 +43,7 @@ public class AssemblageView {
 
     @Override
     public int hashCode() {
-        return  name.hashCode() +
+        return name.hashCode() +
                 owner.hashCode() +
                 date.hashCode() +
                 genre.hashCode() +
@@ -59,8 +59,8 @@ public class AssemblageView {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        AssemblageView view = (AssemblageView)o;
-        return  this.name.equals(view.name) &&
+        AssemblageView view = (AssemblageView) o;
+        return this.name.equals(view.name) &&
                 this.date.equals(view.date) &&
                 this.genre.equals(view.genre) &&
                 this.owner.equals(view.owner) &&
@@ -70,7 +70,7 @@ public class AssemblageView {
 
     @Override
     public String toString() {
-        return  "name: " + name +
+        return "name: " + name +
                 "; date: " + date +
                 "; genre: " + genre +
                 "; owner: " + owner +

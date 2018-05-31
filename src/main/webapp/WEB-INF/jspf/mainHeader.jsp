@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="${request.contextPath}/js/bootstrap/favicon.ico">
+    <link rel="icon" href="${request.contextPath}/img/main.png">
 
     <title>Sticky Footer Navbar Template for Bootstrap</title>
 
@@ -51,6 +51,7 @@
                     <select class="custom-select" id="language" name="language" onchange="submit()">
                         <option value="ru" ${language == 'ru' ? 'selected' : ''}>Russian</option>
                         <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
+                        <option value="by" ${language == 'by' ? 'selected' : ''}>Belarusian</option>
                     </select>
                 </form>
             </div>

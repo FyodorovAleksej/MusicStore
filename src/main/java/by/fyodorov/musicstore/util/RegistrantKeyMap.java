@@ -2,13 +2,16 @@ package by.fyodorov.musicstore.util;
 
 import by.fyodorov.musicstore.model.UserEntity;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class RegistrantKeyMap {
-    private static final int MAX_COUNT = 20;
+    private static final int MAX_COUNT = 10;
 
     private static RegistrantKeyMap instance;
     private static Lock instanceLock = new ReentrantLock();

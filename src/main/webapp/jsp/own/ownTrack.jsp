@@ -43,7 +43,7 @@
     <c:forEach items="${tracksOwn}" var="trackView">
         <tr>
             <td>
-                <audio src="${request.contextPath}/tracks/${trackView.getName()}.mp3" controls preload="auto"></audio>
+                <audio src="${request.contextPath}/tracks/${trackView.getName()}.mp3" controls preload="metadata"></audio>
             </td>
             <td>
                 <h5 style="padding-left: 25px; margin-left: 10px; margin-bottom: 20px; margin-right: 20px;">

@@ -2,7 +2,7 @@ package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
-import by.fyodorov.musicstore.application.UserRole;
+import by.fyodorov.musicstore.model.UserRole;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.model.GenreType;
@@ -10,23 +10,38 @@ import by.fyodorov.musicstore.receiver.AlbumReceiver;
 import by.fyodorov.musicstore.receiver.PerformerReceiver;
 import by.fyodorov.musicstore.receiver.TrackReceiver;
 import by.fyodorov.musicstore.view.AlbumView;
-import by.fyodorov.musicstore.view.TrackView;
+import by.fyodorov.musicstore.view.TrackWithoutPriceView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 import java.util.Optional;
 
+/**
+ * preparing information for editing album
+ */
 public class EditAlbumPrepareCommand implements Command {
     private AlbumReceiver albumReceiver;
     private PerformerReceiver performerReceiver;
     private TrackReceiver trackReceiver;
 
+    /**
+     * create command with album, performer and track receivers
+     * @param trackReceiver - receiver for working with tracks
+     * @param performerReceiver - receiver for working with performers
+     * @param albumReceiver - receiver for working with albums
+     */
     EditAlbumPrepareCommand(TrackReceiver trackReceiver, PerformerReceiver performerReceiver, AlbumReceiver albumReceiver) {
         this.albumReceiver = albumReceiver;
         this.trackReceiver = trackReceiver;
         this.performerReceiver = performerReceiver;
     }
 
+    /**
+     * performing command. Prepare information about album for editing
+     * @param requestInfo - map with arguments of request and session
+     * @return - command of forward or redirect
+     * @throws CommandException - when command can't perform
+     */
     @Override
     public GoToInterface perform(RequestParameterMap requestInfo) throws CommandException {
         Optional<String> path = Optional.empty();
@@ -50,18 +65,17 @@ public class EditAlbumPrepareCommand implements Command {
                     requestInfo.setRequestAttribute(RequestArgument.ALBUM_EDIT_OLD_PRICE.getName(), albumInfo.get().getPrice());
                     requestInfo.setRequestAttribute(RequestArgument.ALBUM_EDIT_OLD_PERFORMER.getName(), albumInfo.get().getPerformer());
                 }
-                LinkedList<TrackView> tracks = trackReceiver.findTrackInfo(name);
-                LinkedList<TrackView> albumTracks = trackReceiver.findTracksInAlbum(album, name);
+                LinkedList<TrackWithoutPriceView> tracks = trackReceiver.findTracksWithoutPrice();
+                LinkedList<TrackWithoutPriceView> albumTracks = trackReceiver.findTracksInAlbum(album);
                 tracks.removeAll(albumTracks);
                 albumTracks.forEach((track) -> track.setCheck(true));
-                tracks.addAll(albumTracks);
-                if (!tracks.isEmpty()) {
-                    requestInfo.setRequestAttribute(RequestArgument.TRACK_SEARCH_LIST.getName(), tracks);
+                albumTracks.addAll(tracks);
+                if (!albumTracks.isEmpty()) {
+                    requestInfo.setRequestAttribute(RequestArgument.TRACK_SEARCH_LIST.getName(), albumTracks);
                 }
                 path = Optional.of(PagesUrl.ALBUM_EDIT_PAGE.getPath());
             }
-        }
-        catch (ConnectorException e) {
+        } catch (ConnectorException e) {
             throw new CommandException("can't connect to find tracks|performers", e);
         }
         return new ForwardGoTo(path.orElse(PagesUrl.MAIN_PAGE.getPath()));

@@ -24,23 +24,32 @@ public class ConnectionPool {
     private ArrayDeque<Connection> connections;
     private Lock lock = new ReentrantLock();
 
+    /**
+     * creating connection pool with properties file
+     * @param path - path to properties file with DB properties
+     * @throws ConnectorException - when can't register DB driver
+     */
     private ConnectionPool(String path) throws ConnectorException {
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't register driver", e);
         }
         try {
             connectionCreator = new ConnectionCreator(path);
             connections = connectionCreator.createDeque();
-        }
-        catch (CreatorException e) {
+        } catch (CreatorException e) {
             LOGGER.catching(e);
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * singleton
+     * @param path - path to DB properties file. Used only once
+     * @return - singleton of pool
+     * @throws ConnectorException - when can't create connection pool
+     */
     public static ConnectionPool getInstance(String path) throws ConnectorException {
         if (!isCreated.get()) {
             instanceLock.lock();
@@ -49,14 +58,18 @@ public class ConnectionPool {
                     instance = new ConnectionPool(path);
                     isCreated.set(true);
                 }
-            }
-            finally {
+            } finally {
                 instanceLock.unlock();
             }
         }
         return instance;
     }
 
+    /**
+     * release used connection. Package private
+     * @param connection - used connection
+     * @throws ConnectorException - when can't close connection
+     */
     void releaseConnection(ProxyConnection connection) throws ConnectorException {
         LOGGER.debug("RELEASE CONNECTION");
         lock.lock();
@@ -66,32 +79,36 @@ public class ConnectionPool {
             }
             ProxyConnection proxyConnection = new ProxyConnection(connectionCreator.create());
             connections.push(proxyConnection);
-        }
-        finally {
+        } finally {
             lock.unlock();
         }
         LOGGER.debug("COUNT OF CONNECTIONS = " + connections.size());
     }
 
+    /**
+     * destroy connection pool
+     * @throws ConnectorException - when can't close connections
+     */
     public void destroy() throws ConnectorException {
         lock.lock();
         try {
             for (Connection connection : connections) {
                 ((ProxyConnection) connection).closeConnection();
             }
-        }
-        finally {
+        } finally {
             lock.unlock();
         }
         try {
             DriverManager.deregisterDriver(new com.mysql.cj.jdbc.Driver());
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't deregister driver", e);
         }
     }
 
-
+    /**
+     * getting connection from connection pool for using
+     * @return - connection for using
+     */
     public Connection getConnection() {
         LOGGER.debug("GET CONNECTION");
         lock.lock();

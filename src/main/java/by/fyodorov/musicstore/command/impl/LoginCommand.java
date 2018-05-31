@@ -12,14 +12,27 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * sign in
+ */
 public class LoginCommand implements Command {
-    private static Logger LOGGER = LogManager.getLogger(LoginCommand.class);
-    private UserReceiver receiver;
+    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
+    private UserReceiver userReceiver;
 
-    public LoginCommand(UserReceiver receiver) {
-        this.receiver = receiver;
+    /**
+     * creating command with user receiver
+     * @param userReceiver - receiver for working with users
+     */
+    public LoginCommand(UserReceiver userReceiver) {
+        this.userReceiver = userReceiver;
     }
 
+    /**
+     * performing command. Sign in for user
+     * @param requestInfo - map with arguments of request and session
+     * @return - command of forward or redirect
+     * @throws CommandException - when command can't perform
+     */
     @Override
     public GoToInterface perform(RequestParameterMap requestInfo) throws CommandException {
         Optional<String> path = Optional.empty();
@@ -28,11 +41,11 @@ public class LoginCommand implements Command {
         String password = requestInfo.getParameter(RequestArgument.PASSWORD.getName());
 
         try {
-            if (receiver.validateUser(login) && receiver.validatePassword(password)) {
-                if (receiver.checkUser(login, password)) {
+            if (userReceiver.validateUser(login) && userReceiver.validatePassword(password)) {
+                if (userReceiver.checkUser(login, password)) {
                     requestInfo.setRequestAttribute(RequestArgument.LOGIN_RESULT.getName(), "Confirm");
 
-                    UserEntity user = receiver.findUser(login);
+                    UserEntity user = userReceiver.findUser(login);
                     if (user != null) {
                         requestInfo.setSessionAttribute(RequestArgument.SESSION_LOGIN.getName(), user.getUserName());
                         requestInfo.setSessionAttribute(RequestArgument.SESSION_ROLE.getName(), user.getRole());
@@ -45,8 +58,7 @@ public class LoginCommand implements Command {
                 }
             }
             return new RedirectGoTo(path.orElse(PagesUrl.MAIN_PAGE.getPath()));
-        }
-        catch (ConnectorException e) {
+        } catch (ConnectorException e) {
             throw new CommandException("can't execute login command - connection problem", e);
         }
     }

@@ -3,6 +3,7 @@ package by.fyodorov.musicstore.application;
 public enum InitParameter {
     DATA_BASE_INIT("dbInit"),
     MAIL_INIT("mailInit"),
+    PAGE_MAX("pageMax"),
     TRACK_EXTENSION(".mp3"),
     FILE_PATH("/tracks/");
 

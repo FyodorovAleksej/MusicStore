@@ -2,31 +2,43 @@ package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
-import by.fyodorov.musicstore.application.UserRole;
+import by.fyodorov.musicstore.model.UserRole;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.receiver.AlbumReceiver;
 import by.fyodorov.musicstore.receiver.AssemblageReceiver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * removing selected assemblage from system
+ */
 public class RemoveAssemblageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(RemoveAssemblageCommand.class);
-    private AssemblageReceiver receiver;
+    private AssemblageReceiver assemblageReceiver;
 
-    public RemoveAssemblageCommand(AssemblageReceiver receiver) {
-        this.receiver = receiver;
+    /**
+     * creating command with assemblage receiver
+     * @param assemblageReceiver - receiver for working with assemblages
+     */
+    public RemoveAssemblageCommand(AssemblageReceiver assemblageReceiver) {
+        this.assemblageReceiver = assemblageReceiver;
     }
 
+    /**
+     * performing command. Removing selected assemblage frm system
+     * @param requestInfo - map with arguments of request and session
+     * @return - command of forward or redirect
+     * @throws CommandException - when command can't perform
+     */
     @Override
-    public GoToInterface perform(RequestParameterMap request) throws CommandException {
-        String userRole = (String) request.getSessionAttribute(RequestArgument.SESSION_ROLE.getName());
-        String assemblageName = (String) request.getSessionAttribute(RequestArgument.ASSEMBLAGE_SESSION_NAME.getName());
+    public GoToInterface perform(RequestParameterMap requestInfo) throws CommandException {
+        String userRole = (String) requestInfo.getSessionAttribute(RequestArgument.SESSION_ROLE.getName());
+        String assemblageName = (String) requestInfo.getSessionAttribute(RequestArgument.ASSEMBLAGE_SESSION_NAME.getName());
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && assemblageName != null) {
-                if (receiver.removeAssemblage(assemblageName)) {
+                if (assemblageReceiver.removeAssemblage(assemblageName)) {
                     LOGGER.debug("remove assemblage successfully");
                 } else {
                     LOGGER.debug("remove assemblage failed");

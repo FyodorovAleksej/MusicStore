@@ -1,7 +1,5 @@
 package by.fyodorov.musicstore.view;
 
-import by.fyodorov.musicstore.model.UserEntity;
-
 public class UserView {
     private int id;
     private String name;

@@ -2,7 +2,7 @@ package by.fyodorov.musicstore.command.impl;
 
 import by.fyodorov.musicstore.application.PagesUrl;
 import by.fyodorov.musicstore.application.RequestArgument;
-import by.fyodorov.musicstore.application.UserRole;
+import by.fyodorov.musicstore.model.UserRole;
 import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.receiver.AssemblageReceiver;
@@ -12,27 +12,40 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * editing assemblage
+ */
 public class EditAssemblageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(EditAssemblageCommand.class);
     private static final String SEPARATOR = ",";
-    private AssemblageReceiver receiver;
+    private AssemblageReceiver assemblageReceiver;
 
-    public EditAssemblageCommand(AssemblageReceiver receiver) {
-        this.receiver = receiver;
+    /**
+     * create command with assemblage receiver
+     * @param assemblageReceiver - receiver for working with assemblages
+     */
+    public EditAssemblageCommand(AssemblageReceiver assemblageReceiver) {
+        this.assemblageReceiver = assemblageReceiver;
     }
 
+    /**
+     * performing command. Edit name, genre, price and tracks of selected assemblage
+     * @param requestInfo - map with arguments of request and session
+     * @return - command of forward or redirect
+     * @throws CommandException - when command can't perform
+     */
     @Override
-    public GoToInterface perform(RequestParameterMap request) throws CommandException {
-        String userRole = (String) request.getSessionAttribute(RequestArgument.SESSION_ROLE.getName());
-        String oldAssemblage = (String) request.getSessionAttribute(RequestArgument.ASSEMBLAGE_SESSION_NAME.getName());
-        String assemblageName = request.getParameter(RequestArgument.ASSEMBLAGE_EDIT_NAME.getName());
-        String[] assemblageGenre = request.getRequestMultipleAttribute(RequestArgument.ASSEMBLAGE_EDIT_GENRE.getName());
-        String assemblagePrice = request.getParameter(RequestArgument.ASSEMBLAGE_EDIT_PRICE.getName());
-        String[] tracks = request.getRequestMultipleAttribute(RequestArgument.ASSEMBLAGE_EDIT_TRACKS.getName());
+    public GoToInterface perform(RequestParameterMap requestInfo) throws CommandException {
+        String userRole = (String) requestInfo.getSessionAttribute(RequestArgument.SESSION_ROLE.getName());
+        String oldAssemblage = (String) requestInfo.getSessionAttribute(RequestArgument.ASSEMBLAGE_SESSION_NAME.getName());
+        String assemblageName = requestInfo.getParameter(RequestArgument.ASSEMBLAGE_EDIT_NAME.getName());
+        String[] assemblageGenre = requestInfo.getRequestMultipleAttribute(RequestArgument.ASSEMBLAGE_EDIT_GENRE.getName());
+        String assemblagePrice = requestInfo.getParameter(RequestArgument.ASSEMBLAGE_EDIT_PRICE.getName());
+        String[] tracks = requestInfo.getRequestMultipleAttribute(RequestArgument.ASSEMBLAGE_EDIT_TRACKS.getName());
         RequestParameterValidator validator = new RequestParameterValidator();
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && oldAssemblage != null && assemblageName != null && assemblageGenre != null && validator.validatePrice(assemblagePrice) && tracks != null) {
-                if (receiver.editAssemblage(oldAssemblage, assemblageName, String.join(SEPARATOR, assemblageGenre), Integer.valueOf(assemblagePrice), tracks)) {
+                if (assemblageReceiver.editAssemblage(oldAssemblage, assemblageName, String.join(SEPARATOR, assemblageGenre), Integer.valueOf(assemblagePrice), tracks)) {
                     LOGGER.debug("edit assemblage successfully");
                 } else {
                     LOGGER.debug("edit assemblage failed");

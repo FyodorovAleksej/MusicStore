@@ -2,7 +2,9 @@ package test.fyodorov.musicstore.receiver;
 
 import by.fyodorov.musicstore.connector.ConnectionPool;
 import by.fyodorov.musicstore.model.TrackEntity;
+import by.fyodorov.musicstore.receiver.AlbumReceiver;
 import by.fyodorov.musicstore.receiver.TrackReceiver;
+import by.fyodorov.musicstore.receiver.UserReceiver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,13 +14,13 @@ import java.util.LinkedList;
 import static org.testng.Assert.*;
 
 public class TrackReceiverTest {
-    private static TrackReceiver receiver;
+    private static TrackReceiver trackReceiver;
     private static final String PATH = "db.properties";
 
     @BeforeClass
     public void initClass() throws Exception {
         ConnectionPool.getInstance(PATH);
-        receiver = new TrackReceiver();
+        trackReceiver = new TrackReceiver();
     }
 
     @AfterClass
@@ -27,19 +29,9 @@ public class TrackReceiverTest {
     }
 
     @Test
-    public void testFindAllTracks() throws Exception {
-        receiver.findAllTracks("p%").forEach(System.out::println);
+    public void test() throws Exception {
+        trackReceiver.findTracksInAlbum("error").forEach(System.out::println);
+        System.out.println("0------------------------0");
+        trackReceiver.findTracksWithoutPrice().forEach(System.out::println);
     }
-
-    @Test
-    public void testFindComments() throws Exception {
-        receiver.findComments("outbreak").forEach(System.out::println);
-    }
-
-    @Test
-    public void testFindTrackInfo() throws Exception {
-        receiver.findTrackInfo("Katrine").forEach(System.out::println);
-    }
-
-
 }

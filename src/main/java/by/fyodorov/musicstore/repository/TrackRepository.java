@@ -6,8 +6,11 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.connector.SqlUtil;
 import by.fyodorov.musicstore.controller.ContextParameter;
 import by.fyodorov.musicstore.model.TrackEntity;
+import by.fyodorov.musicstore.specification.track.TrackCustomUpdateSpecification;
+import by.fyodorov.musicstore.specification.track.TrackLimitSelectSpecification;
 import by.fyodorov.musicstore.specification.track.TrackRepositorySpecification;
-import by.fyodorov.musicstore.specification.track.custom.TrackCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.track.TrackCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.track.custom.TrackLimitCustomSelectSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,9 +36,6 @@ public class TrackRepository {
                     + TRACK_PERFORMER_FK + ") " +
                     "VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', %5$s);";
 
-    private static final String REMOVE_TRACK_SQL =
-            "DELETE FROM " + TRACK_BD_SCHEME + "." + TRACK_BD_TABLE + " WHERE " +
-                    TRACK_ID + " = \'%1$s\';";
     private static final Lock MODIFY_LOCK = new ReentrantLock();
     private SqlUtil util;
 
@@ -53,27 +53,6 @@ public class TrackRepository {
                 track.getDate(),
                 track.getPerformerId()));
     }
-
-    public void remove(TrackEntity track) throws ConnectorException {
-        MODIFY_LOCK.lock();
-        LOGGER.debug("remove track");
-        util.execUpdate(String.format(REMOVE_TRACK_SQL, track.getId()));
-        MODIFY_LOCK.unlock();
-    }
-
-    public void update(TrackEntity track) {
-        MODIFY_LOCK.lock();
-        LOGGER.debug("update track");
-        //util.execUpdate();
-        MODIFY_LOCK.unlock();
-    }
-
-    /*
-    public List<UserEntity> query(UserRepositorySpecification specification) throws ConnectorException {
-        ResultSet set = util.exec(specification.toSqlClauses());
-        LinkedList<UserEntity> list = new LinkedList<>();
-        return list;
-    }*/
 
     public LinkedList<TrackEntity> prepareQuery(TrackRepositorySpecification specification) throws ConnectorException {
         LOGGER.debug("custom track query");
@@ -105,9 +84,14 @@ public class TrackRepository {
         return specification.fromSet(set);
     }
 
-    public int prepareUpdate(TrackCustomSelectSpecification specification) throws ConnectorException {
+    public int prepareUpdate(TrackCustomUpdateSpecification specification) throws ConnectorException {
         LOGGER.debug("custom update");
         return util.execUpdatePrepare(specification.toSqlClauses(), specification.getArguments());
+    }
+
+    public LinkedList<HashMap<String, String>> prepareSelectWithLimit(TrackLimitSelectSpecification specification) throws ConnectorException {
+        LOGGER.debug("custom update");
+        return specification.fromSet(util.execSelectPrepare(specification.toSqlClauses(), specification.getArguments(), specification.getLimits()));
     }
 
 

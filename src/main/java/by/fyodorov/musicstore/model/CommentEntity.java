@@ -54,7 +54,6 @@ public class CommentEntity extends EntityBase {
     }
 
 
-
     public void setCommentId(int commentId) {
         this.commentId = commentId;
     }
@@ -81,17 +80,17 @@ public class CommentEntity extends EntityBase {
 
     @Override
     public String toString() {
-        return  "id = "          + commentId    + "\n"   +
-                "text = \""      + text         + "\"\n" +
-                "date = \""      + date         + "\"\n" +
-                "userId = "      + userId       + "\n"   +
-                "trackId = "     + trackId      + "\n"   +
+        return "id = " + commentId + "\n" +
+                "text = \"" + text + "\"\n" +
+                "date = \"" + date + "\"\n" +
+                "userId = " + userId + "\n" +
+                "trackId = " + trackId + "\n" +
                 "performerId = " + performerId;
     }
 
     @Override
     public int hashCode() {
-        return  Integer.hashCode(commentId) +
+        return Integer.hashCode(commentId) +
                 text.hashCode() +
                 date.hashCode() +
                 Integer.hashCode(userId) +
@@ -108,7 +107,7 @@ public class CommentEntity extends EntityBase {
             return false;
         }
         CommentEntity comment = (CommentEntity) obj;
-        return  this.commentId == comment.commentId &&
+        return this.commentId == comment.commentId &&
                 this.text.equals(comment.text) &&
                 this.date.equals(comment.date) &&
                 this.userId == comment.userId &&

@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Track Info</title>
+    <title>Album Info</title>
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
@@ -17,10 +17,8 @@
 <body>
 <fmt:message key="main.trackNameLabel" var="nameLabel"/>
 <fmt:message key="main.trackGenreLabel" var="genreLabel"/>
-<fmt:message key="main.trackPriceLabel" var="priceLabel"/>
 <fmt:message key="main.trackDateLabel" var="dateLabel"/>
 <fmt:message key="main.performerNameLabel" var="performerLabel"/>
-<fmt:message key="main.trackSummaryLabel" var="summaryLabel"/>
 <fmt:message key="main.trackInfoLabel" var="infoLabel"/>
 <fmt:message key="main.albumBuyLabel" var="buyLabel"/>
 <fmt:message key="main.albumTracksLabel" var="tracksLabel"/>
@@ -30,12 +28,12 @@
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
 <div class="main-page form-horizontal">
-    <h3>${assemblageName}</h3>
-    <h4>${assemblageName}</h4>
-    <h4>${albumInfoGenre}</h4>
-    <h4>${albumInfoPrice}</h4>
-    <h4>${albumInfoDate}</h4>
-    <h4>${albumInfoPerformer}</h4>
+    <h3><c:out value="${assemblageName}"/></h3>
+    <h4><c:out value="${assemblageName}"/></h4>
+    <h4><c:out value="${albumInfoGenre}"/></h4>
+    <h4><c:out value="${albumInfoPrice}"/></h4>
+    <h4><c:out value="${albumInfoDate}"/></h4>
+    <h4><c:out value="${albumInfoPerformer}"/></h4>
 </div>
 <form action="/buyAlbum" method="post">
     <button type="submit" class="btn btn-primary"><c:out value="${buyLabel}${albumInfoSummary}"/></button>
@@ -67,16 +65,6 @@
                 <c:out value="${dateLabel}"/>
             </h4>
         </th>
-        <th>
-            <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                <c:out value="${priceLabel}"/>
-            </h4>
-        </th>
-        <th>
-            <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                <c:out value="${summaryLabel}"/>
-            </h4>
-        </th>
     </tr>
     <c:forEach items="${albumTrackList}" var="albumTrack">
         <tr>
@@ -105,16 +93,6 @@
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
                     <c:out value="${albumTrack.getDate()}"/>
-                </h4>
-            </td>
-            <td>
-                <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                    <c:out value="${albumTrack.getPrice()}"/>
-                </h4>
-            </td>
-            <td>
-                <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                    <c:out value="${albumTrack.getSummary()}"/>
                 </h4>
             </td>
         </tr>

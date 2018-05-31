@@ -21,9 +21,4 @@ public class CommentReceiverTest {
     public void finalize() throws Exception {
         ConnectionPool.getInstance(PATH).destroy();
     }
-
-    @Test
-    public void addCommentTest() throws  Exception {
-        Assert.assertTrue(receiver.addComment("Nice track", "root", "outbreak"));
-    }
 }

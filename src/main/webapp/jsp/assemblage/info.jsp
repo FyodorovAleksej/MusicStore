@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Track Info</title>
+    <title>Assemblage Info</title>
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
@@ -19,10 +19,8 @@
 <body>
 <fmt:message key="main.trackNameLabel" var="nameLabel"/>
 <fmt:message key="main.trackGenreLabel" var="genreLabel"/>
-<fmt:message key="main.trackPriceLabel" var="priceLabel"/>
 <fmt:message key="main.trackDateLabel" var="dateLabel"/>
 <fmt:message key="main.performerNameLabel" var="performerLabel"/>
-<fmt:message key="main.trackSummaryLabel" var="summaryLabel"/>
 <fmt:message key="main.trackInfoLabel" var="infoLabel"/>
 <fmt:message key="main.assemblageBuyLabel" var="buyLabel"/>
 <fmt:message key="main.assemblageTracksLabel" var="tracksLabel"/>
@@ -69,16 +67,6 @@
                 <c:out value="${dateLabel}"/>
             </h4>
         </th>
-        <th>
-            <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                <c:out value="${priceLabel}"/>
-            </h4>
-        </th>
-        <th>
-            <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                <c:out value="${summaryLabel}"/>
-            </h4>
-        </th>
     </tr>
     <c:forEach items="${assemblageTrackList}" var="assemblageTrack">
         <tr>
@@ -109,16 +97,6 @@
             <td>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
                     <c:out value="${assemblageTrack.getDate()}"/>
-                </h4>
-            </td>
-            <td>
-                <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                    <c:out value="${assemblageTrack.getPrice()}"/>
-                </h4>
-            </td>
-            <td>
-                <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                    <c:out value="${assemblageTrack.getSummary()}"/>
                 </h4>
             </td>
         </tr>

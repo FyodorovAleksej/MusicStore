@@ -77,8 +77,8 @@ public class UserEntity extends EntityBase {
         if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        UserEntity user = (UserEntity)obj;
-        return  user.id == this.id &&
+        UserEntity user = (UserEntity) obj;
+        return user.id == this.id &&
                 user.userName.equals(this.userName) &&
                 user.email.equals(this.email) &&
                 user.role.equals(this.role) &&
@@ -90,7 +90,7 @@ public class UserEntity extends EntityBase {
 
     @Override
     public int hashCode() {
-        return  Integer.hashCode(id) +
+        return Integer.hashCode(id) +
                 userName.hashCode() +
                 email.hashCode() +
                 role.hashCode() +
@@ -102,14 +102,14 @@ public class UserEntity extends EntityBase {
 
     @Override
     public String toString() {
-        return  "id = "         + id       +    "\n"   +
-                "username = \"" + userName +    "\"\n" +
-                "email = \""    + email    +    "\"\n" +
-                "role = \""     + role     +    "\"\n" +
-                "cash = "       + cash     +    "\n"   +
-                "bonus = \""    + bonus    +    "\"\n" +
-                "discount = "   + discount +    "\n"   +
-                "password = \"" + password +    "\"";
+        return "id = " + id + "\n" +
+                "username = \"" + userName + "\"\n" +
+                "email = \"" + email + "\"\n" +
+                "role = \"" + role + "\"\n" +
+                "cash = " + cash + "\n" +
+                "bonus = \"" + bonus + "\"\n" +
+                "discount = " + discount + "\n" +
+                "password = \"" + password + "\"";
     }
 
     public String getPassword() {

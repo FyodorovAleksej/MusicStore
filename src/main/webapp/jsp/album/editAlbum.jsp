@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>users</title>
+    <title>Edit album</title>
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
@@ -49,7 +49,7 @@
             </td>
             <td>
                 <input type="text" class="text-left" id="name" style="margin-left: 10px; margin-bottom: 2px;"
-                       name="assemblageName" value="${albumOldName}">
+                       name="albumName" value="${albumOldName}">
             </td>
         </tr>
         <tr>
@@ -68,7 +68,8 @@
             <td>
                 <select id="performer" name="albumPerformer" style="margin-left: 10px; margin-bottom: 2px;">
                     <c:forEach items="${performersList}" var="performerEntity">
-                        <option value="${performerEntity}" ${performerEntity == albumOldPerformer ? 'selected' : ''}><c:out value="${performerEntity}"/></option>
+                        <option value="${performerEntity}" ${performerEntity == albumOldPerformer ? 'selected' : ''}>
+                            <c:out value="${performerEntity}"/></option>
                     </c:forEach>
                 </select>
             </td>
@@ -106,7 +107,8 @@
     <table align="center" border="0">
         <tr>
             <th>
-                <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out value="${trackChooseLabel}"/></h4>
+                <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;"><c:out
+                        value="${trackChooseLabel}"/></h4>
             </th>
             <th>
                 <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
@@ -133,7 +135,8 @@
             <tr>
                 <td>
                     <h4 style="margin-left: 10px; margin-bottom: 4px; margin-right: 20px;">
-                        <input type="checkbox" id="trackCheck" name="chooseTrack" value="${trackSearch.getName()}" ${trackSearch.isCheck() ? 'checked' : ''}>
+                        <input type="checkbox" id="trackCheck" name="chooseTrack"
+                               value="${trackSearch.getName()}" ${trackSearch.isCheck() ? 'checked' : ''}>
                     </h4>
                 </td>
                 <td>
@@ -160,7 +163,8 @@
         </c:forEach>
     </table>
 
-    <button type="submit" class="btn btn-primary" style="background-color: rgba(255,155,0,0.80); margin-top: 5px"><c:out value="${albumEditSendLabel}"/></button>
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(255,155,0,0.80); margin-top: 5px"><c:out
+            value="${albumEditSendLabel}"/></button>
 </form>
 <!-- Bootstrap -->
 <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>

@@ -19,10 +19,18 @@ public enum RequestArgument {
     TRACK_LIST("trackList", null),
     TRACK_ALL("trackAll", null),
 
+    ALL_COUNT("allCount", "\\d+"),
+    SEARCH_PAGE("page", "\\d+"),
+
     ALBUM_SEARCH_LIST("albumSearchList", null),
     ASSEMBLAGE_SEARCH_LIST("assemblageSearchList", null),
     TRACK_SEARCH_LIST("trackSearchList", null),
 
+    NEXT_PAGE("nextPage", "\\d+"),
+    PREVIOUS_PAGE("previousPage", "\\d+"),
+    CURRENT_PAGE("currentPage", "\\d+"),
+    NEXT_HIDE("nextHidden", "()|(hidden)"),
+    PREVIOUS_HIDE("previousHidden", "()|(hidden)"),
 
     ASSEMBLAGE_FIND_RESULT("assemblageFindResult", null),
     ASSEMBLAGE_OWN_LIST("assemblageOwnList", null),
@@ -129,6 +137,22 @@ public enum RequestArgument {
     TRACK_ADD_GENRE("trackGenre", null),
     TRACK_ADD_PERFORMER("trackPerformer", null),
     TRACK_ADD_PRICE("trackPrice", "\\d+"),
+
+    TRACK_EDIT_OLD_NAME("trackOldName", null),
+    TRACK_EDIT_OLD_PRICE("trackOldPrice", null),
+    TRACK_EDIT_OLD_PERFORMER("trackOldPerformer", null),
+    TRACK_EDIT_OLD_CLASSIC_GENRE("classicGenre", null),
+    TRACK_EDIT_OLD_ELECTRO_GENRE("electroGenre", null),
+    TRACK_EDIT_OLD_POP_GENRE("popGenre", null),
+    TRACK_EDIT_OLD_ROCK_GENRE("rockGenre", null),
+    TRACK_EDIT_OLD_JAZZ_GENRE("jazzGenre", null),
+    TRACK_EDIT_OLD_BLUES_GENRE("bluesGenre", null),
+
+    TRACK_EDIT_NAME("trackName", null),
+    TRACK_EDIT_GENRE("trackGenre", null),
+    TRACK_EDIT_PERFORMER("trackPerformer", null),
+    TRACK_EDIT_PRICE("trackPrice", "\\d+"),
+
 
     PERFORMER_LIST("performersList", null),
 

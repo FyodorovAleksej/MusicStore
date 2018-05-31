@@ -4,14 +4,14 @@ import static by.fyodorov.musicstore.specification.comment.CommentRepositoryType
 
 public class CommentByTrackIdSpecification implements CommentRepositorySpecification {
     private static final String SELECT_BY_ID =
-            "SELECT " + COMMENT_ID + ", "
-                    + COMMENT_TEXT + ", "
-                    + COMMENT_DATE + ", "
-                    + COMMENT_USER_ID + ", "
-                    + COMMENT_TRACK_ID + ", "
-                    + COMMENT_PERFORMER_ID + " " +
-                    "FROM "   + COMMENT_BD_SCHEME + "." + COMMENT_BD_TABLE + " " +
-                    "WHERE "  + COMMENT_TRACK_ID + " = ?;";
+            String.format("SELECT %s, %s, %s, %s, %s, %s " +
+                            "FROM %s.%s " +
+                            "WHERE %s.%s = ?;",
+                    COMMENT_ID, COMMENT_TEXT,
+                    COMMENT_DATE, COMMENT_USER_ID,
+                    COMMENT_TRACK_ID, COMMENT_PERFORMER_ID,
+                    COMMENT_BD_SCHEME, COMMENT_BD_TABLE,
+                    COMMENT_BD_TABLE, COMMENT_TRACK_ID);
 
     private int trackId;
 

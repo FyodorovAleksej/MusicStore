@@ -1,6 +1,7 @@
 package by.fyodorov.musicstore.specification.performer.custom;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
+import by.fyodorov.musicstore.specification.performer.PerformerCustomSelectSpecification;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,8 +13,7 @@ import static by.fyodorov.musicstore.specification.performer.PerformerRepository
 public class PerformerAllCustomSelectSpecification implements PerformerCustomSelectSpecification {
     public static final String PERFORMER_NAME_KEY = "performerName";
     private static final String SELECT_SQL =
-            String.format("SELECT %s " +
-                            "FROM %s.%s ;",
+            String.format("SELECT %s FROM %s.%s ;",
                     PERFORMER_NAME,
                     PERFORMER_BD_SCHEME, PERFORMER_BD_TABLE);
 
@@ -29,8 +29,7 @@ public class PerformerAllCustomSelectSpecification implements PerformerCustomSel
 
                 result.add(arguments);
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new ConnectorException("can't read result set from Performer DB", e);
         }
         return result;

@@ -22,13 +22,17 @@
         <param-name>dbInit</param-name>
         <param-value>db.properties</param-value>
     </context-param>
+    <context-param>
+        <param-name>pageMax</param-name>
+        <param-value>10</param-value>
+    </context-param>
     <servlet>
         <display-name>MainServletDisplay</display-name>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>by.fyodorov.musicstore.controller.MainServlet</servlet-class>
 
         <multipart-config>
-            <location>/uploads/</location>
+            <location>/</location>
             <max-file-size>20848820</max-file-size>
             <max-request-size>418018841</max-request-size>
             <file-size-threshold>1048576</file-size-threshold>
@@ -56,7 +60,11 @@
         <url-pattern>/albums</url-pattern>
         <url-pattern>/assemblages</url-pattern>
         <url-pattern>/admin</url-pattern>
-        <url-pattern>/addNewTrack</url-pattern>
+        <url-pattern>/addTrack</url-pattern>
+        <url-pattern>/prepareAddTrack</url-pattern>
+        <url-pattern>/editTrack</url-pattern>
+        <url-pattern>/prepareEditTrack</url-pattern>
+        <url-pattern>/removeTrack</url-pattern>
         <url-pattern>/editUser</url-pattern>
         <url-pattern>/infoUser</url-pattern>
         <url-pattern>/prepareAddAlbum</url-pattern>
@@ -168,14 +176,6 @@
         </init-param>
     </filter>
     <filter>
-        <filter-name>TrackAddFilter</filter-name>
-        <filter-class>by.fyodorov.musicstore.filter.TrackAddFilter</filter-class>
-        <init-param>
-            <param-name>index</param-name>
-            <param-value>/</param-value>
-        </init-param>
-    </filter>
-    <filter>
         <filter-name>AlbumInfoFilter</filter-name>
         <filter-class>by.fyodorov.musicstore.filter.AlbumInfoFilter</filter-class>
     </filter>
@@ -255,6 +255,62 @@
             <param-value>/</param-value>
         </init-param>
     </filter>
+    <filter>
+        <filter-name>AlbumRemoveFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.RemoveAlbumFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>AssemblageRemoveFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.RemoveAssemblageFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>TrackAddPrepareFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.TrackAddPrepareFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>TrackAddFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.TrackAddFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>TrackEditPrepareFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.TrackEditPrepareFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>TrackEditFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.TrackEditFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>TrackRemoveFilter</filter-name>
+        <filter-class>by.fyodorov.musicstore.filter.TrackRemoveFilter</filter-class>
+        <init-param>
+            <param-name>index</param-name>
+            <param-value>/</param-value>
+        </init-param>
+    </filter>
 
 
 
@@ -324,7 +380,23 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>TrackAddFilter</filter-name>
-        <url-pattern>/addNewTrack</url-pattern>
+        <url-pattern>/addTrack</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TrackAddPrepareFilter</filter-name>
+        <url-pattern>/prepareAddTrack</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TrackEditFilter</filter-name>
+        <url-pattern>/editTrack</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TrackEditPrepareFilter</filter-name>
+        <url-pattern>/prepareEditTrack</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>TrackRemoveFilter</filter-name>
+        <url-pattern>/removeTrack</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AlbumInfoFilter</filter-name>
@@ -373,6 +445,14 @@
     <filter-mapping>
         <filter-name>EditAlbumApplyFilter</filter-name>
         <url-pattern>/editAlbumApply</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AlbumRemoveFilter</filter-name>
+        <url-pattern>/removeAlbum</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AssemblageRemoveFilter</filter-name>
+        <url-pattern>/removeAssemblage</url-pattern>
     </filter-mapping>
 
 

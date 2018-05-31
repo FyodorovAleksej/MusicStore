@@ -7,7 +7,7 @@ import by.fyodorov.musicstore.connector.SqlUtil;
 import by.fyodorov.musicstore.controller.ContextParameter;
 import by.fyodorov.musicstore.model.PerformerEntity;
 import by.fyodorov.musicstore.specification.performer.PerformerRepositorySpecification;
-import by.fyodorov.musicstore.specification.performer.custom.PerformerCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.performer.PerformerCustomSelectSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,43 +21,12 @@ import static by.fyodorov.musicstore.specification.performer.PerformerRepository
 public class PerformerRepository {
     private static Logger LOGGER = LogManager.getLogger(PerformerRepository.class);
 
-    private static final String ADD_PERFORMER_SQL =
-            "INSERT INTO " + PERFORMER_BD_SCHEME + "." + PERFORMER_BD_TABLE + " ("
-                    + PERFORMER_NAME + ") " +
-                    "VALUES (\'%1$s\');";
-
-    private static final String REMOVE_PERFORMER_SQL =
-            "DELETE FROM " + PERFORMER_BD_SCHEME + "." + PERFORMER_BD_TABLE + " WHERE " +
-                    PERFORMER_ID + " = \'%1$s\';";
-
     private SqlUtil util;
 
     public PerformerRepository() throws ConnectorException {
         ContextParameter parameter = ContextParameter.getInstance();
         util = new SqlUtil(ConnectionPool.getInstance(parameter.getContextParam(InitParameter.DATA_BASE_INIT.toString())).getConnection());
     }
-
-    public void add(PerformerEntity performer) throws ConnectorException {
-        LOGGER.debug("adding new performer");
-        util.execUpdate(String.format(ADD_PERFORMER_SQL, performer.getName()));
-    }
-
-    public void remove(PerformerEntity performer) throws ConnectorException {
-        LOGGER.debug("remove performer");
-        util.execUpdate(String.format(REMOVE_PERFORMER_SQL, performer.getId()));
-    }
-
-    public void update(PerformerEntity performer) {
-        LOGGER.debug("update performer");
-        //util.execUpdate();
-    }
-
-    /*
-    public List<UserEntity> query(UserRepositorySpecification specification) throws ConnectorException {
-        ResultSet set = util.exec(specification.toSqlClauses());
-        LinkedList<UserEntity> list = new LinkedList<>();
-        return list;
-    }*/
 
     public LinkedList<PerformerEntity> prepareQuery(PerformerRepositorySpecification specification) throws ConnectorException {
         LOGGER.debug("custom performer query");

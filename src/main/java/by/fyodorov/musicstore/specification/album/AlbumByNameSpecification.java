@@ -4,14 +4,14 @@ import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 
 public class AlbumByNameSpecification implements AlbumRepositorySpecification {
     private static final String SELECT_BY_NAME =
-            "SELECT " + ALBUM_ID + ", "
-                    + ALBUM_NAME + ", "
-                    + ALBUM_GENRE + ", "
-                    + ALBUM_PRICE + ", "
-                    + ALBUM_DATE + ", "
-                    + ALBUM_PERFORMER_ID + " " +
-                    "FROM " + ALBUM_BD_SCHEME + "." + ALBUM_BD_TABLE + " " +
-                    "WHERE " + ALBUM_NAME + " LIKE ?;";
+            String.format(
+                    "SELECT %s, %s, %s, %s, %s, %s " +
+                            "FROM %s.%s WHERE %s LIKE ?;",
+                    ALBUM_ID, ALBUM_NAME,
+                    ALBUM_GENRE, ALBUM_PRICE,
+                    ALBUM_DATE, ALBUM_PERFORMER_ID,
+                    ALBUM_BD_SCHEME, ALBUM_BD_TABLE,
+                    ALBUM_NAME);
 
     private String name;
 

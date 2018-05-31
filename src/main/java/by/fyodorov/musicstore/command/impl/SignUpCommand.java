@@ -17,18 +17,32 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * sign up user
+ */
 public class SignUpCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(SignUpCommand.class);
-    private UserReceiver receiver;
+    private UserReceiver userReceiver;
 
-    public SignUpCommand(UserReceiver receiver) {
-        this.receiver = receiver;
+    /**
+     * created command with user receiver
+     *
+     * @param userReceiver - receiver for work with users
+     */
+    public SignUpCommand(UserReceiver userReceiver) {
+        this.userReceiver = userReceiver;
     }
 
-
+    /**
+     * performing command. Sign up user and send message to email for confirm
+     *
+     * @param requestInfo - map with arguments of request and session
+     * @return - command of forward or redirect
+     * @throws CommandException - when command can't perform
+     */
     @Override
     public GoToInterface perform(RequestParameterMap requestInfo) throws CommandException {
-        Optional<String> path = Optional.empty();
+        Optional<String> path;
         LOGGER.debug("performing Sign Up command");
 
         String login = requestInfo.getParameter(RequestArgument.LOGIN.getName());
@@ -60,7 +74,7 @@ public class SignUpCommand implements Command {
             path = Optional.of(PagesUrl.REGISTER_PAGE.getPath());
             try {
                 MailSender sender = new MailSender(ContextParameter.getInstance().getContextParam(InitParameter.MAIL_INIT.toString()));
-                sender.sendUrl("register: ","register" + "?uuid=" + uuid, email);
+                sender.sendUrl("register: ", "register" + "?uuid=" + uuid, email);
             } catch (MailException e) {
                 LOGGER.catching(e);
                 requestInfo.setRequestAttribute(RequestArgument.SIGN_UP_RESULT.getName(), e.getMessage());
@@ -79,9 +93,9 @@ public class SignUpCommand implements Command {
     }
 
     private boolean validInput(String login, String email, String password) {
-        return  receiver.validateUser(login)
-                && receiver.validateEmail(email)
-                && receiver.validatePassword(password);
+        return userReceiver.validateUser(login)
+                && userReceiver.validateEmail(email)
+                && userReceiver.validatePassword(password);
     }
 
     private boolean validPassword(String password, String repPassword) {
@@ -89,7 +103,7 @@ public class SignUpCommand implements Command {
     }
 
     private boolean validExist(String login, String email, RegistrantKeyMap keyMap) throws ConnectorException {
-        return  receiver.findUserByMail(login, email) == null
+        return userReceiver.findUserByMail(login, email) == null
                 && !keyMap.checkLogin(login)
                 && !keyMap.checkEmail(email);
     }

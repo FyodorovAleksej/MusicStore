@@ -1,9 +1,8 @@
 package by.fyodorov.musicstore.receiver;
 
 import by.fyodorov.musicstore.connector.ConnectorException;
-import by.fyodorov.musicstore.model.AssemblageEntity;
 import by.fyodorov.musicstore.repository.AssemblageRepository;
-import by.fyodorov.musicstore.specification.assemblage.AssemblageByNameSpecification;
+import by.fyodorov.musicstore.specification.assemblage.AssemblageCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.assemblage.custom.*;
 import by.fyodorov.musicstore.view.AssemblageView;
 import by.fyodorov.musicstore.view.AssemblageWithoutPriceView;
@@ -16,35 +15,6 @@ import java.util.Optional;
 
 public class AssemblageReceiver {
     private static Logger LOGGER = LogManager.getLogger(AssemblageReceiver.class);
-
-    public LinkedList<AssemblageEntity> findAllAssemblages(String pattern) throws ConnectorException {
-        LOGGER.debug("finding assemblage like pattern = \"" + pattern + "\"");
-        AssemblageRepository albumRepository = new AssemblageRepository();
-        LinkedList<AssemblageEntity> list;
-        try {
-            list = albumRepository.prepareQuery(new AssemblageByNameSpecification(pattern));
-        }
-        finally {
-            albumRepository.close();
-        }
-        return list;
-    }
-
-    public boolean addAssemblage(AssemblageEntity entity) throws ConnectorException {
-        AssemblageRepository assemblageRepository = new AssemblageRepository();
-        boolean result;
-        try {
-            assemblageRepository.add(entity);
-            result = true;
-        }
-        catch (ConnectorException e) {
-            result = false;
-        }
-        finally {
-            assemblageRepository.close();
-        }
-        return result;
-    }
 
     public LinkedList<AssemblageView> findAssemblageInfo(String userName) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
@@ -62,8 +32,7 @@ public class AssemblageReceiver {
                         price,
                         Integer.valueOf(map.getOrDefault(AssemblageWithUserCustomSelectSpecification.ASSEMBLAGE_PRICE_SUMMARY_KEY, Integer.toString(price)))));
             }
-        }
-        finally {
+        } finally {
             assemblageRepository.close();
         }
         return assemblages;
@@ -71,19 +40,18 @@ public class AssemblageReceiver {
 
     public LinkedList<AssemblageWithoutPriceView> findAssemblageForUser(String userName) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
-        AssemblageCustomSelectSpecification specification = new AssemblageOfUserByNameCustomSelect(userName);
+        AssemblageCustomSelectSpecification specification = new AssemblageOfUserByNameCustomSelectSpecification(userName);
         LinkedList<AssemblageWithoutPriceView> assemblages = new LinkedList<>();
         try {
             LinkedList<HashMap<String, String>> arguments = assemblageRepository.customQuery(specification);
             for (HashMap<String, String> map : arguments) {
                 assemblages.add(new AssemblageWithoutPriceView(
-                        map.get(AssemblageOfUserByNameCustomSelect.ASSEMBLAGE_NAME_KEY),
-                        map.get(AssemblageOfUserByNameCustomSelect.ASSEMBLAGE_GENRE_KEY),
-                        map.get(AssemblageOfUserByNameCustomSelect.ASSEMBLAGE_DATE_KEY),
-                        map.get(AssemblageOfUserByNameCustomSelect.ASSEMBLAGE_OWNER_KEY)));
+                        map.get(AssemblageOfUserByNameCustomSelectSpecification.ASSEMBLAGE_NAME_KEY),
+                        map.get(AssemblageOfUserByNameCustomSelectSpecification.ASSEMBLAGE_GENRE_KEY),
+                        map.get(AssemblageOfUserByNameCustomSelectSpecification.ASSEMBLAGE_DATE_KEY),
+                        map.get(AssemblageOfUserByNameCustomSelectSpecification.ASSEMBLAGE_OWNER_KEY)));
             }
-        }
-        finally {
+        } finally {
             assemblageRepository.close();
         }
         return assemblages;
@@ -106,24 +74,7 @@ public class AssemblageReceiver {
                         price,
                         Integer.valueOf(map.getOrDefault(AssemblageInfoForUserCustomSelectSpecification.ASSEMBLAGE_PRICE_SUMMARY_KEY, Integer.toString(price)))));
             }
-        }
-        finally {
-            assemblageRepository.close();
-        }
-        return result;
-    }
-
-    public boolean addNewAssemblage(String assemblage, String genre, int price, String performer) throws ConnectorException {
-        AssemblageRepository assemblageRepository = new AssemblageRepository();
-        boolean result;
-        try {
-            assemblageRepository.prepareUpdate(new AssemblageAddCustomSelectSpecification(assemblage, genre, price, performer));
-            result = true;
-        }
-        catch (ConnectorException e) {
-            result = false;
-        }
-        finally {
+        } finally {
             assemblageRepository.close();
         }
         return result;
@@ -134,15 +85,13 @@ public class AssemblageReceiver {
         boolean result;
         AssemblageRepository.modifyLock();
         try {
-            result = assemblageRepository.prepareUpdate(new AssemblageAddCustomSelectSpecification(assemblage, genre, price, owner)) > 0;
+            result = assemblageRepository.prepareUpdate(new AssemblageAddCustomUpdateSpecification(assemblage, genre, price, owner)) > 0;
             for (String track : tracks) {
-                result = result && assemblageRepository.prepareUpdate(new AssemblageInsertTrackCustomSelectSpecification(assemblage, track)) > 0;
+                result = result && assemblageRepository.prepareUpdate(new AssemblageInsertTrackCustomUpdateSpecification(assemblage, track)) > 0;
             }
-        }
-        catch (ConnectorException e) {
+        } catch (ConnectorException e) {
             result = false;
-        }
-        finally {
+        } finally {
             AssemblageRepository.modifyUnlock();
             assemblageRepository.close();
         }
@@ -154,30 +103,14 @@ public class AssemblageReceiver {
         boolean result;
         AssemblageRepository.modifyLock();
         try {
-            result = assemblageRepository.prepareUpdate(new AssemblageEditCustomSelectSpecification(oldName, newName, genre, price)) > 0;
-            result = result && assemblageRepository.prepareUpdate(new AssemblageClearCustomSelectSpecification(newName)) > 0;
+            result = assemblageRepository.prepareUpdate(new AssemblageEditCustomUpdateSpecification(oldName, newName, genre, price)) > 0;
+            result = result && assemblageRepository.prepareUpdate(new AssemblageClearCustomUpdateSpecification(newName)) > 0;
             for (String track : tracks) {
-                result = result && assemblageRepository.prepareUpdate(new AssemblageInsertTrackCustomSelectSpecification(newName, track)) > 0;
+                result = result && assemblageRepository.prepareUpdate(new AssemblageInsertTrackCustomUpdateSpecification(newName, track)) > 0;
             }
-        }
-        catch (ConnectorException e) {
+        } catch (ConnectorException e) {
             result = false;
-        }
-        finally {
-            AssemblageRepository.modifyUnlock();
-            assemblageRepository.close();
-        }
-        return result;
-    }
-
-    public boolean assemblageClear(String assemblageName) throws ConnectorException {
-        AssemblageRepository assemblageRepository = new AssemblageRepository();
-        boolean result;
-        AssemblageRepository.modifyLock();
-        try {
-            result = assemblageRepository.prepareUpdate(new AssemblageClearCustomSelectSpecification(assemblageName)) > 0;
-        }
-        finally {
+        } finally {
             AssemblageRepository.modifyUnlock();
             assemblageRepository.close();
         }
@@ -189,9 +122,8 @@ public class AssemblageReceiver {
         boolean result;
         AssemblageRepository.modifyLock();
         try {
-            result = assemblageRepository.prepareUpdate(new AssemblageDeleteCustomSpecification(assemblageName)) > 0;
-        }
-        finally {
+            result = assemblageRepository.prepareUpdate(new AssemblageDeleteCustomUpdateSpecification(assemblageName)) > 0;
+        } finally {
             AssemblageRepository.modifyUnlock();
             assemblageRepository.close();
         }

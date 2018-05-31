@@ -13,18 +13,8 @@
         <body-content>empty</body-content>
     </tag>
     <tag>
-        <name>track-view</name>
-        <tag-class>by.fyodorov.musicstore.customtag.TrackAllViewTag</tag-class>
-        <body-content>empty</body-content>
-        <!--<attribute>
-            <name>content</name>
-            <required>true</required>
-            <rtexprvalue>true</rtexprvalue>
-        </attribute>-->
-    </tag>
-    <tag>
-        <name>comments-view</name>
-        <tag-class>by.fyodorov.musicstore.customtag.CommentViewTag</tag-class>
+        <name>pageList-view</name>
+        <tag-class>by.fyodorov.musicstore.customtag.PageListTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>

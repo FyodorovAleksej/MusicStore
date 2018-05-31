@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>users</title>
+    <title>Add album</title>
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
@@ -49,7 +49,7 @@
             </td>
             <td>
                 <input type="text" class="text-left" id="name" style="margin-left: 10px; margin-bottom: 2px;"
-                       name="assemblageName">
+                       name="albumName">
             </td>
         </tr>
         <tr>

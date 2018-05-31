@@ -43,7 +43,7 @@ public class AlbumView {
 
     @Override
     public int hashCode() {
-        return  name.hashCode() +
+        return name.hashCode() +
                 performer.hashCode() +
                 date.hashCode() +
                 genre.hashCode() +
@@ -59,8 +59,8 @@ public class AlbumView {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        AlbumView view = (AlbumView)o;
-        return  this.name.equals(view.name) &&
+        AlbumView view = (AlbumView) o;
+        return this.name.equals(view.name) &&
                 this.performer.equals(view.performer) &&
                 this.date.equals(view.date) &&
                 this.genre.equals(view.genre) &&
@@ -70,7 +70,7 @@ public class AlbumView {
 
     @Override
     public String toString() {
-        return  "name: " + name +
+        return "name: " + name +
                 "; performer: " + performer +
                 "; date: " + date +
                 "; genre: " + genre +

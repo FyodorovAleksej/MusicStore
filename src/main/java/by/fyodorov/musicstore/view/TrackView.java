@@ -53,7 +53,7 @@ public class TrackView {
 
     @Override
     public int hashCode() {
-        return  name.hashCode() +
+        return name.hashCode() +
                 performer.hashCode() +
                 date.hashCode() +
                 genre.hashCode() +
@@ -70,8 +70,8 @@ public class TrackView {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        TrackView view = (TrackView)o;
-        return  this.name.equals(view.name) &&
+        TrackView view = (TrackView) o;
+        return this.name.equals(view.name) &&
                 this.performer.equals(view.performer) &&
                 this.date.equals(view.date) &&
                 this.genre.equals(view.genre) &&
@@ -82,7 +82,7 @@ public class TrackView {
 
     @Override
     public String toString() {
-        return  "name: " + name +
+        return "name: " + name +
                 "; performer: " + performer +
                 "; date: " + date +
                 "; genre: " + genre +

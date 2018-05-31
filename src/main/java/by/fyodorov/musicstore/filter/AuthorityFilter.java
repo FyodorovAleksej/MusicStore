@@ -1,7 +1,7 @@
 package by.fyodorov.musicstore.filter;
 
 import by.fyodorov.musicstore.application.RequestArgument;
-import by.fyodorov.musicstore.application.UserRole;
+import by.fyodorov.musicstore.model.UserRole;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

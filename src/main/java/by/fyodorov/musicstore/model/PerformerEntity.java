@@ -23,7 +23,6 @@ public class PerformerEntity extends EntityBase {
     }
 
 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -35,7 +34,7 @@ public class PerformerEntity extends EntityBase {
 
     @Override
     public String toString() {
-        return  "id = "     + this.id   + "\n" +
+        return "id = " + this.id + "\n" +
                 "name = \"" + this.name + "\"";
     }
 
@@ -47,13 +46,13 @@ public class PerformerEntity extends EntityBase {
         if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        PerformerEntity performer = (PerformerEntity)obj;
+        PerformerEntity performer = (PerformerEntity) obj;
         return performer.id == this.id && performer.name.equals(this.name);
     }
 
     @Override
     public int hashCode() {
-        return  Integer.hashCode(id) +
+        return Integer.hashCode(id) +
                 name.hashCode();
     }
 }

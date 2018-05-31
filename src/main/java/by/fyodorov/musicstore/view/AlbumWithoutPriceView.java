@@ -31,7 +31,7 @@ public class AlbumWithoutPriceView {
 
     @Override
     public int hashCode() {
-        return  name.hashCode() +
+        return name.hashCode() +
                 performer.hashCode() +
                 date.hashCode() +
                 genre.hashCode();
@@ -45,8 +45,8 @@ public class AlbumWithoutPriceView {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        AlbumWithoutPriceView view = (AlbumWithoutPriceView)o;
-        return  this.name.equals(view.name) &&
+        AlbumWithoutPriceView view = (AlbumWithoutPriceView) o;
+        return this.name.equals(view.name) &&
                 this.performer.equals(view.performer) &&
                 this.date.equals(view.date) &&
                 this.genre.equals(view.genre);
@@ -54,7 +54,7 @@ public class AlbumWithoutPriceView {
 
     @Override
     public String toString() {
-        return  "name: " + name +
+        return "name: " + name +
                 "; performer: " + performer +
                 "; date: " + date +
                 "; genre: " + genre;

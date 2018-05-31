@@ -1,16 +1,13 @@
 package by.fyodorov.musicstore.filter;
 
 import by.fyodorov.musicstore.application.RequestArgument;
-import by.fyodorov.musicstore.application.UserRole;
+import by.fyodorov.musicstore.model.UserRole;
 import by.fyodorov.musicstore.command.impl.CommandType;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.IOException;
-
-import static by.fyodorov.musicstore.application.RequestArgument.FILE_KEY;
 
 public class AlbumAddFilter implements Filter {
     private static final String COMMAND_NAME = CommandType.ADD_ALBUM_COMMAND.toString();

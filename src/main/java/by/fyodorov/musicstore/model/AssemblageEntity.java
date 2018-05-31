@@ -55,7 +55,6 @@ public class AssemblageEntity extends EntityBase {
     }
 
 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -83,7 +82,7 @@ public class AssemblageEntity extends EntityBase {
 
     @Override
     public int hashCode() {
-        return  Integer.hashCode(id) +
+        return Integer.hashCode(id) +
                 name.hashCode() +
                 genre.hashCode() +
                 Integer.hashCode(price) +
@@ -93,11 +92,11 @@ public class AssemblageEntity extends EntityBase {
 
     @Override
     public String toString() {
-        return  "id = "          + id    +  "\n"   +
-                "name = \""      + name  +  "\"\n" +
-                "genre = \""     + genre +  "\"\n" +
-                "price = "       + price +  "\n"   +
-                "date = \""      + date  +  "\"\n" +
+        return "id = " + id + "\n" +
+                "name = \"" + name + "\"\n" +
+                "genre = \"" + genre + "\"\n" +
+                "price = " + price + "\n" +
+                "date = \"" + date + "\"\n" +
                 "userId = " + userId;
     }
 
@@ -110,8 +109,8 @@ public class AssemblageEntity extends EntityBase {
         if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        AssemblageEntity assemblage = (AssemblageEntity)obj;
-        return  assemblage.id == this.id &&
+        AssemblageEntity assemblage = (AssemblageEntity) obj;
+        return assemblage.id == this.id &&
                 assemblage.name.equals(this.name) &&
                 assemblage.genre.equals(this.genre) &&
                 assemblage.price == this.price &&

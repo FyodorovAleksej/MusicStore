@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * main servlet of web application
+ */
 public class MainServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(MainServlet.class);
 
@@ -43,24 +46,29 @@ public class MainServlet extends HttpServlet {
         LOGGER.debug("DESTROY MainServlet");
         try {
             ConnectionPool.getInstance(null).destroy();
-        }
-        catch (ConnectorException e) {
+        } catch (ConnectorException e) {
             LOGGER.catching(e);
         }
     }
 
+    /**
+     * getting command from request (that was set by filter) and perform it
+     * @param request - servlet request
+     * @param response - servlet response
+     * @throws ServletException
+     * @throws IOException
+     */
     private void doOperation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CommandCreator creator = new CommandCreator();
         try {
-            String commandName = (String)request.getAttribute(RequestArgument.COMMAND_NAME.getName());
+            String commandName = (String) request.getAttribute(RequestArgument.COMMAND_NAME.getName());
             LOGGER.debug("command = " + commandName);
             Command command = creator.createCommand(commandName);
             RequestParameterMap map = new RequestParameterMap(request);
             GoToInterface jump = command.perform(map);
             map.refresh(request);
             jump.goTo(request, response);
-        }
-        catch (CommandException e) {
+        } catch (CommandException e) {
             LOGGER.catching(e);
             response.setStatus(512);
         }

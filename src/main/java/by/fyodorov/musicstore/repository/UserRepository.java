@@ -6,8 +6,10 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.connector.SqlUtil;
 import by.fyodorov.musicstore.controller.ContextParameter;
 import by.fyodorov.musicstore.model.UserEntity;
+import by.fyodorov.musicstore.specification.user.UserCustomUpdateSpecification;
 import by.fyodorov.musicstore.specification.user.UserRepositorySpecification;
-import by.fyodorov.musicstore.specification.user.custom.UserCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.user.UserCustomSelectSpecification;
+import by.fyodorov.musicstore.specification.user.custom.UserAddCustomUpdateSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,20 +25,6 @@ import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 public class UserRepository {
     private static Logger LOGGER = LogManager.getLogger(UserRepository.class);
 
-    private static final String ADD_USER_SQL =
-            "INSERT INTO " + USER_BD_SCHEME + "." + USER_BD_TABLE + " ("
-                    + USER_USERNAME + ", "
-                    + USER_EMAIL + ", "
-                    + USER_ROLE + ", "
-                    + USER_CASH + ", "
-                    + USER_BONUS + ", "
-                    + USER_DISCOUNT + ", "
-                    + USER_PASSWORD + ") " +
-                    "VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', %5$s, \'%6$s\', SHA(\'%7$s\'));";
-
-    private static final String REMOVE_USER_SQL =
-            "DELETE FROM " + USER_BD_SCHEME + "." + USER_BD_TABLE + " WHERE " +
-                    USER_ID + " = \'%1$s\';";
     private static final Lock MODIFY_LOCK = new ReentrantLock();
 
     private SqlUtil util;
@@ -45,32 +33,6 @@ public class UserRepository {
         ContextParameter parameter = ContextParameter.getInstance();
         util = new SqlUtil(ConnectionPool.getInstance(parameter.getContextParam(InitParameter.DATA_BASE_INIT.toString())).getConnection());
     }
-
-    public void add(UserEntity user) throws ConnectorException {
-        LOGGER.debug("adding new user");
-        util.execUpdate(String.format(ADD_USER_SQL,
-                user.getUserName(),
-                user.getEmail(),
-                user.getRole(),
-                user.getCash(),
-                user.getBonus(),
-                user.getDiscount(),
-                user.getPassword()));
-    }
-
-    public void update(UserEntity user) {
-        MODIFY_LOCK.lock();
-        LOGGER.debug("update user");
-        //util.execUpdate();
-        MODIFY_LOCK.unlock();
-    }
-
-    /*
-    public List<UserEntity> query(UserRepositorySpecification specification) throws ConnectorException {
-        ResultSet set = util.exec(specification.toSqlClauses());
-        LinkedList<UserEntity> list = new LinkedList<>();
-        return list;
-    }*/
 
     public LinkedList<UserEntity> prepareQuery(UserRepositorySpecification specification) throws ConnectorException {
         LOGGER.debug("custom user query");
@@ -103,14 +65,9 @@ public class UserRepository {
         return specification.fromSet(set);
     }
 
-    public int prepareUpdate(UserCustomSelectSpecification specification) throws ConnectorException {
+    public int prepareUpdate(UserCustomUpdateSpecification specification) throws ConnectorException {
         LOGGER.debug("custom update");
         return util.execUpdatePrepare(specification.toSqlClauses(), specification.getArguments());
-    }
-
-    public long prepareLargeUpdate(UserCustomSelectSpecification specification) throws ConnectorException {
-        LOGGER.debug("custom large update");
-        return util.execUpdateLargePrepare(specification.toSqlClauses(), specification.getArguments());
     }
 
     public void close() throws ConnectorException {

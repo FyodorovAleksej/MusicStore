@@ -1,6 +1,6 @@
 package by.fyodorov.musicstore.customtag;
 
-import by.fyodorov.musicstore.application.UserRole;
+import by.fyodorov.musicstore.model.UserRole;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +10,9 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 
+/**
+ * tag for view information of current user
+ */
 public class UserInfoViewTag extends TagSupport {
     private static final Logger LOGGER = LogManager.getLogger(UserInfoViewTag.class);
 
@@ -26,16 +29,14 @@ public class UserInfoViewTag extends TagSupport {
             } catch (ServletException | IOException e) {
                 throw new JspException(e);
             }
-        }
-        else {
+        } else {
             pageContext.getRequest().setAttribute("userName", userName);
             pageContext.getRequest().setAttribute("userRole", userRole);
             try {
                 if (UserRole.ADMIN.toString().equals(userRole)) {
                     LOGGER.debug("include \"" + pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/adminLoginHeader.jsp" + "\"");
                     pageContext.include(pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/adminLoginHeader.jsp");
-                }
-                else {
+                } else {
                     LOGGER.debug("include \"" + pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/loginHeader.jsp" + "\"");
                     pageContext.include(pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/loginHeader.jsp");
                 }

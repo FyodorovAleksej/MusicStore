@@ -13,14 +13,27 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * handle uuid code for registration
+ */
 public class RegisterCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(RegisterCommand.class);
-    private UserReceiver receiver;
+    private UserReceiver userReceiver;
 
-    public RegisterCommand(UserReceiver receiver) {
-        this.receiver = receiver;
+    /**
+     * creating command with user receiver
+     * @param userReceiver - receiver for working with users
+     */
+    public RegisterCommand(UserReceiver userReceiver) {
+        this.userReceiver = userReceiver;
     }
 
+    /**
+     * performing command. Continue registration after confirm email
+     * @param requestInfo - map with arguments of request and session
+     * @return - command of forward or redirect
+     * @throws CommandException - when command can't perform
+     */
     @Override
     public GoToInterface perform(RequestParameterMap requestInfo) throws CommandException {
         Optional<String> path = Optional.empty();
@@ -28,7 +41,7 @@ public class RegisterCommand implements Command {
         UserEntity entity = RegistrantKeyMap.getInstance().continueRegister(uuid);
         if (entity != null) {
             try {
-                if (receiver.addUser(entity)) {
+                if (userReceiver.addUser(entity)) {
                     LOGGER.debug("register was successfully");
                     requestInfo.setSessionAttribute(RequestArgument.SESSION_LOGIN.getName(), entity.getUserName());
                     requestInfo.setSessionAttribute(RequestArgument.SESSION_ROLE.getName(), entity.getRole());
@@ -40,8 +53,7 @@ public class RegisterCommand implements Command {
                     requestInfo.setRequestAttribute(RequestArgument.LOGIN_RESULT.getName(), "Can't register");
                     path = Optional.of(PagesUrl.MAIN_PAGE.getPath());
                 }
-            }
-            catch (ConnectorException e) {
+            } catch (ConnectorException e) {
                 throw new CommandException("can't adding user", e);
             }
             return new RedirectGoTo(path.orElse(PagesUrl.MAIN_PAGE.getPath()));

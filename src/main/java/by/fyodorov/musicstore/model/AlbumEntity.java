@@ -30,7 +30,6 @@ public class AlbumEntity extends EntityBase {
     }
 
 
-
     public int getId() {
         return id;
     }
@@ -54,7 +53,6 @@ public class AlbumEntity extends EntityBase {
     public int getPerformerId() {
         return performerId;
     }
-
 
 
     public void setId(int id) {
@@ -82,13 +80,9 @@ public class AlbumEntity extends EntityBase {
     }
 
 
-
-
-
-
     @Override
     public int hashCode() {
-        return  Integer.hashCode(id) +
+        return Integer.hashCode(id) +
                 name.hashCode() +
                 genre.hashCode() +
                 Integer.hashCode(price) +
@@ -98,11 +92,11 @@ public class AlbumEntity extends EntityBase {
 
     @Override
     public String toString() {
-        return  "id = "          + id    +  "\n"   +
-                "name = \""      + name  +  "\"\n" +
-                "genre = \""     + genre +  "\"\n" +
-                "price = "       + price +  "\n"   +
-                "date = \""      + date  +  "\"\n" +
+        return "id = " + id + "\n" +
+                "name = \"" + name + "\"\n" +
+                "genre = \"" + genre + "\"\n" +
+                "price = " + price + "\n" +
+                "date = \"" + date + "\"\n" +
                 "performerId = " + performerId;
     }
 
@@ -114,8 +108,8 @@ public class AlbumEntity extends EntityBase {
         if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        AlbumEntity albom = (AlbumEntity)obj;
-        return  this.id == albom.id &&
+        AlbumEntity albom = (AlbumEntity) obj;
+        return this.id == albom.id &&
                 this.name.equals(albom.name) &&
                 this.genre.equals(albom.genre) &&
                 this.price == albom.price &&

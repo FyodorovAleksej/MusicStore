@@ -4,10 +4,11 @@ import static by.fyodorov.musicstore.specification.performer.PerformerRepository
 
 public class PerformerByIdSpecification implements PerformerRepositorySpecification {
     private static final String SELECT_BY_ID =
-            "SELECT " + PERFORMER_ID + ", "
-                    + PERFORMER_NAME + " " +
-                    "FROM "   + PERFORMER_BD_SCHEME + "." + PERFORMER_BD_TABLE + " " +
-                    "WHERE "  + PERFORMER_ID + " = ?;";
+            String.format("SELECT %s, %s " +
+                            "FROM %s.%s WHERE %s = ?;",
+                    PERFORMER_ID, PERFORMER_NAME,
+                    PERFORMER_BD_SCHEME, PERFORMER_BD_TABLE,
+                    PERFORMER_ID);
 
     private int id;
 

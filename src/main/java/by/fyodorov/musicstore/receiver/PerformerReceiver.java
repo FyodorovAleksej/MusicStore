@@ -20,8 +20,7 @@ public class PerformerReceiver {
         LinkedList<PerformerEntity> list;
         try {
             list = albumRepository.prepareQuery(new PerformerByIdSpecification(id));
-        }
-        finally {
+        } finally {
             albumRepository.close();
         }
         if (!list.isEmpty()) {
@@ -29,22 +28,6 @@ public class PerformerReceiver {
         }
         return null;
 
-    }
-
-    public boolean addPerformer(PerformerEntity entity) throws ConnectorException {
-        PerformerRepository performerRepository = new PerformerRepository();
-        boolean result;
-        try {
-            performerRepository.add(entity);
-            result = true;
-        }
-        catch (ConnectorException e) {
-            result = false;
-        }
-        finally {
-            performerRepository.close();
-        }
-        return result;
     }
 
     public LinkedList<String> findAllPerformers() throws ConnectorException {
@@ -55,8 +38,7 @@ public class PerformerReceiver {
             for (HashMap<String, String> map : arguments) {
                 performers.add(map.get(PerformerAllCustomSelectSpecification.PERFORMER_NAME_KEY));
             }
-        }
-        finally {
+        } finally {
             repository.close();
         }
         return performers;

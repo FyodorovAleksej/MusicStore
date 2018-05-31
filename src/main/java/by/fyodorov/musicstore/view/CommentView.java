@@ -25,7 +25,7 @@ public class CommentView {
 
     @Override
     public int hashCode() {
-        return  userName.hashCode() +
+        return userName.hashCode() +
                 text.hashCode() +
                 date.hashCode();
     }
@@ -38,15 +38,15 @@ public class CommentView {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        CommentView view = (CommentView)o;
-        return  this.userName.equals(view.userName) &&
+        CommentView view = (CommentView) o;
+        return this.userName.equals(view.userName) &&
                 this.text.equals(view.date) &&
                 this.date.equals(view.date);
     }
 
     @Override
     public String toString() {
-        return  "userName: " + userName +
+        return "userName: " + userName +
                 "; text: \"" + text +
                 "\"; date: " + date;
     }

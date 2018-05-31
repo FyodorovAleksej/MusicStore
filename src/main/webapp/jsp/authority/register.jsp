@@ -16,8 +16,6 @@
 <body>
 <fmt:message key="main.signUpSend" var="sendButton"/>
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
-<br/>
-<c:import url="${request.contextPath}/WEB-INF/jspf/languageSelect.jsp"/>
 <form action="${pageContext.request.contextPath}/register" method="post">
     <input type="text" name="uuid"/>
     <button type="submit" class="btn btn-primary"><c:out value="${sendButton}"/></button>

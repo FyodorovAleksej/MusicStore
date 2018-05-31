@@ -31,7 +31,7 @@ public class AssemblageWithoutPriceView {
 
     @Override
     public int hashCode() {
-        return  name.hashCode() +
+        return name.hashCode() +
                 owner.hashCode() +
                 date.hashCode() +
                 genre.hashCode();
@@ -45,8 +45,8 @@ public class AssemblageWithoutPriceView {
         if (o == null || o.getClass() != this.getClass()) {
             return false;
         }
-        AssemblageWithoutPriceView view = (AssemblageWithoutPriceView)o;
-        return  this.name.equals(view.name) &&
+        AssemblageWithoutPriceView view = (AssemblageWithoutPriceView) o;
+        return this.name.equals(view.name) &&
                 this.date.equals(view.date) &&
                 this.genre.equals(view.genre) &&
                 this.owner.equals(view.owner);
@@ -54,7 +54,7 @@ public class AssemblageWithoutPriceView {
 
     @Override
     public String toString() {
-        return  "name: " + name +
+        return "name: " + name +
                 "; date: " + date +
                 "; genre: " + genre +
                 "; owner: " + owner;

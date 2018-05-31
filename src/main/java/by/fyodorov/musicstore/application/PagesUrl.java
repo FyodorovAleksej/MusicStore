@@ -25,6 +25,9 @@ public enum PagesUrl {
     ASSEMBLAGE_INFO_PAGE("/jsp/assemblage/info.jsp"),
     TRACK_INFO_WITH_ARG_PAGE("/trackInfo?trackInfoName="),
 
+    TRACK_ADD_PAGE("/jsp/administrate/addTrack.jsp"),
+    TRACK_EDIT_PAGE("/jsp/administrate/editTrack.jsp"),
+
     ALBUM_ADD_PAGE("/jsp/album/addAlbum.jsp"),
     ASSEMBLAGE_ADD_PAGE("/jsp/assemblage/addAssemblage.jsp"),
 

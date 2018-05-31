@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>tracks</title>
+    <title>Tracks</title>
 
     <!-- Bootstrap CSS -->
     <link href="${request.contextPath}/css/bootstrap.min.css" rel="stylesheet"/>
@@ -23,11 +23,12 @@
 <fmt:message key="main.trackPerformerLabel" var="performerLabel"/>
 <fmt:message key="main.trackDateLabel" var="dateLabel"/>
 <fmt:message key="main.trackInfoLabel" var="infoLabel"/>
-<fmt:message key="tracks.addTrackLabel" var="addLabel"/>
+<fmt:message key="add.trackAddSendLabel" var="addLabel"/>
 
 <c:import url="/WEB-INF/jspf/mainHeader.jsp"/>
 
-<button type="button" class="btn btn-primary" onClick='location.href="${request.contextPath}/jsp/administrate/addTrack.jsp"'><c:out value="${addLabel}"/></button>
+<button type="button" class="btn btn-primary" onClick='location.href="/prepareAddTrack"'><c:out value="${addLabel}"/></button>
+<h3><c:out value="${tracksAll}"/></h3>
 <table align="center" border="0">
     <tr>
         <th>
@@ -106,6 +107,7 @@
         </tr>
     </c:forEach>
 </table>
+<ctl:pageList-view/>
 <!-- Bootstrap -->
 <script src="${request.contextPath}/js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.12.9_umd_popper.js"></script>
 <script src="${request.contextPath}/js/jquery-latest.js"></script>

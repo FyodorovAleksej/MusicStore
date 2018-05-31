@@ -7,6 +7,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import static by.fyodorov.musicstore.application.InitParameter.FILE_PATH;
+
+/**
+ * singleton with servlet initialization arguments
+ */
 public class ContextParameter {
     private static ContextParameter instance;
     private static Lock instanceLock = new ReentrantLock();
@@ -17,14 +22,24 @@ public class ContextParameter {
         paramMap = new HashMap<>();
     }
 
+    /**
+     * adding parameters from servlet context
+     * @param context - servlet context
+     */
     public void addContextParam(ServletContext context) {
         Enumeration<String> paramNames = context.getInitParameterNames();
+        paramMap.put(FILE_PATH.toString(), context.getRealPath(FILE_PATH.toString()));
         while (paramNames.hasMoreElements()) {
             String name = paramNames.nextElement();
             paramMap.put(name, context.getInitParameter(name));
         }
     }
 
+    /**
+     * getting servlet context parameter by key
+     * @param key - key of parameter
+     * @return - value of this parameter
+     */
     public String getContextParam(String key) {
         return paramMap.get(key);
     }
