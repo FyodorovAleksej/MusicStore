@@ -461,7 +461,7 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <error-page>
-        <error-code>512</error-code>
+        <error-code>500</error-code>
         <location>/jsp/error/errorPage.jsp</location>
     </error-page>
     <error-page>

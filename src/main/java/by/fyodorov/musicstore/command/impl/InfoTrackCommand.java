@@ -40,18 +40,20 @@ public class InfoTrackCommand implements Command {
         Optional<String> path = Optional.empty();
         String trackName = requestInfo.getParameter(RequestArgument.TRACK_NAME_INFO.getName());
         try {
-            TrackEntity trackEntity = trackReceiver.findTrack(trackName);
-            if (trackEntity != null) {
-                PerformerEntity performer = performerReceiver.findPerformerId(trackEntity.getPerformerId());
-                requestInfo.setSessionAttribute(RequestArgument.TRACK_NAME.getName(), trackName);
-                requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_NAME.getName(), trackEntity.getName());
-                requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_GENRE.getName(), trackEntity.getGenre());
-                requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_PRICE.getName(), trackEntity.getPrice());
-                requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_DATE.getName(), trackEntity.getDate());
+            Optional<TrackEntity> trackEntity = trackReceiver.findTrack(trackName);
+            if (trackEntity.isPresent()) {
+                Optional<PerformerEntity> performer = performerReceiver.findPerformerId(trackEntity.get().getPerformerId());
+                if (performer.isPresent()) {
+                    requestInfo.setSessionAttribute(RequestArgument.TRACK_NAME.getName(), trackName);
+                    requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_NAME.getName(), trackEntity.get().getName());
+                    requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_GENRE.getName(), trackEntity.get().getGenre());
+                    requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_PRICE.getName(), trackEntity.get().getPrice());
+                    requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_DATE.getName(), trackEntity.get().getDate());
 
-                requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_COMMENT_LIST.getName(), trackReceiver.findComments(trackEntity.getName()));
+                    requestInfo.setRequestAttribute(RequestArgument.TRACK_INFO_COMMENT_LIST.getName(), trackReceiver.findComments(trackEntity.get().getName()));
 
-                requestInfo.setRequestAttribute(RequestArgument.PERFORMER_INFO_NAME.getName(), performer.getName());
+                    requestInfo.setRequestAttribute(RequestArgument.PERFORMER_INFO_NAME.getName(), performer.get().getName());
+                }
             }
         } catch (ConnectorException e) {
             throw new CommandException("can't connect to find track", e);

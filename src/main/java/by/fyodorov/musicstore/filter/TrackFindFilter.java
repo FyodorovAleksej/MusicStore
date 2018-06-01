@@ -2,6 +2,7 @@ package by.fyodorov.musicstore.filter;
 
 import by.fyodorov.musicstore.application.RequestArgument;
 import by.fyodorov.musicstore.command.impl.CommandType;
+import by.fyodorov.musicstore.validator.RequestParameterValidator;
 
 import javax.servlet.*;
 import java.io.IOException;

@@ -15,7 +15,7 @@ import static by.fyodorov.musicstore.application.PagesUrl.TRACK_INFO_WITH_ARG_PA
  * adding comment for track
  */
 public class AddCommentCommand implements Command {
-    private static Logger LOGGER = LogManager.getLogger(AddCommentCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(AddCommentCommand.class);
     private CommentReceiver commentReceiver;
 
     /**
@@ -37,13 +37,13 @@ public class AddCommentCommand implements Command {
         String userName = (String) requestInfo.getSessionAttribute(RequestArgument.SESSION_LOGIN.getName());
         String text = requestInfo.getParameter(RequestArgument.COMMENT_TEXT.getName());
         String trackName = (String) requestInfo.getSessionAttribute(RequestArgument.TRACK_NAME.getName());
-        LOGGER.debug(String.format("comment - (%s, %s, %s)", userName, text, trackName));
+        LOGGER.info(String.format("comment - (%s, %s, %s)", userName, text, trackName));
         try {
             if (userName != null && text != null && trackName != null) {
                 if (commentReceiver.addComment(text, userName, trackName)) {
-                    LOGGER.debug("adding successfully");
+                    LOGGER.info("adding successfully");
                 } else {
-                    LOGGER.debug("adding Unsuccessfully");
+                    LOGGER.info("adding unsuccessfully");
                 }
             }
         } catch (ConnectorException e) {

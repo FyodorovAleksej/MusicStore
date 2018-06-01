@@ -19,6 +19,11 @@ public class PageListTag extends TagSupport {
     private static final String HIDDEN = "hidden";
     private static final Logger LOGGER = LogManager.getLogger(PageListTag.class);
 
+    /**
+     * handle start tag
+     * @return - EVAL_PAGE - end tag
+     * @throws JspException - when can't forward or redirect
+     */
     @Override
     public int doStartTag() throws JspException {
         String pageString = pageContext.getRequest().getParameter(RequestArgument.SEARCH_PAGE.getName());

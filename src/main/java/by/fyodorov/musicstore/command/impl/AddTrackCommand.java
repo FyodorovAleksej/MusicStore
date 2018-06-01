@@ -52,7 +52,7 @@ public class AddTrackCommand implements Command {
         String[] genres = requestInfo.getRequestMultipleAttribute(RequestArgument.TRACK_ADD_GENRE.getName());
         RequestParameterValidator validator = new RequestParameterValidator();
 
-        LOGGER.debug(String.format("adding track - (%s, %s, %s)", userName, trackName, performer));
+        LOGGER.info(String.format("adding track - (%s, %s, %s)", userName, trackName, performer));
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && performer != null && trackName != null && validator.validatePrice(trackPrice) && genres != null) {
                 Part filePart = (Part) requestInfo.getRequestAttribute(RequestArgument.FILE_KEY.getName());
@@ -64,8 +64,7 @@ public class AddTrackCommand implements Command {
                 writer.flush();
                 writer.close();
 
-                LOGGER.debug("getting file = \"" + filePart.getName() + "\"");
-
+                LOGGER.info("getting file = \"" + filePart.getName() + "\"");
                 trackReceiver.addNewTrack(trackName, String.join(SEPARATOR, genres), Integer.valueOf(trackPrice), performer);
             }
         } catch (ConnectorException e) {

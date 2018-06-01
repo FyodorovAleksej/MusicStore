@@ -47,9 +47,9 @@ public class EditAlbumCommand implements Command {
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && oldAlbum != null && albumName != null && albumGenre != null && validator.validatePrice(albumPrice) && albumPerformer != null && tracks != null) {
                 if (albumReceiver.editAlbum(oldAlbum, albumName, String.join(SEPARATOR, albumGenre), Integer.valueOf(albumPrice), albumPerformer, tracks)) {
-                    LOGGER.debug("edit album successfully");
+                    LOGGER.info("edit \"" + albumName + "\" album successfully");
                 } else {
-                    LOGGER.debug("edit album failed");
+                    LOGGER.info("edit \"" + albumName + "\" album failed");
                 }
             }
         } catch (ConnectorException e) {

@@ -10,7 +10,7 @@ import java.util.Arrays;
  * class for working with DB
  */
 public class SqlUtil {
-    private static Logger LOGGER = LogManager.getLogger(SqlUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(SqlUtil.class);
     private Connection connection;
 
     /**
@@ -41,23 +41,6 @@ public class SqlUtil {
         }
     }
 
-    /**
-     * executing SQL request for setting and appending data
-     * @param sqlRequest - SQL request for executing
-     */
-    public void execUpdate(String sqlRequest) throws ConnectorException {
-        try {
-            if (connection.isClosed()) {
-                throw new ConnectorException("closed connection");
-            }
-            Statement statement = connection.createStatement();
-            statement.closeOnCompletion();
-            LOGGER.debug("executing update query \"" + sqlRequest + "\"");
-            statement.executeUpdate(sqlRequest);
-        } catch (SQLException e) {
-            throw new ConnectorException("can't execute update query = \"" + sqlRequest + "\"", e);
-        }
-    }
 
     /**
      * execute update sql request by prepare statement
@@ -124,7 +107,7 @@ public class SqlUtil {
      * execute sql request by prepare statement
      * @param sqlRequest - sql request for executing
      * @param strings - arguments of sql request. Adding as strings into compiled request
-     * @return - resultset of request
+     * @return - result set of request
      * @throws ConnectorException - when can't execute request
      */
     public ResultSet execPrepare(String sqlRequest, String... strings) throws ConnectorException {

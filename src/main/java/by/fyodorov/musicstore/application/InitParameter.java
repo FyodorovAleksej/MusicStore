@@ -1,5 +1,8 @@
 package by.fyodorov.musicstore.application;
 
+/**
+ * enum with key for servlet context init
+ */
 public enum InitParameter {
     DATA_BASE_INIT("dbInit"),
     MAIL_INIT("mailInit"),

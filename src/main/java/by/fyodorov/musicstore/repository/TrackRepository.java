@@ -6,11 +6,10 @@ import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.connector.SqlUtil;
 import by.fyodorov.musicstore.controller.ContextParameter;
 import by.fyodorov.musicstore.model.TrackEntity;
+import by.fyodorov.musicstore.specification.track.TrackCustomSelectSpecification;
 import by.fyodorov.musicstore.specification.track.TrackCustomUpdateSpecification;
 import by.fyodorov.musicstore.specification.track.TrackLimitSelectSpecification;
 import by.fyodorov.musicstore.specification.track.TrackRepositorySpecification;
-import by.fyodorov.musicstore.specification.track.TrackCustomSelectSpecification;
-import by.fyodorov.musicstore.specification.track.custom.TrackLimitCustomSelectSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,36 +23,29 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 
+/**
+ * repository for working with track DB
+ */
 public class TrackRepository {
-    private static Logger LOGGER = LogManager.getLogger(TrackRepository.class);
-
-    private static final String ADD_TRACK_SQL =
-            "INSERT INTO " + TRACK_BD_SCHEME + "." + TRACK_BD_TABLE + " ("
-                    + TRACK_NAME + ", "
-                    + TRACK_GENRE + ", "
-                    + TRACK_PRICE + ", "
-                    + TRACK_DATE + ", "
-                    + TRACK_PERFORMER_FK + ") " +
-                    "VALUES (\'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\', %5$s);";
-
+    private static final Logger LOGGER = LogManager.getLogger(TrackRepository.class);
     private static final Lock MODIFY_LOCK = new ReentrantLock();
     private SqlUtil util;
 
+    /**
+     * creating repository with connection from connection pool
+     * @throws ConnectorException - when can't getting connection
+     */
     public TrackRepository() throws ConnectorException {
         ContextParameter parameter = ContextParameter.getInstance();
         util = new SqlUtil(ConnectionPool.getInstance(parameter.getContextParam(InitParameter.DATA_BASE_INIT.toString())).getConnection());
     }
 
-    public void add(TrackEntity track) throws ConnectorException {
-        LOGGER.debug("adding new track");
-        util.execUpdate(String.format(ADD_TRACK_SQL,
-                track.getName(),
-                track.getGenre(),
-                track.getPrice(),
-                track.getDate(),
-                track.getPerformerId()));
-    }
-
+    /**
+     * executing select query by using prepare statement
+     * @param specification - specification for select
+     * @return - list of track entities
+     * @throws ConnectorException - when can't executing query
+     */
     public LinkedList<TrackEntity> prepareQuery(TrackRepositorySpecification specification) throws ConnectorException {
         LOGGER.debug("custom track query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
@@ -78,31 +70,58 @@ public class TrackRepository {
         return list;
     }
 
+    /**
+     * executing custom query with using prepare statement
+     * @param specification - specification for repository
+     * @return - list of parameters (result of executing query)
+     * @throws ConnectorException - when can't perform query
+     */
     public LinkedList<HashMap<String, String>> customQuery(TrackCustomSelectSpecification specification) throws ConnectorException {
         LOGGER.debug("custom query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
         return specification.fromSet(set);
     }
 
+    /**
+     * executing custom update query with using prepare statement
+     * @param specification - specification for repository
+     * @return - count of updated rows
+     * @throws ConnectorException - when can't perform query
+     */
     public int prepareUpdate(TrackCustomUpdateSpecification specification) throws ConnectorException {
         LOGGER.debug("custom update");
         return util.execUpdatePrepare(specification.toSqlClauses(), specification.getArguments());
     }
 
+    /**
+     * executing custom query with using prepare statement
+     * @param specification - specification for repository
+     * @return - list of parameters (result of executing query)
+     * @throws ConnectorException - when can't perform query
+     */
     public LinkedList<HashMap<String, String>> prepareSelectWithLimit(TrackLimitSelectSpecification specification) throws ConnectorException {
         LOGGER.debug("custom update");
         return specification.fromSet(util.execSelectPrepare(specification.toSqlClauses(), specification.getArguments(), specification.getLimits()));
     }
 
-
+    /**
+     * close repository
+     * @throws ConnectorException - when cant close connection
+     */
     public void close() throws ConnectorException {
         util.closeConnection();
     }
 
+    /**
+     * locking mutex for some threads
+     */
     public static void modifyLock() {
         MODIFY_LOCK.lock();
     }
 
+    /**
+     * unlocking mutex for some threads
+     */
     public static void modifyUnlock() {
         MODIFY_LOCK.unlock();
     }

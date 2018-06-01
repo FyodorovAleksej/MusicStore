@@ -6,11 +6,15 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 /**
- * proxy class of connection
+ * proxy class of connection. Used for override close method
  */
 public class ProxyConnection implements Connection {
     private Connection connection;
 
+    /**
+     * create proxy object of original connection
+     * @param connection - original connection
+     */
     ProxyConnection(Connection connection) {
         this.connection = connection;
     }

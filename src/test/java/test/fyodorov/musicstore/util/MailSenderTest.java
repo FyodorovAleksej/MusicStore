@@ -7,7 +7,6 @@ public class MailSenderTest {
 
     @Test
     public void testMailSend() throws Exception {
-
         MailSender sender = new MailSender("mailOffline.properties");
         sender.send("Hello world", "Fyodorov.aleksej@gmail.com");
     }

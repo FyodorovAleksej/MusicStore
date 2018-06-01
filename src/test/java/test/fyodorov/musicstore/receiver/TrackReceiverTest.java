@@ -27,11 +27,4 @@ public class TrackReceiverTest {
     public void finalize() throws Exception {
         ConnectionPool.getInstance(PATH).destroy();
     }
-
-    @Test
-    public void test() throws Exception {
-        trackReceiver.findTracksInAlbum("error").forEach(System.out::println);
-        System.out.println("0------------------------0");
-        trackReceiver.findTracksWithoutPrice().forEach(System.out::println);
-    }
 }

@@ -13,9 +13,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Optional;
 
-public class AlbumReceiver implements CommandReceiver {
-    private static Logger LOGGER = LogManager.getLogger(AlbumReceiver.class);
-
+/**
+ * receiver for performing operations with albums
+ */
+public class AlbumReceiver {
+    /**
+     * finding albums with price for user
+     * @param userName - username of current user
+     * @return - list of albums
+     * @throws ConnectorException - when can't perform select request
+     */
     public LinkedList<AlbumView> findAlbumInfo(String userName) throws ConnectorException {
         AlbumRepository albumRepository = new AlbumRepository();
         AlbumCustomSelectSpecification specification = new AlbumWithUserCustomSelectSpecification(userName);
@@ -38,6 +45,12 @@ public class AlbumReceiver implements CommandReceiver {
         return albums;
     }
 
+    /**
+     * finding albums without price for user
+     * @param userName - username of current user
+     * @return - list of albums
+     * @throws ConnectorException - when can't perform select request
+     */
     public LinkedList<AlbumWithoutPriceView> findAlbumForUser(String userName) throws ConnectorException {
         AlbumRepository assemblageRepository = new AlbumRepository();
         AlbumCustomSelectSpecification specification = new AlbumOfUserByNameCustomSelectSpecification(userName);
@@ -57,6 +70,13 @@ public class AlbumReceiver implements CommandReceiver {
         return albums;
     }
 
+    /**
+     * info of album for current user
+     * @param albumName - album name for info
+     * @param userName - username of current user
+     * @return - optional of album for info
+     * @throws ConnectorException - if can't execute select query
+     */
     public Optional<AlbumView> albumInfoForUser(String albumName, String userName) throws ConnectorException {
         AlbumRepository albumRepository = new AlbumRepository();
         AlbumCustomSelectSpecification specification = new AlbumInfoForUserCustomSelectSpecification(albumName, userName);
@@ -80,6 +100,17 @@ public class AlbumReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * adding new album
+     * @param album - name of new album
+     * @param genre - genre of new album
+     * @param price - price of new album
+     * @param performer - performer of new album
+     * @param tracks - array of track of new album
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean addNewAlbum(String album, String genre, int price, String performer, String[] tracks) throws ConnectorException {
         AlbumRepository albumRepository = new AlbumRepository();
         boolean result;
@@ -98,6 +129,18 @@ public class AlbumReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * editing album
+     * @param oldName - old name of album
+     * @param newName - new name of album
+     * @param genre - new genre of album
+     * @param price - new price of album
+     * @param performer - new performer of album
+     * @param tracks - new array of track of album
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean editAlbum(String oldName, String newName, String genre, int price, String performer, String[] tracks) throws ConnectorException {
         AlbumRepository albumRepository = new AlbumRepository();
         boolean result;
@@ -117,6 +160,13 @@ public class AlbumReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * remove album
+     * @param albumName - album name for remove
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean removeAlbum(String albumName) throws ConnectorException {
         AlbumRepository albumRepository = new AlbumRepository();
         boolean result;

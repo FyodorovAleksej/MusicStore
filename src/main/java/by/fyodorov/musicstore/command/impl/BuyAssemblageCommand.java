@@ -40,9 +40,9 @@ public class BuyAssemblageCommand implements Command {
             if (userName != null && assemblageName != null) {
 
                 if (userReceiver.buyAssemblage(userName, assemblageName)) {
-                    LOGGER.debug("buy successfully");
+                    LOGGER.info("buy \"" + assemblageName + "\"successfully");
                 } else {
-                    LOGGER.debug("buy Unsuccessfully");
+                    LOGGER.info("buy \"" + assemblageName + "\" Unsuccessfully");
                 }
             }
         } catch (ConnectorException e) {

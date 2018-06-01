@@ -1,5 +1,8 @@
 package by.fyodorov.musicstore.application;
 
+/**
+ * enum with url to pages
+ */
 public enum PagesUrl {
     MAIN_PAGE("/index.jsp"),
     LOGIN_PAGE("/jsp/login.jsp"),

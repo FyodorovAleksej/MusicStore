@@ -1,5 +1,8 @@
 package by.fyodorov.musicstore.model;
 
+/**
+ * class entity of user
+ */
 public class UserEntity extends EntityBase {
     private final static int DEFAULT_ID = -1;
     private final static String DEFAULT_ROLE = "user";
@@ -14,7 +17,17 @@ public class UserEntity extends EntityBase {
     private int discount;
     private String password;
 
-
+    /**
+     * create entity of user
+     * @param id - user id
+     * @param userName - user name
+     * @param email - user email
+     * @param role - user role
+     * @param cash - user cash
+     * @param bonus - user bonus
+     * @param discount - user discount
+     * @param password - user password
+     */
     public UserEntity(int id, String userName, String email, String role, int cash, String bonus, int discount, String password) {
         this.id = id;
         this.userName = userName;

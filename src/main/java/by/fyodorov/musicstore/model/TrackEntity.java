@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+/**
+ * class entity of track
+ */
 public class TrackEntity extends EntityBase {
-    private static final int DEFAULT_ID = -1;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private int id;
     private String name;
@@ -14,6 +16,15 @@ public class TrackEntity extends EntityBase {
     private Date date;
     private int performerId;
 
+    /**
+     * create track entity
+     * @param id - track id
+     * @param name - track name
+     * @param genre - track genre
+     * @param price - track price
+     * @param date - track creating date
+     * @param performerId - track performer id
+     */
     public TrackEntity(int id, String name, String genre, int price, java.util.Date date, int performerId) {
         this.id = id;
         this.name = name;
@@ -22,10 +33,6 @@ public class TrackEntity extends EntityBase {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
         this.date = Date.valueOf(format.format(date));
         this.performerId = performerId;
-    }
-
-    public TrackEntity(String name, String genre, int price, java.util.Date date, int performerId) {
-        this(DEFAULT_ID, name, genre, price, date, performerId);
     }
 
     public int getId() {

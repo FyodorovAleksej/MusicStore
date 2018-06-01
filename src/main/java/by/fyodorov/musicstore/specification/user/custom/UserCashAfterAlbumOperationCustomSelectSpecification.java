@@ -6,7 +6,7 @@ import static by.fyodorov.musicstore.model.UserBonusType.USER_BONUS_ALBUM;
 import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class UserCashAfterAlbumOperationCustomSelectSpecification extends UserCustomSelectSpecification {
+public class UserCashAfterAlbumOperationCustomSelectSpecification implements UserCustomSelectSpecification {
     private static final String USER_CASH_AFTER_SELECT = String.format(
             "SELECT (%s.%s - IF(%s.%s & %s, 0, (1 - %s.%s) * " +
                     "(SELECT %s.%s FROM %s WHERE %s.%s = ?))) AS %s " +

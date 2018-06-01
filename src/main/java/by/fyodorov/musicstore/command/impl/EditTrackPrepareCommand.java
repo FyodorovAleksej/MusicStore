@@ -52,19 +52,19 @@ public class EditTrackPrepareCommand implements Command {
                 LinkedList<String> performers = performerReceiver.findAllPerformers();
                 requestInfo.setRequestAttribute(RequestArgument.PERFORMER_LIST.getName(), performers);
 
-                TrackEntity trackEntity = trackReceiver.findTrack(track);
-                if (trackEntity != null) {
-                    PerformerEntity performer = performerReceiver.findPerformerId(trackEntity.getPerformerId());
-                    if (performer != null) {
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_NAME.getName(), trackEntity.getName());
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_CLASSIC_GENRE.getName(), decodeGenre(trackEntity.getGenre(), GenreType.CLASSIC_GENRE.getValue()));
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_ELECTRO_GENRE.getName(), decodeGenre(trackEntity.getGenre(), GenreType.ELECTRO_GENRE.getValue()));
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_POP_GENRE.getName(), decodeGenre(trackEntity.getGenre(), GenreType.POP_GENRE.getValue()));
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_ROCK_GENRE.getName(), decodeGenre(trackEntity.getGenre(), GenreType.ROCK_GENRE.getValue()));
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_JAZZ_GENRE.getName(), decodeGenre(trackEntity.getGenre(), GenreType.JAZZ_GENRE.getValue()));
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_BLUES_GENRE.getName(), decodeGenre(trackEntity.getGenre(), GenreType.BLUES_GENRE.getValue()));
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_PRICE.getName(), trackEntity.getPrice());
-                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_PERFORMER.getName(), performer.getName());
+                Optional<TrackEntity> trackEntity = trackReceiver.findTrack(track);
+                if (trackEntity.isPresent()) {
+                    Optional<PerformerEntity> performer = performerReceiver.findPerformerId(trackEntity.get().getPerformerId());
+                    if (performer.isPresent()) {
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_NAME.getName(), trackEntity.get().getName());
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_CLASSIC_GENRE.getName(), decodeGenre(trackEntity.get().getGenre(), GenreType.CLASSIC_GENRE.getValue()));
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_ELECTRO_GENRE.getName(), decodeGenre(trackEntity.get().getGenre(), GenreType.ELECTRO_GENRE.getValue()));
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_POP_GENRE.getName(), decodeGenre(trackEntity.get().getGenre(), GenreType.POP_GENRE.getValue()));
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_ROCK_GENRE.getName(), decodeGenre(trackEntity.get().getGenre(), GenreType.ROCK_GENRE.getValue()));
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_JAZZ_GENRE.getName(), decodeGenre(trackEntity.get().getGenre(), GenreType.JAZZ_GENRE.getValue()));
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_BLUES_GENRE.getName(), decodeGenre(trackEntity.get().getGenre(), GenreType.BLUES_GENRE.getValue()));
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_PRICE.getName(), trackEntity.get().getPrice());
+                        requestInfo.setRequestAttribute(RequestArgument.TRACK_EDIT_OLD_PERFORMER.getName(), performer.get().getName());
                     }
                 }
                 path = Optional.of(PagesUrl.TRACK_EDIT_PAGE.getPath());

@@ -39,9 +39,9 @@ public class RemoveAlbumCommand implements Command {
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && albumName != null) {
                 if (albumReceiver.removeAlbum(albumName)) {
-                    LOGGER.debug("remove album successfully");
+                    LOGGER.info("remove \"" + albumName + "\" album successfully");
                 } else {
-                    LOGGER.debug("remove album failed");
+                    LOGGER.info("remove \"" + albumName + "\" album failed");
                 }
             }
         } catch (ConnectorException e) {

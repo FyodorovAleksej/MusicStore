@@ -45,9 +45,9 @@ public class AddAlbumCommand implements Command {
         try {
             if (userName != null && albumName != null && albumGenre != null && validator.validatePrice(albumPrice) && albumPerformer != null && tracks != null) {
                 if (albumReceiver.addNewAlbum(albumName, String.join(SEPARATOR, albumGenre), Integer.valueOf(albumPrice), albumPerformer, tracks)) {
-                    LOGGER.debug("add album successfully");
+                    LOGGER.info("add album \"" + albumName + "\" successfully");
                 } else {
-                    LOGGER.debug("add album failed");
+                    LOGGER.info("add album \"" + albumName + "\" failed");
                 }
             }
         } catch (ConnectorException e) {

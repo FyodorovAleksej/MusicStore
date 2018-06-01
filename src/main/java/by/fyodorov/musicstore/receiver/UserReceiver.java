@@ -24,9 +24,20 @@ import java.util.LinkedList;
 
 import static by.fyodorov.musicstore.model.UserBonusType.*;
 
-public class UserReceiver implements CommandReceiver {
-    private static Logger LOGGER = LogManager.getLogger(UserReceiver.class);
+/**
+ * receiver for performing operations with users
+ */
+public class UserReceiver {
+    private static final Logger LOGGER = LogManager.getLogger(UserReceiver.class);
 
+    /**
+     * checking user for login
+     * @param name - login
+     * @param password - password
+     * @return - true - user confirm
+     *          false - user doesn't confirm
+     * @throws ConnectorException - if can't execute select query
+     */
     public boolean checkUser(String name, String password) throws ConnectorException {
         LOGGER.debug("checking user = \"" + name + "\", password = \"" + password + "\"");
         UserRepository userRepository = new UserRepository();
@@ -37,6 +48,13 @@ public class UserReceiver implements CommandReceiver {
         return !list.isEmpty();
     }
 
+    /**
+     * finding user by name to existing
+     * @param name - user name
+     * @return - true - user with this name is already exist
+     *          false - username is free
+     * @throws ConnectorException - if can't execute select query
+     */
     public UserEntity findUser(String name) throws ConnectorException {
         LOGGER.debug("finding user = \"" + name + "\"");
         UserRepository userRepository = new UserRepository();
@@ -49,6 +67,11 @@ public class UserReceiver implements CommandReceiver {
         return null;
     }
 
+    /**
+     * getting all users
+     * @return - list of all users info
+     * @throws ConnectorException - when can't execute select query
+     */
     public LinkedList<UserView> findAllUsers() throws ConnectorException {
         LOGGER.debug("finding users");
         UserRepository userRepository = new UserRepository();
@@ -69,6 +92,13 @@ public class UserReceiver implements CommandReceiver {
         return users;
     }
 
+    /**
+     * finding user by name and email for confirm registration
+     * @param name - user name
+     * @param email - user email
+     * @return - user entity for continue registration
+     * @throws ConnectorException - when can't execute select query
+     */
     public UserEntity findUserByMail(String name, String email) throws ConnectorException {
         LOGGER.debug("finding user by name and email = \"" + name + "\", \"" + email + "\"");
         UserRepository userRepository = new UserRepository();
@@ -82,21 +112,43 @@ public class UserReceiver implements CommandReceiver {
         return null;
     }
 
+    /**
+     * validate userName
+     * @param userName - userName
+     * @return - is valid?
+     */
     public boolean validateUser(String userName) {
         RequestParameterValidator validator = new RequestParameterValidator();
         return validator.validateUserName(userName);
     }
 
+    /**
+     * validate password
+     * @param password - password
+     * @return - is valid?
+     */
     public boolean validatePassword(String password) {
         RequestParameterValidator validator = new RequestParameterValidator();
         return validator.validateUserName(password);
     }
 
+    /**
+     * vaidate email
+     * @param email - email
+     * @return - is valid?
+     */
     public boolean validateEmail(String email) {
         RequestParameterValidator validator = new RequestParameterValidator();
         return validator.validateEmail(email);
     }
 
+    /**
+     * adding new user
+     * @param entity - entity of user
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean addUser(UserEntity entity) throws ConnectorException {
         UserRepository userRepository = new UserRepository();
         boolean result;
@@ -113,6 +165,14 @@ public class UserReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * buy track
+     * @param userName - user name of current user
+     * @param trackName - track name to buy
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean buyTrack(String userName, String trackName) throws ConnectorException {
         UserRepository userRepository = new UserRepository();
         TrackRepository trackRepository = new TrackRepository();
@@ -142,6 +202,14 @@ public class UserReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * buy album
+     * @param userName - user name of current user
+     * @param albumName - album name to buy
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean buyAlbum(String userName, String albumName) throws ConnectorException {
         UserRepository userRepository = new UserRepository();
         AlbumRepository albumRepository = new AlbumRepository();
@@ -172,6 +240,14 @@ public class UserReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * buy assemblage
+     * @param userName - user name of current user
+     * @param assemblageName - assemblage name to buy
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean buyAssemblage(String userName, String assemblageName) throws ConnectorException {
         UserRepository userRepository = new UserRepository();
         AssemblageRepository assemblageRepository = new AssemblageRepository();
@@ -203,6 +279,16 @@ public class UserReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * edit user
+     * @param userName - user name to edit
+     * @param role - new role of user
+     * @param bonus - new bonus of user
+     * @param discount - new discount of user
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean updateUser(String userName, String role, String bonus, int discount) throws ConnectorException {
         UserRepository userRepository = new UserRepository();
         boolean result;
@@ -214,6 +300,14 @@ public class UserReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * finding key and value in map
+     * @param mapList - list of map
+     * @param value - value to find
+     * @param key - key to find;
+     * @return - true - value with this key is exist
+     *          false - value with this key isn't exist
+     */
     private boolean findInMap(LinkedList<HashMap<String, String>> mapList, String value, String key) {
         for (HashMap<String, String> map : mapList) {
             if (value.equals(map.get(key))) {

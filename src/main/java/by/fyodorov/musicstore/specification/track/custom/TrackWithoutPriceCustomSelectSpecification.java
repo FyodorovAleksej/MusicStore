@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 
-public class TrackWithoutPriceCustomSelectSpecification extends TrackCustomSelectSpecification {
+public class TrackWithoutPriceCustomSelectSpecification implements TrackCustomSelectSpecification {
     private static final String SELECT_TRACK_INFO = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s " +
                     "FROM %s " +

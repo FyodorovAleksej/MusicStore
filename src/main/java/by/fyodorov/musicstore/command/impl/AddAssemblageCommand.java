@@ -44,9 +44,9 @@ public class AddAssemblageCommand implements Command {
         try {
             if (userName != null && assemblageName != null && assemblageGenre != null && validator.validatePrice(assemblagePrice) && tracks != null) {
                 if (receiver.addNewAssemblage(assemblageName, String.join(SEPARATOR, assemblageGenre), Integer.valueOf(assemblagePrice), userName, tracks)) {
-                    LOGGER.debug("add assemblage successfully");
+                    LOGGER.info("add assemblage \"" + assemblageName + "\" successfully");
                 } else {
-                    LOGGER.debug("add assemblage failed");
+                    LOGGER.info("add assemblage \"" + assemblageName + "\" failed");
                 }
             }
         } catch (ConnectorException e) {

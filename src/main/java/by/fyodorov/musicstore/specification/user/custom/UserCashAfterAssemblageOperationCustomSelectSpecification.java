@@ -6,7 +6,7 @@ import static by.fyodorov.musicstore.model.UserBonusType.USER_BONUS_ASSEMBLAGE;
 import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class UserCashAfterAssemblageOperationCustomSelectSpecification extends UserCustomSelectSpecification {
+public class UserCashAfterAssemblageOperationCustomSelectSpecification implements UserCustomSelectSpecification {
     private static final String USER_CASH_AFTER_SELECT = String.format(
             "SELECT (%s.%s - IF(%s.%s & %s, 0, (1 - %s.%s) * " +
                     "(SELECT %s.%s FROM %s WHERE %s.%s = ?))) AS %s " +

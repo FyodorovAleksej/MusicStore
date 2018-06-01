@@ -13,9 +13,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Optional;
 
+/**
+ * receiver for performing operations with assemblages
+ */
 public class AssemblageReceiver {
-    private static Logger LOGGER = LogManager.getLogger(AssemblageReceiver.class);
-
+    /**
+     * getting list of info with price of assemblages for current user
+     * @param userName - username of current user
+     * @return - list of assemblages info
+     * @throws ConnectorException - if can't execute select query
+     */
     public LinkedList<AssemblageView> findAssemblageInfo(String userName) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
         AssemblageCustomSelectSpecification specification = new AssemblageWithUserCustomSelectSpecification(userName);
@@ -38,6 +45,12 @@ public class AssemblageReceiver {
         return assemblages;
     }
 
+    /**
+     * getting list of info without price of assemblages for current user
+     * @param userName - username of current user
+     * @return - list of assemblages info
+     * @throws ConnectorException - if can't execute select query
+     */
     public LinkedList<AssemblageWithoutPriceView> findAssemblageForUser(String userName) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
         AssemblageCustomSelectSpecification specification = new AssemblageOfUserByNameCustomSelectSpecification(userName);
@@ -57,6 +70,13 @@ public class AssemblageReceiver {
         return assemblages;
     }
 
+    /**
+     * getting assemblage info for current user
+     * @param assemblageName - name of assemblage for info
+     * @param userName - username of current user
+     * @return - optional with assemblage info
+     * @throws ConnectorException - if can't execute select query
+     */
     public Optional<AssemblageView> assemblageInfoForUser(String assemblageName, String userName) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
         AssemblageCustomSelectSpecification specification = new AssemblageInfoForUserCustomSelectSpecification(assemblageName, userName);
@@ -80,6 +100,17 @@ public class AssemblageReceiver {
         return result;
     }
 
+    /***
+     * adding new assemblage
+     * @param assemblage - name of new assemblage
+     * @param genre - genre of new assemblage
+     * @param price - price of new assemblage
+     * @param owner - owner of new assemblage
+     * @param tracks - array of track for current user
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean addNewAssemblage(String assemblage, String genre, int price, String owner, String[] tracks) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
         boolean result;
@@ -98,6 +129,17 @@ public class AssemblageReceiver {
         return result;
     }
 
+    /**
+     * editing assemblage
+     * @param oldName - old name of assemblage
+     * @param newName - new name of assemblage
+     * @param genre - new genre of assemblage
+     * @param price - new price of assemblage
+     * @param tracks - new array of tracks of assemblage
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean editAssemblage(String oldName, String newName, String genre, int price, String[] tracks) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
         boolean result;
@@ -117,6 +159,13 @@ public class AssemblageReceiver {
         return result;
     }
 
+    /**
+     * removing assemblage
+     * @param assemblageName - assemblage name for removing
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean removeAssemblage(String assemblageName) throws ConnectorException {
         AssemblageRepository assemblageRepository = new AssemblageRepository();
         boolean result;

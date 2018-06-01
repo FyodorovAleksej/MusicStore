@@ -1,5 +1,8 @@
 package by.fyodorov.musicstore.model;
 
+/**
+ * enum of user bonuses
+ */
 public enum UserBonusType {
     USER_BONUS_TRACK(1, "free track"),
     USER_BONUS_ALBUM(2, "free album"),
@@ -23,6 +26,11 @@ public enum UserBonusType {
         return Integer.toString(value);
     }
 
+    /**
+     * encoding string bonuses to bit code
+     * @param bonuses - string with bonuses in format : "free track,free assemblage"
+     * @return - bit code of bonuses : 1|4 = 5
+     */
     public static int toBonusType(String bonuses) {
         if (bonuses == null) {
             return 0;
@@ -36,6 +44,11 @@ public enum UserBonusType {
         return result;
     }
 
+    /**
+     * decoding bit code to string format of bonuses
+     * @param code - bit code to decode : 6
+     * @return - string bonuses of code : "free album,free assemblage"
+     */
     public static String fromBonusType(int code) {
         StringBuilder result = new StringBuilder();
         for (UserBonusType type : UserBonusType.values()) {

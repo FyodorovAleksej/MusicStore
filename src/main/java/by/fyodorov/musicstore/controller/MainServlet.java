@@ -23,24 +23,43 @@ import java.io.IOException;
 public class MainServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(MainServlet.class);
 
-
+    /**
+     * initialize servlet. Save context parameters to map
+     */
     @Override
-    public void init() throws ServletException {
+    public void init() {
         ContextParameter.getInstance().addContextParam(getServletContext());
     }
 
+    /**
+     * perform GET request
+     * @param request - servlet request
+     * @param response - servlet response
+     * @throws ServletException - can't forward or redirect
+     * @throws IOException - can't forward
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.info("GET");
         doOperation(request, response);
     }
 
+    /**
+     * perform POST request
+     * @param request - servlet request
+     * @param response - servlet response
+     * @throws ServletException - can't forward or redirect
+     * @throws IOException - can't forward
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOGGER.debug("POST");
         doOperation(request, response);
     }
 
+    /**
+     * destroy servlet. Shutdown connection pool
+     */
     @Override
     public void destroy() {
         LOGGER.debug("DESTROY MainServlet");
@@ -55,8 +74,8 @@ public class MainServlet extends HttpServlet {
      * getting command from request (that was set by filter) and perform it
      * @param request - servlet request
      * @param response - servlet response
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException - can't forward or redirect
+     * @throws IOException - can't forward
      */
     private void doOperation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CommandCreator creator = new CommandCreator();
@@ -70,7 +89,7 @@ public class MainServlet extends HttpServlet {
             jump.goTo(request, response);
         } catch (CommandException e) {
             LOGGER.catching(e);
-            response.setStatus(512);
+            response.setStatus(500);
         }
     }
 }

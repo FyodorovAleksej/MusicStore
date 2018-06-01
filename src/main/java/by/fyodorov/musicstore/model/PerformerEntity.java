@@ -1,17 +1,15 @@
 package by.fyodorov.musicstore.model;
 
+/**
+ * class entity of performer
+ */
 public class PerformerEntity extends EntityBase {
-    private static final int DEFAULT_ID = -1;
     private int id;
     private String name;
 
     public PerformerEntity(int id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public PerformerEntity(String name) {
-        this(DEFAULT_ID, name);
     }
 
     public int getId() {

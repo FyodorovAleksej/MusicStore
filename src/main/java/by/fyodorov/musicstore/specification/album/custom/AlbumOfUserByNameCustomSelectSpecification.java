@@ -12,7 +12,7 @@ import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class AlbumOfUserByNameCustomSelectSpecification extends AlbumCustomSelectSpecification {
+public class AlbumOfUserByNameCustomSelectSpecification implements AlbumCustomSelectSpecification {
     private static final String SELECT_USERS_ALBUMS = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s FROM %s " +
                     "JOIN %s ON %s.%s = %s.%s " +

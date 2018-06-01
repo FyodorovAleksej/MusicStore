@@ -10,16 +10,16 @@ import java.util.LinkedList;
 import static by.fyodorov.musicstore.specification.album.AlbumRepositoryType.*;
 import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.PERFORMER_NAME;
 
-public abstract class AlbumCustomSelectSpecification implements AlbumRepositorySpecification {
-    public static final String ALBUM_NAME_KEY = "trackName";
-    public static final String ALBUM_GENRE_KEY = "trackGenre";
-    public static final String ALBUM_PERFORMER_KEY = "performerName";
-    public static final String ALBUM_DATE_KEY = "trackDate";
-    public static final String ALBUM_PRICE_KEY = "trackPrice";
-    public static final String ALBUM_PRICE_SUMMARY_KEY = "trackSummaryPrice";
-    public static final String SUMMARY_COLUMN = "summary";
+public interface AlbumCustomSelectSpecification extends AlbumRepositorySpecification {
+    String ALBUM_NAME_KEY = "trackName";
+    String ALBUM_GENRE_KEY = "trackGenre";
+    String ALBUM_PERFORMER_KEY = "performerName";
+    String ALBUM_DATE_KEY = "trackDate";
+    String ALBUM_PRICE_KEY = "trackPrice";
+    String ALBUM_PRICE_SUMMARY_KEY = "trackSummaryPrice";
+    String SUMMARY_COLUMN = "summary";
 
-    public LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
+    default LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
         LinkedList<HashMap<String, String>> result = new LinkedList<>();
         try {
             while (set.next()) {

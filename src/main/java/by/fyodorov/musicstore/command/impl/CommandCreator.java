@@ -9,8 +9,6 @@ import org.apache.logging.log4j.Logger;
  * command builder
  */
 public class CommandCreator {
-    private static Logger LOGGER = LogManager.getLogger(CommandCreator.class);
-
     /**
      * create command by it name
      * @param command - name of command. Was set by filters

@@ -7,6 +7,7 @@ import by.fyodorov.musicstore.command.*;
 import by.fyodorov.musicstore.connector.ConnectorException;
 import by.fyodorov.musicstore.controller.ContextParameter;
 import by.fyodorov.musicstore.receiver.TrackReceiver;
+import by.fyodorov.musicstore.validator.RequestParameterValidator;
 import by.fyodorov.musicstore.view.TrackView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,14 @@ public class ListTrackCommand implements Command {
         String pageMaxString = ContextParameter.getInstance().getContextParam(InitParameter.PAGE_MAX.toString());
         Integer pageMax = pageMaxString == null ? 0 : Integer.valueOf(pageMaxString);
         String page = requestInfo.getParameter(RequestArgument.SEARCH_PAGE.getName());
-        Integer currentPage = page == null ? 0 : Integer.valueOf(page);
+        RequestParameterValidator validator = new RequestParameterValidator();
+        Integer currentPage = 0;
+        if (validator.validate(page, RequestArgument.SEARCH_PAGE)) {
+            currentPage = Integer.valueOf(page);
+        }
+        else {
+            requestInfo.setRequestParameter(RequestArgument.SEARCH_PAGE.getName(), currentPage.toString());
+        }
         LinkedList<TrackView> tracks;
         try {
             requestInfo.setSessionAttribute(RequestArgument.ALL_COUNT.getName(), trackReceiver.findTrackCount());

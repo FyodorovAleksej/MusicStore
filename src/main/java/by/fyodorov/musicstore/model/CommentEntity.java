@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+/**
+ * class entity of comment
+ */
 public class CommentEntity extends EntityBase {
     private static final int DEFAULT_ID = -1;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
@@ -14,6 +17,15 @@ public class CommentEntity extends EntityBase {
     private int trackId;
     private int performerId;
 
+    /**
+     * create comment entity
+     * @param commentId - id of comment
+     * @param text - comment text
+     * @param date - date of creating comment
+     * @param userId - id of comment's user
+     * @param trackId - id of commented track
+     * @param performerId - id of track's performer
+     */
     public CommentEntity(int commentId, String text, java.util.Date date, int userId, int trackId, int performerId) {
         this.commentId = commentId;
         this.text = text;
@@ -23,11 +35,6 @@ public class CommentEntity extends EntityBase {
         this.trackId = trackId;
         this.performerId = performerId;
     }
-
-    public CommentEntity(String text, java.util.Date date, int userId, int trackId, int performerId) {
-        this(DEFAULT_ID, text, date, userId, trackId, performerId);
-    }
-
 
     public int getCommentId() {
         return commentId;

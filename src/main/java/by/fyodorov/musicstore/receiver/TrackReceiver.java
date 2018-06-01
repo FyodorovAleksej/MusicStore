@@ -18,26 +18,42 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Optional;
 
-public class TrackReceiver implements CommandReceiver {
-    private static Logger LOGGER = LogManager.getLogger(TrackReceiver.class);
+/**
+ * receiver for performing operations with tracks
+ */
+public class TrackReceiver {
+    private static final Logger LOGGER = LogManager.getLogger(TrackReceiver.class);
 
-
-    public TrackEntity findTrack(String name) throws ConnectorException {
+    /**
+     * finding track by name
+     * @param name - name of track
+     * @return - optional of track
+     * @throws ConnectorException - when can't execute select query
+     */
+    public Optional<TrackEntity> findTrack(String name) throws ConnectorException {
         LOGGER.debug("finding track = \"" + name + "\"");
         TrackRepository trackRepository = new TrackRepository();
         LinkedList<TrackEntity> list;
+        Optional<TrackEntity> result = Optional.empty();
         try {
             list = trackRepository.prepareQuery(new TrackByNameSpecification(name));
         } finally {
             trackRepository.close();
         }
         if (!list.isEmpty()) {
-            return list.getFirst();
+            result = Optional.of(list.getFirst());
         }
-        return null;
+        return result;
     }
 
+    /**
+     * finding comments for track
+     * @param trackName - track name for getting comments
+     * @return - list of comments
+     * @throws ConnectorException - when can't executing select query
+     */
     public LinkedList<CommentView> findComments(String trackName) throws ConnectorException {
         CommentRepository commentRepository = new CommentRepository();
         CommentCustomSelectSpecification specification = new CommentByTrackNameCustomSelectSpecification(trackName);
@@ -56,6 +72,12 @@ public class TrackReceiver implements CommandReceiver {
         return comments;
     }
 
+    /**
+     * finding info of track with price for current user
+     * @param userName - username of current user
+     * @return - list of tracks info with price
+     * @throws ConnectorException - when can't perform select query
+     */
     public LinkedList<TrackView> findTrackInfo(String userName) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackCustomSelectSpecification specification = new TrackForUserCustomSelectSpecification(userName);
@@ -78,6 +100,14 @@ public class TrackReceiver implements CommandReceiver {
         return tracks;
     }
 
+    /**
+     * finding info of track with price for current user with limit
+     * @param userName - username of current user
+     * @param skip - skip rows for select
+     * @param limit - limit of rows for select
+     * @return - limited list of tracks info with price
+     * @throws ConnectorException - when can't perform select query
+            */
     public LinkedList<TrackView> findTrackLimitInfo(String userName, int skip, int limit) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackLimitCustomSelectSpecification specification = new TrackLimitCustomSelectSpecification(userName, skip, limit);
@@ -100,6 +130,11 @@ public class TrackReceiver implements CommandReceiver {
         return tracks;
     }
 
+    /**
+     * getting count of tracks in DB
+     * @return - count of tracks
+     * @throws ConnectorException - when can't execute select query
+     */
     public Integer findTrackCount() throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackCustomSelectSpecification specification = new TrackCountCustomSelectSpecification();
@@ -111,6 +146,12 @@ public class TrackReceiver implements CommandReceiver {
         }
     }
 
+    /**
+     * finding list of tracks info without price for user
+     * @param userName - name of current user
+     * @return - list of user's tracks
+     * @throws ConnectorException - when can't executing query
+     */
     public LinkedList<TrackWithoutPriceView> findTracksForUser(String userName) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackCustomSelectSpecification specification = new TrackOfUserByNameCustomSelectSpecification(userName);
@@ -130,6 +171,11 @@ public class TrackReceiver implements CommandReceiver {
         return tracks;
     }
 
+    /**
+     * finding all tracks info
+     * @return - list of all tracks info without price
+     * @throws ConnectorException - when can't execute select query
+     */
     public LinkedList<TrackWithoutPriceView> findTracksWithoutPrice() throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackCustomSelectSpecification specification = new TrackWithoutPriceCustomSelectSpecification();
@@ -149,6 +195,12 @@ public class TrackReceiver implements CommandReceiver {
         return tracks;
     }
 
+    /**
+     * finding tracks into album
+     * @param albumName - name of album
+     * @return - list of tracks info into album
+     * @throws ConnectorException - when can't execute select query
+     */
     public LinkedList<TrackWithoutPriceView> findTracksInAlbum(String albumName) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackCustomSelectSpecification specification = new TrackInAlbumCustomSelectSpecification(albumName);
@@ -168,6 +220,12 @@ public class TrackReceiver implements CommandReceiver {
         return tracks;
     }
 
+    /**
+     * finding tracks into assemblage
+     * @param assemblageName - name of assemblage
+     * @return - list of tracks info into assemblage
+     * @throws ConnectorException - when can't execute select query
+     */
     public LinkedList<TrackWithoutPriceView> findTracksInAssemblage(String assemblageName) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackCustomSelectSpecification specification = new TrackInAssemblageCustomSelectSpecification(assemblageName);
@@ -187,6 +245,14 @@ public class TrackReceiver implements CommandReceiver {
         return tracks;
     }
 
+    /**
+     * adding new track
+     * @param trackName - name of new track
+     * @param genre - genre of new track
+     * @param price - price of new track
+     * @param performerName - performer of new track
+     * @throws ConnectorException - when can't execute update query
+     */
     public void addNewTrack(String trackName, String genre, int price, String performerName) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         TrackAddCustomUpdateSpecification specification = new TrackAddCustomUpdateSpecification(trackName, genre, price, performerName);
@@ -199,6 +265,17 @@ public class TrackReceiver implements CommandReceiver {
         }
     }
 
+    /**
+     * editing track
+     * @param oldName - old name of track
+     * @param trackName - new name of track
+     * @param genre - new genre of track
+     * @param price - new price of track
+     * @param performerName - new performer of track
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean editTrack(String oldName, String trackName, String genre, int price, String performerName) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         boolean result;
@@ -213,6 +290,13 @@ public class TrackReceiver implements CommandReceiver {
         return result;
     }
 
+    /**
+     * remove track
+     * @param trackName - name of track for removing
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean removeTrack(String trackName) throws ConnectorException {
         TrackRepository trackRepository = new TrackRepository();
         boolean result;

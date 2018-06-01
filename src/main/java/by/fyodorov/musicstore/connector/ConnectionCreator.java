@@ -16,7 +16,7 @@ import java.util.Properties;
  */
 public class ConnectionCreator {
     private static final String URL = "jdbc:mysql://localhost:3306/musicstore";
-    private static Logger LOGGER = LogManager.getLogger(ConnectionCreator.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionCreator.class);
     private static final String COUNT_KEY = "count";
 
     private Properties properties;

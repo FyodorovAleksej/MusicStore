@@ -46,9 +46,9 @@ public class EditAssemblageCommand implements Command {
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && oldAssemblage != null && assemblageName != null && assemblageGenre != null && validator.validatePrice(assemblagePrice) && tracks != null) {
                 if (assemblageReceiver.editAssemblage(oldAssemblage, assemblageName, String.join(SEPARATOR, assemblageGenre), Integer.valueOf(assemblagePrice), tracks)) {
-                    LOGGER.debug("edit assemblage successfully");
+                    LOGGER.debug("edit \"" + assemblageName + "\" assemblage successfully");
                 } else {
-                    LOGGER.debug("edit assemblage failed");
+                    LOGGER.debug("edit \"" + assemblageName + "\" assemblage failed");
                 }
             }
         } catch (ConnectorException e) {

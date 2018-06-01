@@ -42,14 +42,14 @@ public class RegisterCommand implements Command {
         if (entity != null) {
             try {
                 if (userReceiver.addUser(entity)) {
-                    LOGGER.debug("register was successfully");
+                    LOGGER.info("register was successfully");
                     requestInfo.setSessionAttribute(RequestArgument.SESSION_LOGIN.getName(), entity.getUserName());
                     requestInfo.setSessionAttribute(RequestArgument.SESSION_ROLE.getName(), entity.getRole());
 
                     requestInfo.setRequestAttribute(RequestArgument.LOGIN_RESULT.getName(), "Register successfully");
                     path = Optional.of(PagesUrl.MAIN_PAGE.getPath());
                 } else {
-                    LOGGER.debug("register was not successfully");
+                    LOGGER.info("register was not successfully");
                     requestInfo.setRequestAttribute(RequestArgument.LOGIN_RESULT.getName(), "Can't register");
                     path = Optional.of(PagesUrl.MAIN_PAGE.getPath());
                 }

@@ -10,16 +10,16 @@ import java.util.LinkedList;
 import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.PERFORMER_NAME;
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 
-public abstract class TrackCustomSelectSpecification implements TrackRepositorySpecification {
-    public static final String TRACK_NAME_KEY = "trackName";
-    public static final String TRACK_GENRE_KEY = "trackGenre";
-    public static final String PERFORMER_KEY = "performerName";
-    public static final String TRACK_DATE_KEY = "trackDate";
-    public static final String TRACK_PRICE_KEY = "trackPrice";
-    public static final String TRACK_PRICE_SUMMARY_KEY = "trackSummaryPrice";
-    public static final String SUMMARY_COLUMN = "summary";
+public interface TrackCustomSelectSpecification extends TrackRepositorySpecification {
+    String TRACK_NAME_KEY = "trackName";
+    String TRACK_GENRE_KEY = "trackGenre";
+    String PERFORMER_KEY = "performerName";
+    String TRACK_DATE_KEY = "trackDate";
+    String TRACK_PRICE_KEY = "trackPrice";
+    String TRACK_PRICE_SUMMARY_KEY = "trackSummaryPrice";
+    String SUMMARY_COLUMN = "summary";
 
-    public LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
+    default LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
         LinkedList<HashMap<String, String>> result = new LinkedList<>();
         try {
             while (set.next()) {

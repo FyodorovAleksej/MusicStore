@@ -39,9 +39,9 @@ public class RemoveAssemblageCommand implements Command {
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && assemblageName != null) {
                 if (assemblageReceiver.removeAssemblage(assemblageName)) {
-                    LOGGER.debug("remove assemblage successfully");
+                    LOGGER.debug("remove \"" + assemblageName + "\" assemblage successfully");
                 } else {
-                    LOGGER.debug("remove assemblage failed");
+                    LOGGER.debug("remove \"" + assemblageName + "\" assemblage failed");
                 }
             }
         } catch (ConnectorException e) {

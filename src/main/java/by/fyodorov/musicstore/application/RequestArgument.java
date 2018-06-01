@@ -1,5 +1,8 @@
 package by.fyodorov.musicstore.application;
 
+/**
+ * enum with arguments on jsp pages
+ */
 public enum RequestArgument {
     LOGIN("login", "\\w+"),
     PASSWORD("password", null),

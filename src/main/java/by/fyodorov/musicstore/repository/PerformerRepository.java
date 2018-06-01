@@ -18,16 +18,29 @@ import java.util.LinkedList;
 
 import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 
+/**
+ * repository for working with performer DB
+ */
 public class PerformerRepository {
-    private static Logger LOGGER = LogManager.getLogger(PerformerRepository.class);
+    private static final Logger LOGGER = LogManager.getLogger(PerformerRepository.class);
 
     private SqlUtil util;
 
+    /**
+     * creating repository with connection from connection pool
+     * @throws ConnectorException - when can't getting connection
+     */
     public PerformerRepository() throws ConnectorException {
         ContextParameter parameter = ContextParameter.getInstance();
         util = new SqlUtil(ConnectionPool.getInstance(parameter.getContextParam(InitParameter.DATA_BASE_INIT.toString())).getConnection());
     }
 
+    /**
+     * executing custom query with using prepare statement
+     * @param specification - specification for repository
+     * @return - list of performer entity
+     * @throws ConnectorException - when can't perform query
+     */
     public LinkedList<PerformerEntity> prepareQuery(PerformerRepositorySpecification specification) throws ConnectorException {
         LOGGER.debug("custom performer query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
@@ -47,13 +60,22 @@ public class PerformerRepository {
         return list;
     }
 
+    /**
+     * executing custom query with using prepare statement
+     * @param specification - specification for repository
+     * @return - list of parameters (result of executing query)
+     * @throws ConnectorException - when can't perform query
+     */
     public LinkedList<HashMap<String, String>> customQuery(PerformerCustomSelectSpecification specification) throws ConnectorException {
         LOGGER.debug("custom query");
         ResultSet set = util.execPrepare(specification.toSqlClauses(), specification.getArguments());
         return specification.fromSet(set);
     }
 
-
+    /**
+     * close repository
+     * @throws ConnectorException - when can't close connection
+     */
     public void close() throws ConnectorException {
         util.closeConnection();
     }

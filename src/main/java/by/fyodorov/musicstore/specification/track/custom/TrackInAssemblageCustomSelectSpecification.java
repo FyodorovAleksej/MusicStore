@@ -12,7 +12,7 @@ import static by.fyodorov.musicstore.specification.assemblage.AssemblageReposito
 import static by.fyodorov.musicstore.specification.performer.PerformerRepositoryType.*;
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 
-public class TrackInAssemblageCustomSelectSpecification extends TrackCustomSelectSpecification {
+public class TrackInAssemblageCustomSelectSpecification implements TrackCustomSelectSpecification {
     private static final String SELECT_TRACK_INFO = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s " +
                     "FROM %s JOIN %s ON %s.%s = %s.%s " +

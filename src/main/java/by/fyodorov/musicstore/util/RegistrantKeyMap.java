@@ -10,6 +10,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * map for saving users, who not confirm email. Singleton
+ */
 public class RegistrantKeyMap {
     private static final int MAX_COUNT = 10;
 
@@ -19,10 +22,17 @@ public class RegistrantKeyMap {
 
     private HashMap<String, UserEntity> waitRegisterMap;
 
+    /**
+     * creating key map
+     */
     private RegistrantKeyMap() {
         this.waitRegisterMap = new HashMap<>();
     }
 
+    /**
+     * getting singleton
+     * @return - instance of key map
+     */
     public static RegistrantKeyMap getInstance() {
         if (!isCreated.get()) {
             instanceLock.lock();
@@ -35,6 +45,11 @@ public class RegistrantKeyMap {
         return instance;
     }
 
+    /**
+     * adding user for saving
+     * @param entity - entity of user
+     * @return - uuid for confirm email. Used as key to storage in map
+     */
     public String addValue(UserEntity entity) {
         String uuid;
         int count = 0;
@@ -51,11 +66,22 @@ public class RegistrantKeyMap {
         return uuid;
     }
 
+    /**
+     * getting user entity from map
+     * @param uuid - uuid to continue
+     * @return - stored user entity, if uuid exist. And null - if uuid not exist in map
+     */
     public UserEntity continueRegister(String uuid) {
         Optional<UserEntity> optional = Optional.ofNullable(waitRegisterMap.remove(uuid));
         return optional.orElse(null);
     }
 
+    /**
+     * checking login in map
+     * @param login - login for checking
+     * @return - true - if login exist in map
+     *          false - if login not exist in map
+     */
     public boolean checkLogin(String login) {
         if (login == null) {
             return false;
@@ -69,6 +95,12 @@ public class RegistrantKeyMap {
         return false;
     }
 
+    /**
+     * checking email in map
+     * @param email - email for checking
+     * @return - true - if email exist in map
+     *          false - if email not exist in map
+     */
     public boolean checkEmail(String email) {
         if (email == null) {
             return false;

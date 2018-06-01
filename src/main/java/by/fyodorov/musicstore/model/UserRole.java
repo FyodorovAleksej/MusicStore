@@ -1,5 +1,8 @@
 package by.fyodorov.musicstore.model;
 
+/**
+ * enum of user roles
+ */
 public enum UserRole {
     ADMIN("admin"),
     USER("user"),

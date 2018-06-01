@@ -40,9 +40,9 @@ public class BuyAlbumCommand implements Command {
             if (userName != null && albumName != null) {
 
                 if (userReceiver.buyAlbum(userName, albumName)) {
-                    LOGGER.debug("buy successfully");
+                    LOGGER.info("buy \"" + albumName + "\" successfully");
                 } else {
-                    LOGGER.debug("buy Unsuccessfully");
+                    LOGGER.info("buy \"" + albumName + "\" unsuccessfully");
                 }
             }
         } catch (ConnectorException e) {

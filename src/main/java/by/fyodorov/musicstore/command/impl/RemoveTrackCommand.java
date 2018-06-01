@@ -39,9 +39,9 @@ public class RemoveTrackCommand implements Command {
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && trackName != null) {
                 if (trackReceiver.removeTrack(trackName)) {
-                    LOGGER.debug("remove track successfully");
+                    LOGGER.debug("remove \"" + trackName + "\" track successfully");
                 } else {
-                    LOGGER.debug("remove track failed");
+                    LOGGER.debug("remove \"" + trackName + "\" track failed");
                 }
             }
         } catch (ConnectorException e) {

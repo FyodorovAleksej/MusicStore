@@ -44,6 +44,10 @@ public class ContextParameter {
         return paramMap.get(key);
     }
 
+    /**
+     * getting instance of context parameter singleton
+     * @return - singleton instance
+     */
     public static ContextParameter getInstance() {
         if (!isCreated.get()) {
             instanceLock.lock();

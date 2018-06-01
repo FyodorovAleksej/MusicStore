@@ -6,9 +6,19 @@ import by.fyodorov.musicstore.specification.comment.custom.CommentAddByTextAndUs
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * receiver for performing comments operations
+ */
 public class CommentReceiver {
-    private static Logger LOGGER = LogManager.getLogger(CommentReceiver.class);
-
+    /**
+     * adding comment for track
+     * @param text - text of comment
+     * @param user - username of current user
+     * @param trackName - track name for commenting
+     * @return - true - update successful
+     *          false - update unsuccessful
+     * @throws ConnectorException - if can't execute update query
+     */
     public boolean addComment(String text, String user, String trackName) throws ConnectorException {
         CommentRepository commentRepository = new CommentRepository();
         int result;

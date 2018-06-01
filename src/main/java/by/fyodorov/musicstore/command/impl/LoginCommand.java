@@ -16,7 +16,6 @@ import java.util.Optional;
  * sign in
  */
 public class LoginCommand implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(LoginCommand.class);
     private UserReceiver userReceiver;
 
     /**

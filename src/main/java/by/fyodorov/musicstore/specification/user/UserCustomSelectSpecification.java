@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public abstract class UserCustomSelectSpecification implements UserRepositorySpecification {
-    public static final String SUMMARY_KEY = "summary";
-    public static final String SUMMARY_TABLE = "SUMMARY";
+public interface UserCustomSelectSpecification extends UserRepositorySpecification {
+    String SUMMARY_KEY = "summary";
+    String SUMMARY_TABLE = "SUMMARY";
 
-    public LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
+    default LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
         LinkedList<HashMap<String, String>> result = new LinkedList<>();
         try {
             while (set.next()) {

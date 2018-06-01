@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class AssemblageOfUserByNameCustomSelectSpecification extends AssemblageCustomSelectSpecification {
+public class AssemblageOfUserByNameCustomSelectSpecification implements AssemblageCustomSelectSpecification {
     private static final String TEMP_USER = "X";
 
     private static final String SELECT_USERS_ASSEMBLAGES = String.format(

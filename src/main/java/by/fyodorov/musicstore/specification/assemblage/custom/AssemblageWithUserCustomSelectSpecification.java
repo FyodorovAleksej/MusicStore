@@ -5,7 +5,7 @@ import by.fyodorov.musicstore.specification.assemblage.AssemblageCustomSelectSpe
 import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class AssemblageWithUserCustomSelectSpecification extends AssemblageCustomSelectSpecification {
+public class AssemblageWithUserCustomSelectSpecification implements AssemblageCustomSelectSpecification {
     private static final String TEMPO_TABLE = "X";
 
     private static final String SELECT_ASSEMBLAGE_INFO_FOR_USERNAME = String.format(

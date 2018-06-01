@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.TRACK_BD_SCHEME;
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.TRACK_BD_TABLE;
 
-public class TrackCountCustomSelectSpecification extends TrackCustomSelectSpecification {
+public class TrackCountCustomSelectSpecification implements TrackCustomSelectSpecification {
     private static final String COUNT_TEMP = "count";
 
     private static final String SELECT_COUNT = String.format(

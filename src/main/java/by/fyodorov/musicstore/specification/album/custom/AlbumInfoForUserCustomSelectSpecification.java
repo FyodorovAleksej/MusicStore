@@ -7,7 +7,7 @@ import static by.fyodorov.musicstore.specification.performer.PerformerRepository
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
 
-public class AlbumInfoForUserCustomSelectSpecification extends AlbumCustomSelectSpecification {
+public class AlbumInfoForUserCustomSelectSpecification implements AlbumCustomSelectSpecification {
     private static final String SELECT_ALBUM_INFO_FOR_USERNAME = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s, %s.%s, " +
                     "CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +

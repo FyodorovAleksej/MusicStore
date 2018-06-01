@@ -1,14 +1,8 @@
 package test.fyodorov.musicstore.validator;
 
-import by.fyodorov.musicstore.model.UserEntity;
 import by.fyodorov.musicstore.validator.RequestParameterValidator;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
-import java.util.Optional;
-
-import static org.testng.Assert.*;
 
 public class RequestParameterValidatorTest {
 

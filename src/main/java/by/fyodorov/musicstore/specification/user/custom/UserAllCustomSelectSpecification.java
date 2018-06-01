@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class UserAllCustomSelectSpecification extends UserCustomSelectSpecification {
+public class UserAllCustomSelectSpecification implements UserCustomSelectSpecification {
     public static final String USER_ID_KEY = "userId";
     public static final String USER_NAME_KEY = "userName";
     public static final String USER_EMAIL_KEY = "userEmail";

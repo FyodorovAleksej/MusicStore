@@ -13,7 +13,7 @@ import static by.fyodorov.musicstore.specification.performer.PerformerRepository
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class TrackInAlbumCustomSelectSpecification extends TrackCustomSelectSpecification {
+public class TrackInAlbumCustomSelectSpecification implements TrackCustomSelectSpecification {
     private static final String SELECT_TRACK_INFO = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s " +
                     "FROM %s JOIN %s ON %s.%s = %s.%s " +

@@ -10,6 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * class of sender message by email
+ */
 public class MailSender {
     private Properties mailProps;
     private static final String SUBJECT_KEY = "subject";
@@ -20,6 +23,11 @@ public class MailSender {
     private static final String PASSWORD_KEY = "password";
     private static final String DOMEN_KEY = "domen";
 
+    /**
+     * creating sender with path to properties file
+     * @param path - properties file
+     * @throws MailException - when can't open or read from properties file
+     */
     public MailSender(String path) throws MailException {
         Properties props = new Properties();
         try {
@@ -32,6 +40,12 @@ public class MailSender {
         mailProps = props;
     }
 
+    /**
+     * send message with text to email
+     * @param text - text of message
+     * @param address - email to send
+     * @throws MailException - when can't send message
+     */
     public void send(String text, String address) throws MailException {
         try {
             Session mailSession = Session.getDefaultInstance(mailProps);
@@ -50,6 +64,13 @@ public class MailSender {
         }
     }
 
+    /**
+     * sending mail with text and url to address
+     * @param text - text of message
+     * @param url - url to append to message
+     * @param address - address to send message
+     * @throws MailException - when can't sending message
+     */
     public void sendUrl(String text, String url, String address) throws MailException {
         try {
             Session mailSession = Session.getDefaultInstance(mailProps);

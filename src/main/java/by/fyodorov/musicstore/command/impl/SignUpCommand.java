@@ -66,11 +66,9 @@ public class SignUpCommand implements Command {
                 requestInfo.setRequestAttribute(RequestArgument.SIGN_UP_RESULT.getName(), "user already exist");
                 return new ForwardGoTo(PagesUrl.SIGN_UP_PAGE.getPath());
             }
-
             LOGGER.debug("login, password, email is valid");
             String uuid = keyMap.addValue(new UserEntity(login, email, 0, 0, password));
             LOGGER.debug("uuid = " + uuid);
-
             path = Optional.of(PagesUrl.REGISTER_PAGE.getPath());
             try {
                 MailSender sender = new MailSender(ContextParameter.getInstance().getContextParam(InitParameter.MAIL_INIT.toString()));

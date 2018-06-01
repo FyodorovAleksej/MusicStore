@@ -6,7 +6,7 @@ import static by.fyodorov.musicstore.specification.performer.PerformerRepository
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class TrackLimitCustomSelectSpecification extends TrackLimitSelectSpecification {
+public class TrackLimitCustomSelectSpecification implements TrackLimitSelectSpecification {
     private static final String SELECT_TRACK_INFO_FOR_USERNAME = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s, %s.%s, CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +
                     "FROM %s LEFT JOIN %s ON %s.%s = ? " +

@@ -10,26 +10,42 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Optional;
 
+/**
+ * receiver for perform operations with performers
+ */
 public class PerformerReceiver {
-    private static Logger LOGGER = LogManager.getLogger(PerformerReceiver.class);
+    private static final Logger LOGGER = LogManager.getLogger(PerformerReceiver.class);
 
-    public PerformerEntity findPerformerId(int id) throws ConnectorException {
+    /**
+     * finding performer by id
+     * @param id - id of performer
+     * @return - optional of performer
+     * @throws ConnectorException - when can't execute select query
+     */
+    public Optional<PerformerEntity> findPerformerId(int id) throws ConnectorException {
         LOGGER.debug("finding performers by id = \"" + id + "\"");
         PerformerRepository albumRepository = new PerformerRepository();
         LinkedList<PerformerEntity> list;
+        Optional<PerformerEntity> result = Optional.empty();
         try {
             list = albumRepository.prepareQuery(new PerformerByIdSpecification(id));
         } finally {
             albumRepository.close();
         }
         if (!list.isEmpty()) {
-            return list.getFirst();
+            result = Optional.of(list.getFirst());
         }
-        return null;
+        return result;
 
     }
 
+    /**
+     * getting list of all performers
+     * @return - list of all performers
+     * @throws ConnectorException - when can't execute select query
+     */
     public LinkedList<String> findAllPerformers() throws ConnectorException {
         PerformerRepository repository = new PerformerRepository();
         LinkedList<String> performers = new LinkedList<>();

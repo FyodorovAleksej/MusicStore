@@ -10,17 +10,16 @@ import java.util.LinkedList;
 import static by.fyodorov.musicstore.specification.assemblage.AssemblageRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.USER_USERNAME;
 
-public abstract class AssemblageCustomSelectSpecification implements AssemblageRepositorySpecification {
-    public static final String ASSEMBLAGE_NAME_KEY = "assemblageName";
-    public static final String ASSEMBLAGE_GENRE_KEY = "assemblageGenre";
-    public static final String ASSEMBLAGE_OWNER_KEY = "ownerName";
-    public static final String ASSEMBLAGE_DATE_KEY = "assemblageDate";
-    public static final String ASSEMBLAGE_PRICE_KEY = "assemblagePrice";
-    public static final String ASSEMBLAGE_PRICE_SUMMARY_KEY = "assemblageSummaryPrice";
+public interface AssemblageCustomSelectSpecification extends AssemblageRepositorySpecification {
+    String ASSEMBLAGE_NAME_KEY = "assemblageName";
+    String ASSEMBLAGE_GENRE_KEY = "assemblageGenre";
+    String ASSEMBLAGE_OWNER_KEY = "ownerName";
+    String ASSEMBLAGE_DATE_KEY = "assemblageDate";
+    String ASSEMBLAGE_PRICE_KEY = "assemblagePrice";
+    String ASSEMBLAGE_PRICE_SUMMARY_KEY = "assemblageSummaryPrice";
+    String SUMMARY_COLUMN = "summary";
 
-    public static final String SUMMARY_COLUMN = "summary";
-
-    public LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
+    default LinkedList<HashMap<String, String>> fromSet(ResultSet set) throws ConnectorException {
         LinkedList<HashMap<String, String>> result = new LinkedList<>();
         try {
             while (set.next()) {

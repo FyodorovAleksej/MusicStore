@@ -40,9 +40,9 @@ public class BuyTrackCommand implements Command {
             if (userName != null && trackName != null) {
 
                 if (userReceiver.buyTrack(userName, trackName)) {
-                    LOGGER.debug("buy successfully");
+                    LOGGER.info("buy \"" + trackName + "\" successfully");
                 } else {
-                    LOGGER.debug("buy Unsuccessfully");
+                    LOGGER.info("buy \"" + trackName + "\" Unsuccessfully");
                 }
             }
         } catch (ConnectorException e) {

@@ -46,9 +46,9 @@ public class EditTrackCommand implements Command {
         try {
             if (UserRole.ADMIN.toString().equals(userRole) && oldTrack != null && trackName != null && trackGenre != null && validator.validatePrice(trackPrice) && trackPerformer != null) {
                 if (trackReceiver.editTrack(oldTrack, trackName, String.join(SEPARATOR, trackGenre), Integer.valueOf(trackPrice), trackPerformer)) {
-                    LOGGER.debug("edit track successfully");
+                    LOGGER.info("edit \"" + trackName + "\" track successfully");
                 } else {
-                    LOGGER.debug("edit track failed");
+                    LOGGER.info("edit \"" + trackName + "\" track failed");
                 }
             }
         } catch (ConnectorException e) {

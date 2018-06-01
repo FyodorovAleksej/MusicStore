@@ -14,17 +14,18 @@ import java.io.IOException;
  * tag for view information of current user
  */
 public class UserInfoViewTag extends TagSupport {
-    private static final Logger LOGGER = LogManager.getLogger(UserInfoViewTag.class);
-
+    /**
+     * handle start tag
+     * @return - EVAL_PAGE - end of tag
+     * @throws JspException - when can't forward or redirect
+     */
     @Override
     public int doStartTag() throws JspException {
-        LOGGER.debug("DO START TAG");
         String userName = (String) pageContext.getSession().getAttribute("userName");
         String userRole = (String) pageContext.getSession().getAttribute("userRole");
 
         if (userName == null || userRole == null) {
             try {
-                LOGGER.debug("include = \"" + pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/notLoginHeader.jsp" + "\"");
                 pageContext.include(pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/notLoginHeader.jsp");
             } catch (ServletException | IOException e) {
                 throw new JspException(e);
@@ -34,10 +35,8 @@ public class UserInfoViewTag extends TagSupport {
             pageContext.getRequest().setAttribute("userRole", userRole);
             try {
                 if (UserRole.ADMIN.toString().equals(userRole)) {
-                    LOGGER.debug("include \"" + pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/adminLoginHeader.jsp" + "\"");
                     pageContext.include(pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/adminLoginHeader.jsp");
                 } else {
-                    LOGGER.debug("include \"" + pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/loginHeader.jsp" + "\"");
                     pageContext.include(pageContext.getServletContext().getContextPath() + "/WEB-INF/jspf/loginHeader.jsp");
                 }
             } catch (ServletException | IOException e) {

@@ -7,7 +7,7 @@ import static by.fyodorov.musicstore.specification.performer.PerformerRepository
 import static by.fyodorov.musicstore.specification.track.TrackRepositoryType.*;
 import static by.fyodorov.musicstore.specification.user.UserRepositoryType.*;
 
-public class TrackInAssemblageForUserCustomSelectSpecification extends TrackCustomSelectSpecification {
+public class TrackInAssemblageForUserCustomSelectSpecification implements TrackCustomSelectSpecification {
     private static final String SELECT_TRACK_INFO_FOR_USERNAME = String.format(
             "SELECT %s.%s, %s.%s, %s.%s, %s.%s, %s.%s, CAST(%s.%s*(1 - (%s.%s / 100)) AS UNSIGNED) AS %s " +
                     "FROM %s JOIN %s ON %s.%s = %s.%s " +

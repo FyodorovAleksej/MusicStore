@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+/**
+ * class entity of album
+ */
 public class AlbumEntity extends EntityBase {
     private static int DEFAULT_ID = -1;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
@@ -15,6 +18,15 @@ public class AlbumEntity extends EntityBase {
     private Date date;
     private int performerId;
 
+    /**
+     * create album entity
+     * @param id - id of album
+     * @param name - name of album
+     * @param genre - genre of album
+     * @param price - price of album
+     * @param date - date of album
+     * @param performerId - performer id of album
+     */
     public AlbumEntity(int id, String name, String genre, int price, java.util.Date date, int performerId) {
         this.id = id;
         this.name = name;
@@ -24,11 +36,6 @@ public class AlbumEntity extends EntityBase {
         this.date = Date.valueOf(format.format(date));
         this.performerId = performerId;
     }
-
-    public AlbumEntity(String name, String genre, int price, java.util.Date date, int performerId) {
-        this(DEFAULT_ID, name, genre, price, date, performerId);
-    }
-
 
     public int getId() {
         return id;
@@ -108,12 +115,12 @@ public class AlbumEntity extends EntityBase {
         if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        AlbumEntity albom = (AlbumEntity) obj;
-        return this.id == albom.id &&
-                this.name.equals(albom.name) &&
-                this.genre.equals(albom.genre) &&
-                this.price == albom.price &&
-                this.date.equals(albom.date) &&
-                this.performerId == albom.performerId;
+        AlbumEntity album = (AlbumEntity) obj;
+        return this.id == album.id &&
+                this.name.equals(album.name) &&
+                this.genre.equals(album.genre) &&
+                this.price == album.price &&
+                this.date.equals(album.date) &&
+                this.performerId == album.performerId;
     }
 }

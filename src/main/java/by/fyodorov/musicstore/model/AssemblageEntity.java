@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+/**
+ * class entity of assemblage
+ */
 public class AssemblageEntity extends EntityBase {
-    private static int DEFAULT_ID = -1;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     private int id;
@@ -15,6 +17,15 @@ public class AssemblageEntity extends EntityBase {
     private Date date;
     private int userId;
 
+    /**
+     * create entity of assemblage
+     * @param id - id of assemblage
+     * @param name - name of assemblage
+     * @param genre - genre of assemblage
+     * @param price - price of assemblage
+     * @param date - date of creating assemblage
+     * @param userId - id of assemblage's owner
+     */
     public AssemblageEntity(int id, String name, String genre, int price, java.util.Date date, int userId) {
         this.id = id;
         this.name = name;
@@ -24,11 +35,6 @@ public class AssemblageEntity extends EntityBase {
         this.date = Date.valueOf(format.format(date));
         this.userId = userId;
     }
-
-    public AssemblageEntity(String name, String genre, int price, java.util.Date date, int userId) {
-        this(DEFAULT_ID, name, genre, price, date, userId);
-    }
-
 
     public int getId() {
         return id;
