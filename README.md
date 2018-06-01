@@ -1,3 +1,3 @@
 # MusicStore
 Java web application
-### Documentation: ([En](https://fyodorovaleksej.github.io/MsuicStore/))
+### Documentation: ([En](https://fyodorovaleksej.github.io/MusicStore/))
